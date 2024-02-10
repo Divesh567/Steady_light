@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3950387518259819598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3950387518259819599}
+  - component: {fileID: 3950387518259819592}
+  m_Layer: 0
+  m_Name: MenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3950387518259819599
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3950387518259819598}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3950387518259819592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3950387518259819598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31594c3d287bf0d4e93c235000d09ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainMenuPrefab: {fileID: 616929845254153619, guid: 2f1a17627f52aa24da04bc1e35c27800,
+    type: 3}
+  _settingsMenuPrefab: {fileID: 6725559142728619681, guid: e56f392c51a973b4181357d0f860f1a1,
+    type: 3}
+  _levelSelectorMenuPrefab: {fileID: 2069655287592313291, guid: 7f5f6b68596c6c54f97efc72e0d469af,
+    type: 3}
+  _gameMenuPrefab: {fileID: 1570611957304883825, guid: 91caa3d0d483bb7459ec6555222a9659,
+    type: 3}
+  _winScreenPrefab: {fileID: 5811095753194528427, guid: fcd137358441f504b9e4a4947886be17,
+    type: 3}
+  _loseScreenPrefab: {fileID: 6395879162119475963, guid: a3d720e1fd9fc0247b204729e32097cd,
+    type: 3}
+  _anotherChancePrefab: {fileID: 54528383411666489, guid: eb97f0c7a1c70ca43a34ed4cb778bf1c,
+    type: 3}
+  _shopMenuPrefab: {fileID: 5107449990890228236, guid: 860f0610ed77ada49927ecb4f20f04cb,
+    type: 3}
+  _creditMenuPrefab: {fileID: 1884352040031653833, guid: 90ca38c7f1626f64ea2437f264bf6a13,
+    type: 3}
+  _noInternetMenu: {fileID: 7163426174589903988, guid: 29b5590e06f9be04eba38098365dbe99,
+    type: 3}
+  _unlockScreens: {fileID: 141043696490476393, guid: ff47c9ddf17b8cc45a44a4560083e280,
+    type: 3}
+  _loadingScreen: {fileID: 8068677842038687619, guid: 909f10b0fddf9e24e9d698de35a18ca0,
+    type: 3}

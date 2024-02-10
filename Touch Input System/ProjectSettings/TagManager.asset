@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Objective
+  - Star
+  - Spike
+  - CheckPoint
+  - Wall
+  - DeadZone
+  - BoostField
+  - Ball
+  - Screen
+  - Block
+  - SharkStop
+  - ForceField
+  - Portal
+  - FxTemporaire
+  - Powerup
+  - SpotTrigger
+  - PointToPoint
+  - SpotLight
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Player
+  - Ball
+  - Shield
+  - NoBallCol
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Level Fills
+    uniqueID: 3703763187
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 2591677887
+    locked: 0
+  - name: Walls
+    uniqueID: 692533495
+    locked: 0
+  - name: Player
+    uniqueID: 2105209897
+    locked: 0
+  - name: First
+    uniqueID: 981003187
+    locked: 0
