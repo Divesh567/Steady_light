@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec0f6c7c9418eb4a9a0a1cc5ab25a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultTime: 60
-  _currentTime: 0
+  _defaultTime: 26.84
+  startAnim: {fileID: 11400000, guid: ddba38195ec15fc468938d1383e49327, type: 2}

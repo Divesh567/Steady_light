@@ -1,34 +1,55 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StarControl : MonoBehaviour
 {
-    [SerializeField]
-    GameObject _starCollectedFx;
-    private void Awake()
+    private List<Star> stars = new List<Star>();
+
+    public int starsCollected = 0;
+
+    public GameStartAnim startAnim;
+
+
+    private void OnEnable()
     {
-        if (SoundManager.Instance != null)
-        {
-            SoundManager.Instance.PitchChangeStarObjective();
-        }
+        ObjectiveEventHandler.OnStarInitEvent += AddStars;
+        ObjectiveEventHandler.OnStarCollectedEvent += OnStarCollected;
+    }
+
+    private void OnDisable()
+    {
+        ObjectiveEventHandler.OnStarInitEvent -= AddStars;
+        ObjectiveEventHandler.OnStarCollectedEvent -= OnStarCollected;
     }
     private void Start()
     {
-        if (MyGameManager.Instance != null && GameMenu.Instance != null)
-        {
-            MyGameManager.Instance.StarsObjectiveStatus(false);
-            MyGameManager.Instance.ResetAllValues();
-            GameMenu.Instance.EnableStarPanel();
-        }
+        stars.Clear();
 
+        startAnim.StartAnim(() => 
+        {
+
+            GameMenu.Instance.InitObjectiveUI(this);
+            MyGameManager.gameState = MyGameManager.GameState.GameNotStarted;
+
+
+        }, () => MyGameManager.gameState = MyGameManager.GameState.GameRunning);
     }
 
-    public void StarCollected()
+
+    private void AddStars(Star star)
     {
-        if (MyGameManager.Instance != null)
+        Debug.Log("TRIGGERED ADDED");
+        stars.Add(star);
+    }
+
+    private void OnStarCollected(Star star)
+    {
+        starsCollected++;
+
+        if(starsCollected >= stars.Count)
         {
-            Instantiate(_starCollectedFx, transform.position, transform.rotation);
-            MyGameManager.Instance.StarCollected();
-            Destroy(gameObject);
+            ObjectiveEventHandler.OnStarObjectiveCompletedEventCaller();
         }
     }
 }

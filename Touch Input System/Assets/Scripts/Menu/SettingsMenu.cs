@@ -3,94 +3,57 @@ using UnityEngine.UI;
 
 public class SettingsMenu : Menu<SettingsMenu>
 {
-   
-    private GameObject _panelChild;
+  
 
+    [Space(10)]
+    [Header("Buttons")]
     [SerializeField]
-    private Sprite _musicOff;
+    private CustomButton _musicButton;
     [SerializeField]
-    private Sprite _muiscOn;
+    private CustomButton _sfxButton;
     [SerializeField]
-    private Sprite _sfxOff;
-    [SerializeField]
-    private Sprite _sfxOn;
+    private CustomButton backButton; // Add UISfx pn button Pressed
 
-    [SerializeField]
-    private Image _musicImage;
-    [SerializeField]
-    private Image _sfxImage;
-
-    private void Start()
+    public override void Start()
     {
-        _panelChild = transform.GetChild(0).gameObject;
+        base.Start();
+
+        _musicButton.button.onClick.AddListener(() => OnMusicPressed());
+        _sfxButton.button.onClick.AddListener(() => OnSfxPressed());
+        backButton.button.onClick.AddListener(() => MenuClose());
     }
 
 
     public override void MenuClose()
     {
-        _panelChild.gameObject.SetActive(false);
+        MainPanel.gameObject.SetActive(false);
+
+        MainMenu.Instance.graphicRaycaster.enabled = true;
     }
 
     public override void MenuOpen()
     {
-        _panelChild.gameObject.SetActive(true);
-        UpdateImages();
+        MainPanel.gameObject.SetActive(true);
     }
 
-    public void OnSfxPressed()
+    private void OnSfxPressed()  //TODO - Add listner
     {
         if (SoundManager.Instance != null)
         {
-            SoundManager.SoundSfx = !SoundManager.SoundSfx;
-            if (SoundManager.SoundSfx)
-            {
-                _sfxImage.sprite = _sfxOn;
-            }
-            else
-            {
-                _sfxImage.sprite = _sfxOff;
-            }
+            DataManager.Instance.isSfxMuted = !DataManager.Instance.isSfxMuted;
+            DataManager.Instance.SaveData();
         }
+
     }
 
-    public void OnMusicPressed()
+    private void OnMusicPressed() //TODO - Add listner
     {
         if (SoundManager.Instance != null)
         {
-            SoundManager.MusicSfx = !SoundManager.MusicSfx;
-            SoundManager.Instance.PlayAndStopMusic();
-            if (SoundManager.MusicSfx)
-            {
-                _musicImage.sprite = _muiscOn;
-            }
-            else
-            {
-                _musicImage.sprite = _musicOff;
-            }
+            DataManager.Instance.isMuiscMuted = !DataManager.Instance.isMuiscMuted;
+            SoundManager.Instance.PlayMusic(); // TODO Use Event to update 
+            DataManager.Instance.SaveData();
         }
     }
 
-    public void UpdateImages()
-    {
-        if (SoundManager.Instance != null)
-        {
-            if (SoundManager.SoundSfx)
-            {
-                _sfxImage.sprite = _sfxOn;
-            }
-            else
-            {
-                _sfxImage.sprite = _sfxOff;
-            }
-
-            if (SoundManager.MusicSfx)
-            {
-                _musicImage.sprite = _muiscOn;
-            }
-            else
-            {
-                _musicImage.sprite = _musicOff;
-            }
-        }
-    }
 }

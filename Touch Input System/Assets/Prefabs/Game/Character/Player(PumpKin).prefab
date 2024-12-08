@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1047109252292108953}
   - component: {fileID: 1047109252292108958}
   - component: {fileID: 1047109252292108959}
+  - component: {fileID: 8995108029486279567}
   m_Layer: 0
   m_Name: Player(PumpKin)
   m_TagString: Untagged
@@ -76,8 +77,24 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 128
+  _dragging: 0
   _touchPos: {x: 0, y: 0}
   _force: 0
+  playerInput: {fileID: 0}
+--- !u!114 &8995108029486279567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047109252292108952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d418bb55d92b294e8f648d75c2e6713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  touchController: {fileID: 1047109252292108959}
 --- !u!1001 &1047109251535562007
 PrefabInstance:
   m_ObjectHideFlags: 0

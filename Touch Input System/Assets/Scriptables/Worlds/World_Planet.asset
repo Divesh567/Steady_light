@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e8d1b2b798486c4e84eed527f131460, type: 3}
+  m_Name: World_Planet
+  m_EditorClassIdentifier: 
+  levels:
+  - sceneAddress:
+      m_AssetGUID: a4c90484ed21a9b42a89cc21566b98bf
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 0
+  - sceneAddress:
+      m_AssetGUID: 0daacc2e06c159f4fb72f8603a593701
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 0
+  - sceneAddress:
+      m_AssetGUID: 65919ef419ef46744955ed49e216aa0c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 1
+  - sceneAddress:
+      m_AssetGUID: 3582fd59e052a9e45b60420c4ee33c15
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 0
+  - sceneAddress:
+      m_AssetGUID: 70f5937474059394fa0a0912993e9481
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 0
+  worldType: 4

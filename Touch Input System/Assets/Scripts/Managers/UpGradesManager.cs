@@ -34,14 +34,7 @@ public class UpGradesManager : MonoBehaviour
    
      public void LoadAllUpGrades()
      {
-        
-        _lifesBought = _dataManager.lifes;
-        _timeBought = _dataManager.time;
-        _powerUpBought = _dataManager.powerUp;
-        UpgradeMenu.Instance.SetUpgrades(_lifesBought, _timeBought, _powerUpBought);
-        MyGameManager.Instance.AddLifeUpGrades(_lifesBought);
-        MyGameManager.Instance.AddPowerUpgrades(_powerUpBought);
-        GameMenu.Instance.lifesBought = _lifesBought;
+       
      }
 
     public void OnLifeBought()
@@ -53,7 +46,6 @@ public class UpGradesManager : MonoBehaviour
             UpgradeMenu.Instance._lifemax = true;
 
         }*/
-        _dataManager.lifes = _lifesBought;
         _dataManager.SaveData();
         LoadAllUpGrades();
     }
@@ -66,7 +58,6 @@ public class UpGradesManager : MonoBehaviour
             _dataManager._timeMaximum = true;
             UpgradeMenu.Instance._lifemax = true;
         }*/
-        _dataManager.time = _timeBought;
         _dataManager.SaveData();
         LoadAllUpGrades();
     }
@@ -74,12 +65,6 @@ public class UpGradesManager : MonoBehaviour
     public void OnPowerUpBought()
     {
         _powerUpBought++;
-       /* if(_powerUpBought == 3)
-        {
-            _dataManager._powerupMaximum = true;
-            UpgradeMenu.Instance._lifemax = true;
-        }*/
-        _dataManager.powerUp = _powerUpBought;
         _dataManager.SaveData();
         LoadAllUpGrades();
     }

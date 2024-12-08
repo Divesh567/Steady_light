@@ -3,8 +3,10 @@ using UnityEngine;
 public class TimeTrialControl : MonoBehaviour
 {
     public float _defaultTime = 5f;
-    public float _currentTime;
+    public static float _currentTime;
     private bool _timeOut = false;
+
+    public GameStartAnim startAnim;
     
     private void Awake()
     {
@@ -18,22 +20,17 @@ public class TimeTrialControl : MonoBehaviour
     {
         _timeOut = false;
         _currentTime = _defaultTime;
-        if (MyGameManager.Instance != null && GameMenu.Instance != null &&
-                    AnotherChanceScript.Instance != null)
-        {
-            MyGameManager.Instance.GetTimeTrail(GetComponent<TimeTrialControl>());
-            MyGameManager.Instance._levelType = "tt";
-            MyGameManager.Instance.TimeTrialObjective(true);
-            MyGameManager.Instance.ResetAllValues();
-            GameMenu.Instance.EnableTimeTrailPanel();
-            MyGameManager.Instance.SetLifeInfinte();
-            AnotherChanceScript.Instance._timetrail = true;
-        }
+
+        ObjectiveEventHandler.OnTimerObjectiveCompleteEventCaller();
+
+
+
+        startAnim.StartAnim(() => GameMenu.Instance.InitObjectiveUI(this), () => MyGameManager.gameState = MyGameManager.GameState.GameRunning);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if (!_timeOut && MyGameManager.GameStarted)
+        if (!_timeOut && MyGameManager.gameState == MyGameManager.GameState.GameRunning)
         {
             TimeTrialCountDown();
         }
@@ -42,26 +39,22 @@ public class TimeTrialControl : MonoBehaviour
     private void TimeTrialCountDown()
     {
         _currentTime -= Time.deltaTime;
-        GameMenu.Instance.TimerUIFeedBack((_currentTime * 100) / 100);
-        if (_currentTime <= 0f && MyGameManager.Instance._won == false)
+        if (_currentTime <= 0f)
         {
             if (MyGameManager.Instance != null)
             {
                 _timeOut = true;
-                MyGameManager.Instance.TimeTrialObjective(false);
+                ObjectiveEventHandler.OnTimerObjectiveFailedEventCaller();
+             
             }
         }
     }
 
-    public void SecondChance()
-    {
-        _timeOut = false;
-        _currentTime = 31f;
-        MyGameManager.Instance.TimeTrialObjective(true);
-    }
 
    public void AddTimeUpgrades(float _time)
    {
         _currentTime += _time;
    }
+
+    
 }

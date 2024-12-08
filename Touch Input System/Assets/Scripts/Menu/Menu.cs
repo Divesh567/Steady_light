@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public abstract class Menu<T> : Menu where T : Menu<T>
 {
@@ -18,6 +18,8 @@ public abstract class Menu<T> : Menu where T : Menu<T>
             _instance = (T)this;
             DontDestroyOnLoad(gameObject);
         }
+
+        graphicRaycaster = GetComponent<GraphicRaycaster>();
     }
     protected void OnDestroy()
     {
@@ -26,6 +28,22 @@ public abstract class Menu<T> : Menu where T : Menu<T>
 }
 public abstract class Menu : MonoBehaviour
 {
+    [SerializeField]
+    private AudioController audioController;
+
+
+    [Header("UI COMPONENTS")]
+    public MenuMainPanel MainPanel;
+    public GraphicRaycaster graphicRaycaster;
+    public Canvas canvas;
+
+
+        
+
+    public virtual void Start()
+    {
+        MenuClose();
+    }
     public virtual void OnQuitPressed()
     {
         Application.Quit();
@@ -33,6 +51,7 @@ public abstract class Menu : MonoBehaviour
 
     public virtual void MenuClose()
     {
+        graphicRaycaster.enabled = false;
     }
     public virtual void MenuOpen()
     {

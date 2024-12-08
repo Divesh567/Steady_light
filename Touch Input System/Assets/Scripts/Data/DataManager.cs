@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
@@ -7,6 +9,8 @@ public class DataManager : MonoBehaviour
 
     SaveData _saveData;
     JsonSaver _jsonSaver;
+
+    public SaveDataSO saveDataSO;
     private void Awake()
     {
         if (_instance != null)
@@ -28,69 +32,41 @@ public class DataManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(Application.persistentDataPath);
         LoadData();
-        MyGameManager.Instance.GetData();
-        UpGradesManager.Instance.GetData();
-        LevelSelectorMenu.Instance.GetData();
-        MainMenu.Instance.DisplayCompletionBar(unlockedLevels);
-    }
-    public bool[] unlockedLevels
-    {
-        get { return _saveData._allLevels; }
-        set { _saveData._allLevels = value; }
-    }
-    public bool[] unlockedWorlds
-    {
-        get { return _saveData.unlockedWorlds; }
-        set { _saveData.unlockedWorlds = value; }
+      //  MainMenu.Instance.DisplayCompletionBar(unlockedLevels);
     }
 
-    public bool[] diamondData
+    public bool isSfxMuted
     {
-        get { return _saveData._diamondData; }
-        set { _saveData._diamondData = value; }
+        get { return _saveData.soundSettings.isSfxMuted; }
+        set { _saveData.soundSettings.isSfxMuted = value; }
+    }
+    public SaveData.ResourcesData resourcesData
+    {
+        get { return _saveData.resourcesData; }
+        set { _saveData.resourcesData = value; }
     }
 
-    public int diamonds
+    public SaveData.UpgradeData upgradeData
     {
-        get { return _saveData._Diamonds; }
-        set { _saveData._Diamonds = value; }
+        get { return _saveData.upgradeData; }
+        set { _saveData.upgradeData= value; }
     }
 
-    public int lifes
+    public List<SaveData.WorldData> worldDatas
     {
-        get { return _saveData._lifes; }
-        set { _saveData._lifes = value; }
+        get { return _saveData.worldDatas; }
+        set { _saveData.worldDatas = value; }
     }
 
-    public float time
+    public bool isMuiscMuted
     {
-        get { return _saveData._time; }
-        set { _saveData._time = value; }
+        get { return _saveData.soundSettings.isMusicMuted; }
+        set { _saveData.soundSettings.isMusicMuted = value; }
     }
 
-    public int powerUp
-    {
-        get { return _saveData._powerUp; }
-        set { _saveData._powerUp = value; }
-    }
 
-    public bool _lifeMaximum
-    {
-        get { return _saveData._lifeMaximun; }
-        set { _saveData._lifeMaximun = value; }
-    }
-    public bool _timeMaximum
-    {
-        get { return _saveData._timeMaximun; }
-        set { _saveData._timeMaximun = value; }
-    }
-
-    public bool _powerupMaximum
-    {
-        get { return _saveData._powerUpMaximum; }
-        set { _saveData._powerUpMaximum = value; }
-    }
     public string hashValue
     {
         get { return _saveData.hashValue; }
@@ -98,15 +74,71 @@ public class DataManager : MonoBehaviour
     }
 
    
+    public void SaveCompletedLevel(string levelName ,List<int> diamondsCollected)
+    {
+        var data = worldDatas;
+        var worldData = data.Find(x => x.worldType == RuntimeGameData.worldType);
+
+        if (worldData == null)
+        {
+            worldData = new SaveData.WorldData(RuntimeGameData.worldType);
+            data.Add(worldData);
+        }
+
+        if(!worldData.levelsList.Exists(l => l.LevelName == levelName))
+        {
+            worldData.levelsList.Add(new SaveData.Level(levelName, diamondsCollected, isCompleted : true, isUnlocked : true));
+        }
+            
+
+        worldDatas = data;
+        SaveData();
+    }
+
+
+    public void SaveUnlockedLevel(string levelName, List<int> diamondsCollected)
+    {
+        var data = worldDatas;
+        var worldData = data.Find(x => x.worldType == RuntimeGameData.worldType);
+
+        if (worldData == null)
+        {
+            worldData = new SaveData.WorldData(RuntimeGameData.worldType);
+            data.Add(worldData);
+        }
+
+        if (!worldData.levelsList.Exists(l => l.LevelName == levelName))
+        {
+            worldData.levelsList.Add(new SaveData.Level(levelName, diamondsCollected, isUnlocked: true, isCompleted: false));
+        }
+
+
+        worldDatas = data;
+        SaveData();
+    }
+
+
 
     public void LoadData()
     {
-        _jsonSaver.Load(_saveData);
+        if (!_jsonSaver.Load(_saveData))
+        {
+            SaveData();
+        }
+
+        saveDataSO.saveData = _saveData;
     }
 
     public void SaveData()
     {
         _jsonSaver.Save(_saveData);
+
+        _jsonSaver.Load(_saveData);
+    }
+
+    public Task SaveLoadData()
+    {
+       return Task.Delay(2000);
     }
 
     public void DeleteSaveData()

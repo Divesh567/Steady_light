@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "738362941935",
+    "project_id": "steady-light",
+    "storage_bucket": "steady-light.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738362941935:android:38f43307d2969fe028961a",
+        "android_client_info": {
+          "package_name": "com.Immersiveorama.LightForce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738362941935-k5up56ona76dnigih764keoukv3veo39.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlWBji7kSx7qEL9xYSuACHD6da8lAPqBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738362941935-k5up56ona76dnigih764keoukv3veo39.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

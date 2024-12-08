@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2220dc44ae22bf64f8ff7f239d576e51, type: 3}
+  m_Name: New_3,2,1_GOAnim
+  m_EditorClassIdentifier: 
+  timerTextMesh: {fileID: 6265157556344290110, guid: 7a27d5379b2d3a84c9aa6a2f053474bc,
+    type: 3}
+  timeInterval: 1
+  valueStartScaleMultiplier: 2
+  valueEndScaleMultiplier: 1
+  countDownClip: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}

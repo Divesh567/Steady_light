@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e8d1b2b798486c4e84eed527f131460, type: 3}
+  m_Name: World_Factory
+  m_EditorClassIdentifier: 
+  levels:
+  - scene: {fileID: 102900000, guid: a54290288e8b1f54393831346b15cb76, type: 3}
+    sceneAddress:
+      m_AssetGUID: a54290288e8b1f54393831346b15cb76
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 0
+  - scene: {fileID: 102900000, guid: 4eb5c956e214bcc4a8b82ad0c30d8bfe, type: 3}
+    sceneAddress:
+      m_AssetGUID: 4eb5c956e214bcc4a8b82ad0c30d8bfe
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 0
+  - scene: {fileID: 102900000, guid: 9fac9b6cb0125b448a8ae2b1c38a5d6b, type: 3}
+    sceneAddress:
+      m_AssetGUID: 9fac9b6cb0125b448a8ae2b1c38a5d6b
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 1
+  - scene: {fileID: 102900000, guid: 8b38af8fecbb41e4893b0c9d5c7adcb7, type: 3}
+    sceneAddress:
+      m_AssetGUID: 8b38af8fecbb41e4893b0c9d5c7adcb7
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 0
+  - scene: {fileID: 102900000, guid: 46f2e1e6261d67c40bdb58712902c558, type: 3}
+    sceneAddress:
+      m_AssetGUID: 46f2e1e6261d67c40bdb58712902c558
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 0
+  - scene: {fileID: 102900000, guid: d49374fd9ba35e74db940de3d95b03d7, type: 3}
+    sceneAddress:
+      m_AssetGUID: d49374fd9ba35e74db940de3d95b03d7
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 1
+  - scene: {fileID: 102900000, guid: f8c67a4cddaba0d49bdb9530665ca571, type: 3}
+    sceneAddress:
+      m_AssetGUID: f8c67a4cddaba0d49bdb9530665ca571
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 2
+  worldType: 2

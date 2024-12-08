@@ -9,7 +9,7 @@ public class TapToContinue : MonoBehaviour
         _ball = FindObjectOfType<BallCollisions>().gameObject;
         _ballGravity = _ball.GetComponent<Rigidbody2D>().gravityScale;
         _ball.GetComponent<Rigidbody2D>().gravityScale = 0f;
-        _ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        _ball.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
     }
     public void OnTapToContinuePressed()
     {

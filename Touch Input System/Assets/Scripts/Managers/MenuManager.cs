@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
+using UnityEditor;
 
 public class MenuManager : MonoBehaviour
 {
@@ -6,31 +9,9 @@ public class MenuManager : MonoBehaviour
     public static MenuManager Instance { get { return _instance; } }
 
     [SerializeField]
-    private MainMenu _mainMenuPrefab;
-    [SerializeField]
-    private SettingsMenu _settingsMenuPrefab;
-    [SerializeField]
-    private LevelSelectorMenu _levelSelectorMenuPrefab;
-    [SerializeField]
-    private GameMenu _gameMenuPrefab;
-    [SerializeField]
-    private WinScreen _winScreenPrefab;
-    [SerializeField]
-    private LoseScreen _loseScreenPrefab;
-    [SerializeField]
-    private AnotherChanceScript _anotherChancePrefab;
-    [SerializeField]
-    private UpgradeMenu _shopMenuPrefab;
-    [SerializeField]
-    private CreditMenu _creditMenuPrefab;
-    [SerializeField]
-    private InternetCheck _noInternetMenu;
-    [SerializeField]
-    private UnlockedWorldScreen _unlockScreens;
+    private List<Menu> allMenus;
 
-    [SerializeField]
-    private DestroySelf _loadingScreen;
-
+    private List<Menu> _runTimeMenus = new List<Menu>();
 
     public static bool _settingsMenuSwitch = false;
 
@@ -50,30 +31,62 @@ public class MenuManager : MonoBehaviour
 
     private void InitializeMenus()
     {
-        Menu[] menus = { _mainMenuPrefab,_settingsMenuPrefab, _levelSelectorMenuPrefab,
-                            _gameMenuPrefab, _winScreenPrefab, _loseScreenPrefab, _anotherChancePrefab,
-                                _shopMenuPrefab, _creditMenuPrefab,_noInternetMenu,_unlockScreens};
-
-        foreach (Menu menu in menus)
+        foreach (Menu menu in allMenus)
         {
             if (menu != null)
             {
-                Menu newMenu = Instantiate(menu);
+                 Menu newMenu = Instantiate(menu);
+                _runTimeMenus.Add(newMenu);
+            }
+        }
+
+        OpenMainMenu();
+
+
+    }
+    public void OpenMainMenu()
+    {
+        for (int i = 0; i < _runTimeMenus.Count; i++)
+        {
+            if (i == 0)
+            {
+                OpenMenu(_runTimeMenus[i]);
+            }
+            else
+            {
+                CloseMenu(_runTimeMenus[i]);
             }
         }
     }
 
+    public Menu currentMenu;
+    public Menu previousMenu;
     public void OpenMenu(Menu newmenu)
     {
         newmenu.MenuOpen();
+
+        //Set and update previous and current Menu
+        previousMenu = currentMenu;
+        currentMenu = newmenu;
+    }
+
+    public void OpenPopupMenu(Menu newmenu)
+    {
+        newmenu.MenuOpen(); 
     }
     public void CloseMenu(Menu newmenu)
     {
         newmenu.MenuClose();
     }
 
-    public void ShowLoadingScreen()
+    public class MenuTransitions 
     {
-        Instantiate(_loadingScreen.gameObject, transform.position, transform.rotation);
+        List<MenuTransitions> menuTransitions;
+
+        public void InitTransitions()
+        {
+
+        }
+    
     }
 }

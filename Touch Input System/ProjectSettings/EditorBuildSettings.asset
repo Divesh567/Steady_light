@@ -6,115 +6,118 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
+    path: Assets/Scenes/Inital Scenes/InitScene.unity
+    guid: aa29b2a5c71a42f45b212fd55b36eb7f
+  - enabled: 1
+    path: Assets/Scenes/Inital Scenes/Main Menu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/Level 0 Tutorial.unity
+  - enabled: 0
+    path: Assets/Scenes/Basics/Level_Basic_1.unity
     guid: 946187d4d8bd6924c9f7cba5c9a36c0e
-  - enabled: 1
-    path: Assets/Scenes/Level 1_1 Tutorial.unity
+  - enabled: 0
+    path: Assets/Scenes/Basics/Level_Basic_2.unity
     guid: f37cfc41b824f4346929f482ae3da504
-  - enabled: 1
-    path: Assets/Scenes/Level 1_2 Tutorial.unity
+  - enabled: 0
+    path: Assets/Scenes/Basics/Level_Basic_3.unity
     guid: 267bbcc2a452a7a45ad087b03e1bc010
-  - enabled: 1
-    path: Assets/Scenes/Level 1_3.unity
+  - enabled: 0
+    path: Assets/Scenes/Basics/Level_Basic_4.unity
     guid: 46d55d43707293042ab2ab0c3f70e015
-  - enabled: 1
-    path: Assets/Scenes/Level 1_4.unity
+  - enabled: 0
+    path: Assets/Scenes/Basics/Level_Basic_5.unity
     guid: 5082a1b289d3fc04ab4922467fd3f583
-  - enabled: 1
-    path: Assets/Scenes/Level 1_5.unity
+  - enabled: 0
+    path: Assets/Scenes/Basics/Level_Basic_6.unity
     guid: 1e4da7989764b5a4894499a8bda21f2a
-  - enabled: 1
-    path: Assets/Scenes/Level 1_6.unity
+  - enabled: 0
+    path: Assets/Scenes/Basics/Level_Basic_7.unity
     guid: 543a8ae8f727a1140b54379b3895663c
-  - enabled: 1
-    path: Assets/Scenes/Level Enudrance 1.unity
+  - enabled: 0
+    path: Assets/Scenes/Basics/Level_Basic_8.unity
     guid: cdaa18d478d86a94aa07e48ba043ce7b
-  - enabled: 1
-    path: Assets/Scenes/Level 1_7.unity
+  - enabled: 0
+    path: Assets/Scenes/Caves/Level_Caves_1.unity
     guid: f085440ad5f4e7c43b752ed0b3f62832
-  - enabled: 1
-    path: Assets/Scenes/Level 1_8.unity
+  - enabled: 0
+    path: Assets/Scenes/Caves/Level_Caves_2.unity
     guid: 5b3d32efd58708c4085e1f5b8cca250d
-  - enabled: 1
-    path: Assets/Scenes/Level 1_9.unity
+  - enabled: 0
+    path: Assets/Scenes/Caves/Level_Caves_3.unity
     guid: a41cd9a87a39ecf418f87120dcd6015d
-  - enabled: 1
-    path: Assets/Scenes/Level 1_10.unity
+  - enabled: 0
+    path: Assets/Scenes/Caves/Level_Caves_4.unity
     guid: 8b5a5804865194443b1432e40b9655d1
-  - enabled: 1
-    path: Assets/Scenes/Level 1_11.unity
+  - enabled: 0
+    path: Assets/Scenes/Caves/Level_Caves_5.unity
     guid: ec1cf98fb04edfa42813896cea460a2b
-  - enabled: 1
-    path: Assets/Scenes/Level Enudrance 3.unity
+  - enabled: 0
+    path: Assets/Scenes/Caves/Level_Caves_6.unity
     guid: d16549121dcdc944cae3fec105027da8
-  - enabled: 1
-    path: Assets/Scenes/Level 2_1.unity
+  - enabled: 0
+    path: Assets/Scenes/Factory/Level_Factory_1.unity
     guid: a54290288e8b1f54393831346b15cb76
-  - enabled: 1
-    path: Assets/Scenes/Level 2_2.unity
+  - enabled: 0
+    path: Assets/Scenes/Factory/Level_Factory_2.unity
     guid: 4eb5c956e214bcc4a8b82ad0c30d8bfe
-  - enabled: 1
-    path: Assets/Scenes/Level 2_3.unity
+  - enabled: 0
+    path: Assets/Scenes/Factory/Level_Factory_3.unity
     guid: 9fac9b6cb0125b448a8ae2b1c38a5d6b
-  - enabled: 1
-    path: Assets/Scenes/Level 2_4.unity
+  - enabled: 0
+    path: Assets/Scenes/Factory/Level_Factory_4.unity
     guid: 8b38af8fecbb41e4893b0c9d5c7adcb7
-  - enabled: 1
-    path: Assets/Scenes/Level 2_5 1.unity
+  - enabled: 0
+    path: Assets/Scenes/Factory/Level_Factory_5.unity
     guid: 46f2e1e6261d67c40bdb58712902c558
-  - enabled: 1
-    path: Assets/Scenes/Level 2_6.unity
+  - enabled: 0
+    path: Assets/Scenes/Factory/Level_Factory_6.unity
     guid: d49374fd9ba35e74db940de3d95b03d7
-  - enabled: 1
-    path: Assets/Scenes/Level Enudrance 5.unity
+  - enabled: 0
+    path: Assets/Scenes/Factory/Level_Factory_7.unity
     guid: f8c67a4cddaba0d49bdb9530665ca571
-  - enabled: 1
-    path: Assets/Scenes/Level 2_7.unity
+  - enabled: 0
+    path: Assets/Scenes/MicroChip/Level_Microchip_1.unity
     guid: becd9e637d4fb2f48b906f517383babf
-  - enabled: 1
-    path: Assets/Scenes/Level 2_8.unity
+  - enabled: 0
+    path: Assets/Scenes/MicroChip/Level_Microchip_2.unity
     guid: 7ced147e8bb236e4199ff8caf36d653b
-  - enabled: 1
-    path: Assets/Scenes/Level 2_9.unity
+  - enabled: 0
+    path: Assets/Scenes/MicroChip/Level_Microchip_3.unity
     guid: 20a5925e3483a4d4cae8ffa02a0d262a
-  - enabled: 1
-    path: Assets/Scenes/Level 2_10.unity
+  - enabled: 0
+    path: Assets/Scenes/MicroChip/Level_Microchip_4.unity
     guid: 81d50df940ce7034fbd7fa9ca880f27f
-  - enabled: 1
-    path: Assets/Scenes/Level 2_11.unity
+  - enabled: 0
+    path: Assets/Scenes/MicroChip/Level_Microchip_5.unity
     guid: 696c6febef9d5764b98ff2048c0baf51
-  - enabled: 1
-    path: Assets/Scenes/Level Enudrance 6.unity
+  - enabled: 0
+    path: Assets/Scenes/MicroChip/Level_Microchip_6.unity
     guid: 8fb09d0da1da7634ba1609f4628adf59
-  - enabled: 1
-    path: Assets/Scenes/Level 3_1.unity
+  - enabled: 0
+    path: Assets/Scenes/Planets/Level_Planets_1.unity
     guid: a4c90484ed21a9b42a89cc21566b98bf
-  - enabled: 1
-    path: Assets/Scenes/Level 3_2.unity
+  - enabled: 0
+    path: Assets/Scenes/Planets/Level_Planets_2.unity
     guid: 0daacc2e06c159f4fb72f8603a593701
-  - enabled: 1
-    path: Assets/Scenes/Level 3_3.unity
+  - enabled: 0
+    path: Assets/Scenes/Planets/Level_Planets_3.unity
     guid: 65919ef419ef46744955ed49e216aa0c
-  - enabled: 1
-    path: Assets/Scenes/Level 3_4.unity
+  - enabled: 0
+    path: Assets/Scenes/Planets/Level_Planets_4.unity
     guid: 3582fd59e052a9e45b60420c4ee33c15
-  - enabled: 1
-    path: Assets/Scenes/Level 3_5.unity
+  - enabled: 0
+    path: Assets/Scenes/Planets/Level_Planets_5.unity
     guid: 70f5937474059394fa0a0912993e9481
-  - enabled: 1
-    path: Assets/Scenes/Level 3_7.unity
+  - enabled: 0
+    path: Assets/Scenes/Stage/Level_Stage_1.unity
     guid: 595c0ae602bb20042a0748f7dbf6ce4c
-  - enabled: 1
-    path: Assets/Scenes/Level 3_8.unity
+  - enabled: 0
+    path: Assets/Scenes/Stage/Level_Stage_2.unity
     guid: bb6e6f7b70eec1344babe9d2ca50550f
-  - enabled: 1
-    path: Assets/Scenes/Level 3_9.unity
+  - enabled: 0
+    path: Assets/Scenes/Stage/Level_Stage_3.unity
     guid: 2faab584e5fe51d40af3f74b020fd07d
-  - enabled: 1
-    path: Assets/Scenes/Level 3_11.unity
+  - enabled: 0
+    path: Assets/Scenes/Stage/Level_Stage_4.unity
     guid: 9e9b50ffa21643446bd1d1c0199e9344
   - enabled: 1
     path: Assets/Scenes/EndGame Screen.unity
@@ -128,4 +131,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/LevelTemplate 1.unity
     guid: 1fd01fbbec636d5449d57fb8037ef3b3
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: e4376bf8358a8cf4496193d7f3d2e714
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 9b9a95f9547453242bea3c9cb1e0ca17,
+      type: 2}
+  m_UseUCBPForAssetBundles: 0

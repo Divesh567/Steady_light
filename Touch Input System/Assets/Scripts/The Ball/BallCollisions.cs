@@ -7,7 +7,7 @@ public class BallCollisions : MonoBehaviour
 {
     private TouchController _player;
 
-    private Transform _lastCheckPoint = null;
+    public Transform _lastCheckPoint = null;
     private Rigidbody2D _ballRigidbody;
     private SpriteRenderer _spriteRenderer;
     private TrailRenderer _trailRenderer;
@@ -35,14 +35,12 @@ public class BallCollisions : MonoBehaviour
 
     private void Start()
     {
-        MyGameManager.Instance.GetBall(GetComponent<BallCollisions>());
         _startPos = transform.position;
         _collider = GetComponent<Collider2D>();
         _ballRigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _trailRenderer = GetComponent<TrailRenderer>();
         _light2D = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
-        GameMenu.Instance.GetAndSetBallSprite(_spriteRenderer.sprite);
         _lastCheckPoint = null;
     }
 
@@ -60,13 +58,14 @@ public class BallCollisions : MonoBehaviour
             {
                 if (MyGameManager.Instance != null)
                 {
-                    MyGameManager.Instance.LifeLost();
                     Instantiate(_deathVfx, transform.position, transform.rotation);
                     if (SoundManager.Instance != null)
                     {
                         SoundManager.Instance.PlayBallDeath(_ballDeathSfx, _ballDeathSfxVolume);
                     }
                     StartCoroutine(Respawn());
+
+                    ObjectiveEventHandler.OnLifeLostEventCaller();
                 }
             }
         }
@@ -77,7 +76,7 @@ public class BallCollisions : MonoBehaviour
             {
                 if (MyGameManager.Instance != null)
                 {
-                    MyGameManager.Instance.LevelWon();
+                    MyGameManager.Instance.LevelWon(); // Put in portal
                 }
             }
             else if (collision.CompareTag("Spike"))
@@ -86,7 +85,6 @@ public class BallCollisions : MonoBehaviour
                 {
                     if (MyGameManager.Instance != null)
                     {
-                        MyGameManager.Instance.LifeLost();
                         Instantiate(_deathVfx, transform.position, transform.rotation);
                         if (SoundManager.Instance != null)
                         {
@@ -99,7 +97,7 @@ public class BallCollisions : MonoBehaviour
             }
             else if (collision.CompareTag("Star"))
             {
-                var star = collision.gameObject.GetComponent<StarControl>();
+                var star = collision.gameObject.GetComponent<Star>();
                 if (star != null)
                 {
                     star.StarCollected();
@@ -109,20 +107,7 @@ public class BallCollisions : MonoBehaviour
                     SoundManager.Instance.PlayStarCollected();
                 }
             }
-            else if (collision.CompareTag("CheckPoint"))
-            {
-                _lastCheckPoint = collision.transform;
-                var checkPoint = collision.GetComponent<CheckpointControl>();
-                if (checkPoint._active == false)
-                {
-                    checkPoint.CheckpointAnimationTrigger();
-                    if (SoundManager.Instance != null)
-                    {
-                        SoundManager.Instance.PlayCheckpointReached();
-                    }
-                    MyGameManager.Instance.AddTimeFromUpgrades();
-                }
-            }
+            
         }
     }
 
@@ -149,7 +134,7 @@ public class BallCollisions : MonoBehaviour
         _spriteRenderer.enabled = false;
         _light2D.enabled = false;
         _trailRenderer.enabled = false;
-        _ballRigidbody.velocity = new Vector2(0, 0);
+        _ballRigidbody.linearVelocity = new Vector2(0, 0);
 
         yield return new WaitForSeconds(1.5f);
 
@@ -159,7 +144,7 @@ public class BallCollisions : MonoBehaviour
         _spriteRenderer.enabled = true;
         _light2D.enabled = true;
         _trailRenderer.enabled = true;
-        _ballRigidbody.velocity = new Vector2(0, 0);
+        _ballRigidbody.linearVelocity = new Vector2(0, 0);
     }
 
     public void GoToLastPosition()

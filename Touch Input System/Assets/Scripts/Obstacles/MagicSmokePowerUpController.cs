@@ -16,10 +16,7 @@ public class MagicSmokePowerUpController : MonoBehaviour
 
     private void Start()
     {
-        if (MyGameManager.Instance != null)
-        {
-            MyGameManager.Instance.GetCurrentPowerup(this.gameObject);
-        }
+
         _ballCollisions = _ball.GetComponent<BallCollisions>();
         _ballSR = _ball.GetComponent<SpriteRenderer>();
         _ballTR = _ball.GetComponent<TrailRenderer>();
@@ -29,16 +26,7 @@ public class MagicSmokePowerUpController : MonoBehaviour
 
     public void OnPowerUpButtonPressed()
     {
-        if (MyGameManager.Instance._currentPowers >= 1)
-        {
-            MyGameManager.Instance._currentPowers--;
-            _bvf.PowerUpUsedVisualFeedback();
-            StartCoroutine(PowerUp());
-        }
-        else
-        {
-            _bvf.PowerUpUsedVisualFeedback();
-        }
+
     }
 
     IEnumerator PowerUp()
@@ -46,14 +34,14 @@ public class MagicSmokePowerUpController : MonoBehaviour
         _ballSR.enabled = false;
         _ballTR.enabled = false;
         _ballCollisions._invulnerable = true;
-        _ballRB2D.velocity = new Vector2(0, 0);
+        _ballRB2D.linearVelocity = new Vector2(0, 0);
         SoundManager.Instance.PlayPowerUp(0);
         Instantiate(_resetVfx, _ball.transform.position, _ball.transform.rotation);
         yield return new WaitForSeconds(1f);
         _ball.gameObject.GetComponent<BallCollisions>().GoToLastPosition();
         SoundManager.Instance.PlayPowerUp(0);
         Instantiate(_resetVfx, _ball.transform.position, _ball.transform.rotation);
-        _ballRB2D.velocity = new Vector2(0, 0);
+        _ballRB2D.linearVelocity = new Vector2(0, 0);
         yield return new WaitForSeconds(0.25f);
         _ballCollisions._invulnerable = false;
         _ballSR.enabled = true;

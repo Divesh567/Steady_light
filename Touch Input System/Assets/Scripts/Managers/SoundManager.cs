@@ -20,16 +20,17 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public static bool MusicSfx = true;
-    public static bool SoundSfx = true;
-
     //Cache Components
     [Header("Sfx Source")]
     [SerializeField]
     private AudioSource _audioSource;
+
     [Header("Music Source")]
     [SerializeField]
     private AudioSource _musicSource;
+    [SerializeField]
+    private MusicController _musicController;
+
     [SerializeField]
     private AudioSource _obstacleSfxManager;
     [SerializeField]
@@ -87,72 +88,55 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBallBounce(AudioClip _ballBounce, float _ballBounceVolume)
     {
-        if (SoundSfx)
-        {
-            _audioSource.PlayOneShot(_ballBounce, _ballBounceVolume);
-        }
+        _audioSource.PlayOneShot(_ballBounce, _ballBounceVolume);
+
     }
 
     public void PlayBallDeath(AudioClip _ballDeath, float _ballDeathVolume)
     {
-        if (SoundSfx)
-        {
-            _audioSource.PlayOneShot(_ballDeath, _ballDeathVolume);
-        }
+        _audioSource.PlayOneShot(_ballDeath, _ballDeathVolume);
+
     }
 
     public void PlayForceFieldDisabled(AudioClip _soundEffect, float _volume)
     {
-        if (SoundSfx)
-        {
-            _audioSource.PlayOneShot(_soundEffect, _volume);
-            _audioSource.priority = 0;
-        }
+        _audioSource.PlayOneShot(_soundEffect, _volume);
+        _audioSource.priority = 0;
+
     }
 
     public void PlayForceFieldEnabled(AudioClip _soundEffect, float _volume)
     {
-        if (SoundSfx)
-        {
-            _audioSource.PlayOneShot(_soundEffect, _volume);
-            _audioSource.priority = 0;
-        }
+
+        _audioSource.PlayOneShot(_soundEffect, _volume);
+        _audioSource.priority = 0;
+
     }
 
     public void PlayStarCollected()
     {
-        if (SoundSfx)
-        {
-            _audioSource.PlayOneShot(_starCollected, _starCollectedVolume);
-        }
+        _audioSource.PlayOneShot(_starCollected, _starCollectedVolume);
+
     }
 
     public void PlayCheckpointReached()
     {
-        if (SoundSfx)
-        {
-            _audioSource.PlayOneShot(_checkpointReached, _checkpointReachedVolume);
-        }
+        _audioSource.PlayOneShot(_checkpointReached, _checkpointReachedVolume);
     }
 
     public void PlayLevelComplete()
     {
-        if (SoundSfx)
-        {
-            _audioSource.PlayOneShot(_levelComplete, _levelCompleteVolume);
-        }
+        _audioSource.PlayOneShot(_levelComplete, _levelCompleteVolume);
     }
 
-    public void PlayAndStopMusic()
+    public void PlayMusic()
     {
-        if (MusicSfx)
-        {
-            _musicSource.Play();
-        }
-        else
-        {
-            _musicSource.Stop();
-        }
+        _musicController.PlayMusic(_musicSource);
+    }
+
+    public void StopMusic()
+    {
+        _musicController.PlayMusic(_musicSource); // Stop Music //TODO
     }
 
     public void PitchChangeTimeTrail()
@@ -191,10 +175,8 @@ public class SoundManager : MonoBehaviour
 
     public void PlayUiButtonSfx()
     {
-        if (SoundSfx)
-        {
-            _audioSource.PlayOneShot(_uiButtonPress);
-        }
+        _audioSource.PlayOneShot(_uiButtonPress);
+
     }
 
     public void UiButtonPressed()
@@ -225,18 +207,12 @@ public class SoundManager : MonoBehaviour
 
     public void PlayDiamondCollected()
     {
-        if (SoundSfx)
-        {
-            _audioSource.PlayOneShot(_diamondCollected, _diamondVolume);
-        }
+        _audioSource.PlayOneShot(_diamondCollected, _diamondVolume);
     }
 
     public void PlayUpgradeBought()
     {
-        if (SoundSfx)
-        {
-            _audioSource.PlayOneShot(_upgradeBoughtSfx, _upgradeBoughtSfxVolume);
-        }
+        _audioSource.PlayOneShot(_upgradeBoughtSfx, _upgradeBoughtSfxVolume);
     }
 
 }

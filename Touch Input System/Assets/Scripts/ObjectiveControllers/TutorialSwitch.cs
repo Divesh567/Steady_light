@@ -24,7 +24,7 @@ public class TutorialSwitch : MonoBehaviour
     {
         if (GameMenu.Instance != null)
         {
-            GameMenu.Instance.GamePanelClose();
+
         }
         GetComponent<Collider2D>().enabled = false;
         Instantiate(_tutotrialPanel, _tutotrialPanel.transform.position, Quaternion.identity);

@@ -2,25 +2,26 @@ using UnityEngine;
 
 public class CreditMenu : Menu<CreditMenu>
 {
-    private GameObject _panels;
 
-    private void Start()
+    public override void Start()
     {
-        _panels = transform.GetChild(0).gameObject;
+        base.Start();
     }
 
     public override void MenuClose()
     {
-        _panels.gameObject.SetActive(false);
+        MainPanel.gameObject.SetActive(false);
     }
 
     public override void MenuOpen()
     {
-        _panels.gameObject.SetActive(true);
+        MainPanel.gameObject.SetActive(true);
     }
 
     public void OnBackButtonPressed()
     {
         MenuClose();
+
+        MainMenu.Instance.graphicRaycaster.enabled = true;
     }
 }

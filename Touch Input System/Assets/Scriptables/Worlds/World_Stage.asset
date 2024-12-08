@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e8d1b2b798486c4e84eed527f131460, type: 3}
+  m_Name: World_Stage
+  m_EditorClassIdentifier: 
+  levels:
+  - scene: {fileID: 102900000, guid: 595c0ae602bb20042a0748f7dbf6ce4c, type: 3}
+    sceneAddress:
+      m_AssetGUID: 595c0ae602bb20042a0748f7dbf6ce4c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 0
+  - scene: {fileID: 102900000, guid: bb6e6f7b70eec1344babe9d2ca50550f, type: 3}
+    sceneAddress:
+      m_AssetGUID: bb6e6f7b70eec1344babe9d2ca50550f
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 0
+  - scene: {fileID: 102900000, guid: 2faab584e5fe51d40af3f74b020fd07d, type: 3}
+    sceneAddress:
+      m_AssetGUID: 2faab584e5fe51d40af3f74b020fd07d
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 1
+  - scene: {fileID: 102900000, guid: 9e9b50ffa21643446bd1d1c0199e9344, type: 3}
+    sceneAddress:
+      m_AssetGUID: 9e9b50ffa21643446bd1d1c0199e9344
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    levelType: 0
+  worldType: 5

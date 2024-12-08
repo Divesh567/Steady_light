@@ -14220,7 +14220,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1703289409
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -14337,6 +14337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1451380e0e3524c8fdd3ab34e80b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _portalClose: {fileID: 3606860615214857297}
+  _portalOpen: {fileID: 4791357311885646010}
 --- !u!1 &4791357311885646010
 GameObject:
   m_ObjectHideFlags: 0
@@ -19072,7 +19074,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1703289409
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0

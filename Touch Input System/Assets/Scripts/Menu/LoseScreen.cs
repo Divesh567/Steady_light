@@ -1,67 +1,38 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LoseScreen : Menu<LoseScreen>
 {
-    private GameObject _backgroundImage;
-    private GameObject _losePanel;
-    private Animator _animator;
+    [SerializeField]
+    public Button restartbutton;
 
     private void Start()
     {
-        _backgroundImage = transform.GetChild(0).gameObject;
-        _losePanel = transform.GetChild(1).gameObject;
-        _animator = GetComponent<Animator>();
+        base.Start();
+
+        restartbutton.onClick.AddListener(OnRetryPressed);
+
+
     }
     public void OnRetryPressed()
     {
-        MyGameManager.Instance._replaying = true;
-        MenuClose();
-        TutorialSwitch.TurorialOn = false;
-        if (LevelLoader.Instance != null)
-        {
-            LevelLoader.Instance.ReloadLevel();
-        }
+        GameMenu.Instance.objectiveUIs.ForEach(x => x.ResetUI());
+        LevelLoader.Instance.ReloadLevel();
     }
 
     public override void MenuOpen()
     {
-        if (GameMenu.Instance != null && MenuManager.Instance != null)
-        {
-            MenuManager.Instance.CloseMenu(GameMenu.Instance);
-        }
-        _losePanel.gameObject.SetActive(true);
-        _backgroundImage.gameObject.SetActive(true);
-        _animator.SetTrigger("On");
-        StartCoroutine(PauseGame());
+        canvas.sortingOrder = 20;
+        MainPanel.gameObject.SetActive(true);
     }
 
     public override void MenuClose()
     {
-        StartCoroutine(ResumeGame());
-        _losePanel.gameObject.SetActive(false);
-        _backgroundImage.gameObject.SetActive(false);
-        _animator.SetTrigger("Off");
+        canvas.sortingOrder = 0;
+        MainPanel.gameObject.SetActive(false);
     }
-    public override void OnMainMenuButtonPressed()
+    public void OnUpgradeButtonPressed()
     {
-        MenuClose();
-        base.OnMainMenuButtonPressed();
-    }
-
-    public void OnSkipLevelButtonPressed()
-    {
-        if (Application.internetReachability == NetworkReachability.NotReachable)
-        {
-            MenuManager.Instance.OpenMenu(InternetCheck.Instance);
-        }
-        else
-        {
-            if (MyGameManager.Instance != null && AdManager.Instance != null)
-            {
-                MyGameManager.Instance._levelType = "sl";
-                AdManager.Instance.ShowRewardedAd();
-                MenuClose();
-            }
-        }
+      
     }
 }

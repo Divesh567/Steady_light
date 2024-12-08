@@ -2,30 +2,56 @@
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using Menus.Animations;
 
 public class MainMenu : Menu<MainMenu>
 {
-    private GameObject _menuPanel;
-    private Slider _completionBar;
 
-    private int _completedLevels;
+    [Space(20)]
+    [Header("Buttons")]
+    [SerializeField]
+    private CustomButton playButton;
+    [SerializeField]
+    private CustomButton settingsButton;
+    [SerializeField]
+    private CustomButton rateButton;
+    [SerializeField]
+    private CustomButton creditsButton;
+    [SerializeField]
+    private CustomButton shopButton;
 
-    private void Start()
+    [Header("Transition Sets")]
+    [SerializeField]
+    private MenuTransitionSet _levelSelectionTransitionSet;
+    [SerializeField]
+    private MenuTransitionSet _settingsTransitionSet;
+    [SerializeField]
+    private MenuTransitionSet _creditsTransitionSet;
+    [SerializeField]
+    private MenuTransitionSet _shopMenuTransitionSet;
+
+    public override void Start()
     {
-        _menuPanel = transform.GetChild(0).gameObject;
+        _levelSelectionTransitionSet.InitTranistion(this, LevelSelectionMenu.Instance);
+        _settingsTransitionSet.InitTranistion(this, SettingsMenu.Instance);
+        _creditsTransitionSet.InitTranistion(this, CreditMenu.Instance);
+        _shopMenuTransitionSet.InitTranistion(this, UpgradeMenu.Instance);
+
+
+        playButton.button.onClick.AddListener(() => OnPlayPressed());
+        settingsButton.button.onClick.AddListener(() => OnSettingsPressed());
+        rateButton.button.onClick.AddListener(() => OnRateUsButtonPressed());
+        creditsButton.button.onClick.AddListener(() => OnCreditsButtonPressed()); // Add UISfx pn button Pressed
+        shopButton.button.onClick.AddListener(() => OnShopButtonPressed()); // Add UISfx pn button Pressed
+
+        SoundManager.Instance.PlayMusic();
     }
-    public void OnPlayPressed()
+    private void OnPlayPressed()
     {
         TutorialSwitch.TurorialOn = true;
-        MenuManager._settingsMenuSwitch = false;
-        if (MenuManager.Instance != null && SettingsMenu.Instance != null && LevelSelectorMenu.Instance != null)
-        {
-            MenuManager.Instance.CloseMenu(SettingsMenu.Instance);
-            MenuManager.Instance.CloseMenu(CreditMenu.Instance);
-            MenuManager.Instance.OpenMenu(LevelSelectorMenu.Instance);
-            UpGradesManager.Instance.LoadAllUpGrades();
-            MenuClose();
-        }
+        MenuManager._settingsMenuSwitch = false; //Code Smell
+
+        _levelSelectionTransitionSet.PlayTransition();
     }
 
     public void OnSettingsPressed()
@@ -33,7 +59,7 @@ public class MainMenu : Menu<MainMenu>
         
         if (MenuManager.Instance != null && SettingsMenu.Instance != null)
         {
-            MenuManager.Instance.OpenMenu(SettingsMenu.Instance);
+            _settingsTransitionSet.PlayTransition();
         }
     }
 
@@ -44,68 +70,31 @@ public class MainMenu : Menu<MainMenu>
 
     public override void MenuOpen()
     {
-        StartCoroutine(ResumeGame());
-        _menuPanel.gameObject.SetActive(true);
-        _completionBar.gameObject.SetActive(true);
-        DisplayCompletionBar(DataManager.Instance.unlockedLevels);
+        Debug.Log("Open MainMenu");
+        StartCoroutine(ResumeGame()); // Code smell
+        MainPanel.gameObject.SetActive(true);
+//        DisplayCompletionBar(DataManager.Instance.unlockedLevels);
     }
 
     public override void MenuClose()
     {
         StartCoroutine(ResumeGame());
-        _menuPanel.gameObject.SetActive(false);
-        _completionBar.gameObject.SetActive(false);
+        MainPanel.gameObject.SetActive(false);
     }
 
     public void OnShopButtonPressed()
     {
-        MenuClose();
-        UpgradeMenu.Instance._isPreviousScreenMainMenu = true;
-        MenuManager.Instance.OpenMenu(UpgradeMenu.Instance);
+        _shopMenuTransitionSet.PlayTransition();
     }
 
     public void OnCreditsButtonPressed()
     {
-        MenuManager.Instance.OpenMenu(CreditMenu.Instance);
+        _creditsTransitionSet.PlayTransition();
     }
 
-    public void OnFeedbackButtonPressed()
+    public void OnRateUsButtonPressed()
     {
         Application.OpenURL("https://play.google.com/store/apps/details?id=com.Immersiveorama.LightForce");
     }
 
-    public void DisplayCompletionBar(bool[] _levelData)
-    {
-        float _totalLevels;
-        _completedLevels = 0;
-        _totalLevels = _levelData.Length;
-
-        for(int i = 0; i < _levelData.Length - 1; i++)
-        {
-            if(_levelData[i] == true)
-            {
-                _completedLevels++;
-            }
-        }
-
-        _completionBar = transform.GetChild(1).gameObject.GetComponent<Slider>();
-        float _gameCompleted = (_completedLevels / _totalLevels) * 100f;
-        _gameCompleted = Mathf.Round(_gameCompleted * 100f) / 100f;
-        StartCoroutine(FillCompletionBar(0f,_gameCompleted));
-    }
-
-    IEnumerator FillCompletionBar(float currentValue, float targetvalue)
-    {
-        var completionText = _completionBar.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
-        float elaspedTime = 0.0f;
-        while(elaspedTime < 2f)
-        {
-            var _barvalue = (float)Mathf.Lerp(currentValue, targetvalue, elaspedTime / 1);
-            elaspedTime += Time.deltaTime;
-            _completionBar.value = _barvalue;
-            completionText.text = Mathf.Round((_completionBar.value * 100f) / 100f).ToString() + "%";
-            yield return null;
-        }
-        _completionBar.value = targetvalue;
-    }
 }

@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 public class JsonSaver
 {
@@ -40,6 +41,7 @@ public class JsonSaver
         {
             writer.Write(json);
         }
+
     }
 
     // load the data from disk and overwrite the contents of SaveData object
