@@ -32,8 +32,6 @@ public class MyGameManager : MonoBehaviour // Should be a static class
             _instance = this;
             DontDestroyOnLoad(gameObject);
         }
-
-        LevelLoader.Instance.LoadMainMenu();
     }
 
 

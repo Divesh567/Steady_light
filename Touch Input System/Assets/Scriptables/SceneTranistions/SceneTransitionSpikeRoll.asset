@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 968cd69a20f285842b63b9df934e6c74, type: 3}
-  m_Name: Button AudioController
+  m_Script: {fileID: 11500000, guid: 720a0dcd5f438f74faae780c04d08c37, type: 3}
+  m_Name: SceneTransitionSpikeRoll
   m_EditorClassIdentifier: 
-  soundType: 0
-  clip: {fileID: 8300000, guid: 81652031b64c342cc8dbc59c138d77c5, type: 3}
+  trasnitionObject: {fileID: 1643340133256135530, guid: 6ec4b6bf45b0ecd47be9abc586a916ef,
+    type: 3}
+  transform: {fileID: 0}
+  scaleInDuration: 1

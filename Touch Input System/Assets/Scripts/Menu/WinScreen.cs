@@ -50,7 +50,8 @@ public class WinScreen : Menu<WinScreen>
 
     private void OnNextLevelButton()
     {
-        LevelLoader.Instance.LoadNextLevel();
+        SceneTransitionManager.Instance.OnSceneTransitionStarted.Invoke();
+        
     }
     private void OnUpgradeButton()
     {

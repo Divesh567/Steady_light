@@ -1,10 +1,10 @@
 using UnityEngine;
-using Firebase.Analytics;
+//using Firebase.Analytics;
 
 public static class FirebaseAnalyticsController 
 {
     public static void LogFirebaseEvent(string eventName)
     {
-        FirebaseAnalytics.LogEvent(eventName);
+       // FirebaseAnalytics.LogEvent(eventName);
     }
 }

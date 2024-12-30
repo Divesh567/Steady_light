@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 968cd69a20f285842b63b9df934e6c74, type: 3}
-  m_Name: Button AudioController
+  m_Script: {fileID: 11500000, guid: d32bd2dd4855c2547b3b0f572f262c10, type: 3}
+  m_Name: SceneTransitionSlideInOut
   m_EditorClassIdentifier: 
-  soundType: 0
-  clip: {fileID: 8300000, guid: 81652031b64c342cc8dbc59c138d77c5, type: 3}
+  trasnitionObject: {fileID: 1643340133256135530, guid: 427f6dc5f40178d4eae0527f2c14e76f,
+    type: 3}
+  rectTransform: {fileID: 0}
+  SlideDuration: 1

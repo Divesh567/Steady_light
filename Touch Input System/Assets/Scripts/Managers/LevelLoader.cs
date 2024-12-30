@@ -45,7 +45,7 @@ public class LevelLoader : MonoBehaviour
 
         UnloadLevel();
 
-       // Debug.Log($"LOADING NEXT LEVEL{Path.GetFileName(nextLevelRef.editorAsset.name)}");
+        // Debug.Log($"LOADING NEXT LEVEL{Path.GetFileName(nextLevelRef.editorAsset.name)}");
 
         LoadLevel(nextLevelRef);
     }
@@ -79,7 +79,7 @@ public class LevelLoader : MonoBehaviour
     private void OnSceneLoaded(AsyncOperationHandle<SceneInstance> handle)
     {
         WinScreen.Instance.MenuClose();
-      
+        
 
         // Check the status of the operation
         if (handle.Status == AsyncOperationStatus.Succeeded)
@@ -96,6 +96,9 @@ public class LevelLoader : MonoBehaviour
         GameMenu.Instance.MenuOpen();
 
         DataManager.Instance.SaveUnlockedLevel(RuntimeGameData.levelSelectedName, new List<int>());
+
+
+        SceneTransitionManager.Instance.OnSceneTransitionCompleted.Invoke();
 
     }
 
