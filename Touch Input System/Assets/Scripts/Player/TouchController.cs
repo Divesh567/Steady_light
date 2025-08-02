@@ -31,7 +31,7 @@ public class TouchController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (MyGameManager.gameState != MyGameManager.GameState.GameRunning) return;
+        if (MyGameManager.Instance.gameState != MyGameManager.GameState.GameRunning) return;
 
         LookAtTheBall();
     }
@@ -47,75 +47,45 @@ public class TouchController : MonoBehaviour
         float angle = Mathf.Atan2(_directionToFace.y, _directionToFace.x) * Mathf.Rad2Deg - 90f;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));   
     }
-
+    private Vector2 _touchStartScreenPos;
+    private Vector2 _touchOffset;
     public void CheckShouldMove(bool isClicked)
     {
+        /*  if (MyGameManager.Instance.gameState != MyGameManager.GameState.GameRunning) return;
+
+          _dragging = isClicked;*/
+
+
+        if (MyGameManager.Instance.gameState != MyGameManager.GameState.GameRunning) return;
+
         _dragging = isClicked;
+
+        if (_dragging)
+        {
+            // On click start, capture offset
+            _touchStartScreenPos = Touchscreen.current != null ? Touchscreen.current.primaryTouch.position.ReadValue() : Mouse.current.position.ReadValue();
+            Vector2 worldTouchStart = Camera.main.ScreenToWorldPoint(_touchStartScreenPos);
+            _touchOffset = (Vector2)transform.position - worldTouchStart;
+        }
     }
 
     public void Movement(Vector2 movePos)
     {
-        if (MyGameManager.gameState != MyGameManager.GameState.GameRunning) return;
+        /* if (MyGameManager.Instance.gameState != MyGameManager.GameState.GameRunning) return;
 
+         if (!_dragging) return;
+
+         _touchPos = Camera.main.ScreenToWorldPoint(movePos);
+
+         transform.position = _touchPos;*/
+
+        if (MyGameManager.Instance.gameState != MyGameManager.GameState.GameRunning) return;
         if (!_dragging) return;
 
-        _touchPos = Camera.main.ScreenToWorldPoint(movePos);
+        Vector2 worldPos = Camera.main.ScreenToWorldPoint(movePos);
+        Vector2 targetPos = worldPos + _touchOffset;
 
-        transform.position = _touchPos;
-
-        /*      #region OldCode
-              if (Input.touchCount > 0)
-              {
-
-                  _touch = Input.GetTouch(0);
-                  _touchPos = Camera.main.ScreenToWorldPoint(_touch.position);
-                  _touchRaycast = new Ray2D(_touchPos, Vector2.zero);
-
-
-                  if (_touch.phase == UnityEngine.TouchPhase.Began)
-                  {
-                      if (Physics2D.OverlapCircle(_touchRaycast.origin, _racastSize))
-                      {
-
-                          Vector2 _startpos = new Vector2(_touchPos.x - Camera.main.transform.position.x,
-                                                       _touchPos.y -
-                                                       Camera.main.transform.position.y).normalized;
-
-                          transform.position = new Vector2(Camera.main.transform.position.x + (_startpos.x * 12f),
-                                                                      Camera.main.transform.position.y + (_startpos.y * 12f));
-                          _startTouchPos = new Vector2(_touchPos.x - transform.position.x,
-                                                                      _touchPos.y - transform.position.y);
-
-                          if (!_dragging)
-                          {
-                              _dragging = true;
-                          }
-
-                      }
-                  }
-                  else if (_touch.phase == UnityEngine.TouchPhase.Ended || _touch.phase == UnityEngine.TouchPhase.Canceled)
-                  {
-                      if (_dragging)
-                      {
-                          _dragging = false;
-                      }
-
-                  }
-              }
-
-              if (_dragging)
-              {
-                  transform.position = Vector3.Lerp
-                      (transform.position, new Vector2(_touchPos.x - _startTouchPos.x,
-                                                                    _touchPos.y - _startTouchPos.y), _playerLerp * Time.deltaTime);
-              }
-              else
-              {
-                  transform.position = Vector3.Lerp(transform.position,
-                      new Vector2(_gameBall.transform.position.x, _gameBall.transform.position.y - 12),
-                      resetSpeed * Time.deltaTime);
-              }
-              #endregion*/
+        transform.position = Vector2.Lerp(transform.position, targetPos, Time.deltaTime * _playerLerp);
     }
 
     public void Reset()

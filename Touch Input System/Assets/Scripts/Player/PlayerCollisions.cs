@@ -33,7 +33,7 @@ public class PlayerCollisions : MonoBehaviour
             }
         }
 
-        else if (collision.gameObject.tag == "Ball")
+        else if (collision.gameObject.CompareTag("Ball"))
         {
             _playerTouchController._force = true;
         }
@@ -49,7 +49,7 @@ public class PlayerCollisions : MonoBehaviour
                 SoundManager.Instance.PlayForceFieldEnabled(_forceFieldEnableSfx, _forceFieldEnableeSfxVolume);
             }
         }
-        if (collision.gameObject.tag == "Ball")
+        if (collision.gameObject.CompareTag("Ball"))
         {
             _playerTouchController._force = false;
         }

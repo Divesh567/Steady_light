@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
@@ -12,6 +13,8 @@ public class SceneTranistionFadeInOut : SceneTransitionBaseSO
     public float fadeDuration;
 
     private string ButtonName = "Anim Test Button";
+
+
 
 
     [Button("$ButtonName")]
@@ -31,15 +34,18 @@ public class SceneTranistionFadeInOut : SceneTransitionBaseSO
     }
 
 
-    public override void PlayAnimationPart1(GameObject target)
+    public override void PlayAnimationPart1(GameObject target, UnityAction onCompleteAction)
     {
         image = target.GetComponent<Image>();
 
         image.DOFade(0, 0).OnComplete(() =>
         {
+            AudioControllerMono audioController = target.GetComponent<AudioControllerMono>();
+            audioController.PlayAudioClip(transitionClip1);
+
             image.DOFade(1, fadeDuration).OnComplete(() =>
             {
-                LevelLoader.Instance.LoadNextLevel();
+                onCompleteAction.Invoke();
             });
         });
        
@@ -51,7 +57,13 @@ public class SceneTranistionFadeInOut : SceneTransitionBaseSO
 
         image.DOFade(1,0).OnComplete(() =>
         {
-            image.DOFade(0, fadeDuration);
+            AudioControllerMono audioController = target.GetComponent<AudioControllerMono>();
+            audioController.PlayAudioClip(transitionClip2);
+
+            image.DOFade(0, fadeDuration).OnComplete(() => OnAnimComplete());
+
+          
+
         });
 
        

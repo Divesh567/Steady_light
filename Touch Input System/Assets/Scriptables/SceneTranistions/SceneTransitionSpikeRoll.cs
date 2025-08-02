@@ -2,12 +2,17 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "SceneTransitionSpikeRoll", menuName = "SceneTransitions/SceneTransitionSpikeRoll")]
 public class SceneTransitionSpikeRoll : SceneTransitionBaseSO
 {
     public Transform transform;
     public float scaleInDuration;
+    public float rotDuration;
+    public float scaleSize;
+    public Vector3 rotValue;
+
 
 
     private string ButtonName = "Anim Test Button";
@@ -29,15 +34,23 @@ public class SceneTransitionSpikeRoll : SceneTransitionBaseSO
 
     }
 
-    public override void PlayAnimationPart1(GameObject target)
+    public override void PlayAnimationPart1(GameObject target, UnityAction onCompleteAction)
     {
         transform = target.GetComponent<RectTransform>();
         transform.DOScale(0, 0).OnComplete(() =>
         {
-            transform.DOScale(3, scaleInDuration).OnComplete(() =>
-            {
-                LevelLoader.Instance.LoadNextLevel();
-            });
+            Sequence scaleAndRotate = DOTween.Sequence();
+
+            AudioControllerMono audioController = target.GetComponent<AudioControllerMono>();
+            audioController.PlayAudioClip(transitionClip1);
+
+            scaleAndRotate
+                .Join(transform.DOScale(scaleSize, scaleInDuration))
+                .Join(transform.DORotate(rotValue, scaleInDuration, RotateMode.FastBeyond360))
+                .OnComplete(() =>
+                {
+                    onCompleteAction?.Invoke();
+                });
         });
 
     }
@@ -46,9 +59,19 @@ public class SceneTransitionSpikeRoll : SceneTransitionBaseSO
     {
         Debug.Log("Scene is loaded completing trasition");
 
-        transform.DOScale(3, 0).OnComplete(() =>
+        transform.DOScale(scaleSize, 0).OnComplete(() =>
         {
-            transform.DOScale(0, scaleInDuration);
+            Sequence scaleAndRotate = DOTween.Sequence();
+
+            AudioControllerMono audioController = target.GetComponent<AudioControllerMono>();
+            audioController.PlayAudioClip(transitionClip2);
+
+            scaleAndRotate
+                .Join(transform.DOScale(0, scaleInDuration))
+                .Join(transform.DORotate(-rotValue, scaleInDuration, RotateMode.FastBeyond360))
+                .OnComplete(() => OnAnimComplete());
+
+            transform.DOScale(0, scaleInDuration).OnComplete(() => OnAnimComplete());
         });
       
     }

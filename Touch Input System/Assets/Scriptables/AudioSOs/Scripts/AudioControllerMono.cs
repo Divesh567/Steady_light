@@ -10,12 +10,15 @@ public class AudioControllerMono : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void PlayAudioClip(AudioClip audioClip)
+    public void PlayAudioClip(AudioClip audioClip = null)
     {
 
         if (DataManager.Instance.saveDataSO.saveData.soundSettings.isSfxMuted) return;
 
-        audioSource.clip = audioClip;
+        if(audioClip != null)
+            audioSource.clip = audioClip;
+
+
         audioSource.Play();
     }
     

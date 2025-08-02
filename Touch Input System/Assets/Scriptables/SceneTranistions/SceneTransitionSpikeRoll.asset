@@ -14,5 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trasnitionObject: {fileID: 1643340133256135530, guid: 6ec4b6bf45b0ecd47be9abc586a916ef,
     type: 3}
+  transitionClip1: {fileID: 8300000, guid: 72127805eb2bc4e7fbf2e02eca266cfa, type: 3}
+  transitionClip2: {fileID: 8300000, guid: 72127805eb2bc4e7fbf2e02eca266cfa, type: 3}
   transform: {fileID: 0}
   scaleInDuration: 1
+  rotDuration: 1
+  scaleSize: 3
+  rotValue: {x: 0, y: 0, z: 360}

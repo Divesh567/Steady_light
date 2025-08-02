@@ -1,37 +1,55 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
 
     [SerializeField]
-    private float _timer;
+    private float delay;
     [SerializeField]
-    private float _deafultTimer;
-    private Animator _animator;
+    private float rotationSpeed;
+
     [SerializeField]
-    private bool _rotate;
+    private Vector3 RotationValue;
+
+    public Ease ease;
+
+    public AudioControllerMono audioController;
+    private Renderer _renderer;
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
+        RotateSpikeAnchor();
+        _renderer = GetComponent<Renderer>();
     }
 
-    private void Update()
+    private void RotateSpikeAnchor()
     {
-        _timer = _timer - 0.25f * Time.deltaTime;
-        if (_timer <= 0)
-        {
-            if (!_rotate)
-            {
-                _rotate = true;
-                _animator.SetBool("Rotate", _rotate);
-            }
-            else
-            {
-                _rotate = false;
-                _animator.SetBool("Rotate", _rotate);
-            }
-            _timer = _deafultTimer;
-        }
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.AppendCallback(() => PlayRotateSfx());
+
+        sequence.Append(transform.DOLocalRotate(RotationValue, rotationSpeed)
+        .SetEase(ease).SetRelative());
+
+        sequence.AppendInterval(delay); // Apply delay between actions
+
+        sequence.AppendCallback(() => PlayRotateSfx());
+
+        sequence.Append(transform.DOLocalRotate(-RotationValue, rotationSpeed)
+        .SetEase(ease).SetRelative());
+
+        sequence.AppendInterval(delay); // Apply delay between actions
+
+        sequence.SetLoops(-1, LoopType.Restart);
+        sequence.Play();
+
     }
+
+    private void PlayRotateSfx()
+    {
+        if (_renderer.isVisible)
+            audioController.PlayAudioClip();
+    }
+
 }

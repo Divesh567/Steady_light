@@ -21,7 +21,17 @@ public class World : MonoBehaviour
     {
         levelButtons.AddRange(TrasformUtilities.GetComponentChildrenList<LevelButton>(buttonsParent.transform));
 
-        for (int i = 0; i < levelButtons.Count; i++)
+        if(levelButtons.Count > worldSO.levels.Count)
+        {
+           int buttonsToDisable = levelButtons.Count - worldSO.levels.Count;
+
+            for (int x = 0; x < buttonsToDisable; x++)
+            {
+                levelButtons[levelButtons.Count - x - 1].gameObject.SetActive(false);
+            }
+        }
+
+        for (int i = 0; i < worldSO.levels.Count; i++)
         {
             levelButtons[i].level = worldSO.levels[i];
             levelButtons[i].LockButton();
@@ -33,8 +43,6 @@ public class World : MonoBehaviour
 
             for (int i = 0; i <= levelsUnlocked; i++)
             {
-
-                Debug.Log("levelsCompleted" + levelsUnlocked);
                 levelButtons[i].UnlockButton();
             }
         }

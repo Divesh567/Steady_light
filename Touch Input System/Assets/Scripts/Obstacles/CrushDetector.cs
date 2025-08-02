@@ -7,7 +7,7 @@ public class CrushDetector : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Ball"))
         {
-            GetComponent<CrusherController>().StartResetCrusher();
+            GetComponent<CrusherController>();
             GetComponent<AudioSource>().Play();
         }
     }

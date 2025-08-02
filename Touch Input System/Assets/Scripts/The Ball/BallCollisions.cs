@@ -33,6 +33,8 @@ public class BallCollisions : MonoBehaviour
     [SerializeField]
     private float _ballBounceSfxVolume;
 
+    public Cinemachine.CinemachineImpulseSource impulseSource;
+
     private void Start()
     {
         _startPos = transform.position;
@@ -41,6 +43,7 @@ public class BallCollisions : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _trailRenderer = GetComponent<TrailRenderer>();
         _light2D = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+        impulseSource = GetComponent<Cinemachine.CinemachineImpulseSource>();
         _lastCheckPoint = null;
     }
 
@@ -62,6 +65,8 @@ public class BallCollisions : MonoBehaviour
                     if (SoundManager.Instance != null)
                     {
                         SoundManager.Instance.PlayBallDeath(_ballDeathSfx, _ballDeathSfxVolume);
+                        impulseSource.GenerateImpulse();
+
                     }
                     StartCoroutine(Respawn());
 

@@ -86,6 +86,7 @@ public class SoundManager : MonoBehaviour
     private float _starObjectivePitch = 1f;
     private float _enduranceObjectivePitch = 0.53f;
 
+
     public void PlayBallBounce(AudioClip _ballBounce, float _ballBounceVolume)
     {
         _audioSource.PlayOneShot(_ballBounce, _ballBounceVolume);

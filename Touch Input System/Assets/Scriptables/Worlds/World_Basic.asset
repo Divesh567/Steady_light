@@ -16,49 +16,50 @@ MonoBehaviour:
   - sceneAddress:
       m_AssetGUID: 946187d4d8bd6924c9f7cba5c9a36c0e
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     levelType: 0
   - sceneAddress:
       m_AssetGUID: f37cfc41b824f4346929f482ae3da504
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     levelType: 0
   - sceneAddress:
       m_AssetGUID: 267bbcc2a452a7a45ad087b03e1bc010
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     levelType: 1
   - sceneAddress:
       m_AssetGUID: 46d55d43707293042ab2ab0c3f70e015
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     levelType: 0
   - sceneAddress:
       m_AssetGUID: 5082a1b289d3fc04ab4922467fd3f583
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     levelType: 0
   - sceneAddress:
       m_AssetGUID: 1e4da7989764b5a4894499a8bda21f2a
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     levelType: 0
   - sceneAddress:
       m_AssetGUID: 543a8ae8f727a1140b54379b3895663c
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     levelType: 0
-  - sceneAddress:
-      m_AssetGUID: cdaa18d478d86a94aa07e48ba043ce7b
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
-    levelType: 2
   worldType: 0

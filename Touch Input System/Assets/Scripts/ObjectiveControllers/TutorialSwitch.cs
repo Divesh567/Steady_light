@@ -10,7 +10,7 @@ public class TutorialSwitch : MonoBehaviour
     {
         if (TurorialOn)
         {
-            if (collision.gameObject.tag == "Ball")
+            if (collision.gameObject.CompareTag("Ball"))
             {
                 StartCoroutine(EnableTutorial());
             }

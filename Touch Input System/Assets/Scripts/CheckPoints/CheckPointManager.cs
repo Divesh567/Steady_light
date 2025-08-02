@@ -9,12 +9,6 @@ public class CheckPointManager : MonoBehaviour
     public int currentCheckPoint = 0;
 
 
-    private void Awake()
-    {
-       
-    }
-
-
     private void Start()
     {
         for (int i = 0; i < transform.childCount - 1; i++)

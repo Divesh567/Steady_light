@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 
 public class LevelButton : CustomButton
@@ -30,14 +32,11 @@ public class LevelButton : CustomButton
 
     private void StartLevel()
     {
-        RuntimeGameData.levelSelected = level.sceneAddress;
-        RuntimeGameData.levelType = level.levelType;
-
-        Debug.Log("Level Type =" + level.levelType);
-
+      
         LevelSelectionEvents.OnLevelSelectedEventCaller();
     }
 
+   
 
     public void LockButton()
     {

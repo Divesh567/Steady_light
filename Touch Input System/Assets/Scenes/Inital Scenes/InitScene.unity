@@ -301,6 +301,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4608943841641382150, guid: 5827a2bd7400c1341a50dd7c5f1bca40,
+        type: 3}
+      propertyPath: levelHolder.worldSO.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4608943841641382151, guid: 5827a2bd7400c1341a50dd7c5f1bca40,
         type: 3}
       propertyPath: m_Name
@@ -311,6 +316,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5827a2bd7400c1341a50dd7c5f1bca40, type: 3}
+--- !u!1 &1116267667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1116267668}
+  - component: {fileID: 1116267669}
+  m_Layer: 0
+  m_Name: SequencePlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1116267668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116267667}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1116267669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116267667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9035c97f86b96042ba8956385351962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequenceHolder: {fileID: 11400000, guid: 31c4b0a37152e95499f429a56e4b408c, type: 2}
 --- !u!850595691 &1467663844
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -414,7 +464,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -517,6 +567,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3950387518259819592, guid: f65f40466d9acac43bef473fe39be1e9,
+        type: 3}
+      propertyPath: 'allMenus.Array.data[6]'
+      value: 
+      objectReference: {fileID: 5811095753194528427, guid: d33160b37f2c765418a4b1d4dcabd886,
+        type: 3}
     - target: {fileID: 3950387518259819598, guid: f65f40466d9acac43bef473fe39be1e9,
         type: 3}
       propertyPath: m_Name
@@ -905,7 +961,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: f820d0c913d23734dbd74ce84ee756f6, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5411180177097300435, guid: d3a4fb8df2de65249a0e1a05db14a092,
         type: 3}
       propertyPath: m_PlayOnAwake
@@ -934,3 +990,4 @@ SceneRoots:
   - {fileID: 132581287848249465}
   - {fileID: 513144735}
   - {fileID: 1531357298}
+  - {fileID: 1116267668}

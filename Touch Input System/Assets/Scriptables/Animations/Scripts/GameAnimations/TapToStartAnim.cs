@@ -25,11 +25,19 @@ public class TapToStartAnim : GameStartAnim
         base.StartAnim(startAction, endAction);
         sceneInitializer.initStart.Invoke();
 
-        startButton.enabled = true;
+        startButton.button.interactable = true;
+      
+
         startButton.button.onClick.AddListener(() => 
         {
+            AnalyticsEvent analyticsEvent = new AnalyticsEvent(EventName.LevelStart)
+                                             .AddParam(ParamName.Level_Name, LevelLoader.Instance.GetCurrentSceneName());
+
+            FirebaseAnalyticsController.LogEvent(analyticsEvent);
+
             sceneInitializer.initEnd.Invoke();
             Destroy(startButton.gameObject);
+
         });
 
         tapToStartText = startButton.textMesh;

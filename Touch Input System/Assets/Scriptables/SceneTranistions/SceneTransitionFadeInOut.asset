@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trasnitionObject: {fileID: 1643340133256135530, guid: 427f6dc5f40178d4eae0527f2c14e76f,
     type: 3}
+  transitionClip1: {fileID: 8300000, guid: a0ca8964c08d54c5dbebf245bdc474ca, type: 3}
+  transitionClip2: {fileID: 8300000, guid: a0ca8964c08d54c5dbebf245bdc474ca, type: 3}
   image: {fileID: 0}
   fadeDuration: 1

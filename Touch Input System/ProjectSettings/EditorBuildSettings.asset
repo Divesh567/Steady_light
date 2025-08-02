@@ -119,7 +119,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Stage/Level_Stage_4.unity
     guid: 9e9b50ffa21643446bd1d1c0199e9344
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/EndGame Screen.unity
     guid: 74bee9a203a1d6a44858fc2f165b09ee
   - enabled: 0
@@ -131,7 +131,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/LevelTemplate 1.unity
     guid: 1fd01fbbec636d5449d57fb8037ef3b3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestScene.unity
     guid: e4376bf8358a8cf4496193d7f3d2e714
   m_configObjects:

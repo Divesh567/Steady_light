@@ -2,13 +2,16 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "SceneTransitionSlideInOut", menuName = "SceneTransitions/SceneTransitionSlideInOut")]
 public class SceneTransitionSlideInOut : SceneTransitionBaseSO
 {
     public RectTransform rectTransform;
     public float SlideDuration;
-
+    public Vector2 startPos;
+    public Vector2 inPos;
+    public Vector2 outPos;
 
     private string ButtonName = "Anim Test Button";
 
@@ -18,34 +21,44 @@ public class SceneTransitionSlideInOut : SceneTransitionBaseSO
     {
         rectTransform = SceneTransitionManager.Instance.TestAnimation().GetComponent<RectTransform>();
 
-        rectTransform.DOAnchorPosX(1920, 0).OnComplete(() =>
+        rectTransform.DOAnchorPos(startPos, 0).OnComplete(() =>
         {
-            rectTransform.DOAnchorPosX(0, SlideDuration).OnComplete(() =>
+            rectTransform.DOAnchorPos(inPos, SlideDuration).OnComplete(() =>
             {
-                rectTransform.DOAnchorPosX(-1920, SlideDuration);
+                rectTransform.DOAnchorPos(outPos, SlideDuration);
             });
 
         });
 
     }
 
-    public override void PlayAnimationPart1(GameObject target)
+    public override void PlayAnimationPart1(GameObject target, UnityAction onCompleteAction)
     {
         rectTransform = target.GetComponent<RectTransform>();
 
-        rectTransform.anchoredPosition = new Vector2(1920, 0);
 
-        rectTransform.DOAnchorPosX(0, SlideDuration).OnComplete( () => 
+        rectTransform.anchoredPosition = startPos;
+
+        AudioControllerMono audioController = target.GetComponent<AudioControllerMono>();
+        audioController.PlayAudioClip(transitionClip1);
+        rectTransform.DOAnchorPos(inPos, SlideDuration).OnComplete( () => 
         {
-            LevelLoader.Instance.LoadNextLevel();
+            onCompleteAction.Invoke();
         });
     }
 
     public override void PlayAnimationPart2(GameObject target)
     {
-        Debug.Log("Scene is loaded completing trasition");
-        rectTransform.anchoredPosition = new Vector2(0, 0);
-        rectTransform.DOAnchorPosX(-1920, SlideDuration);
+     
+
+        AudioControllerMono audioController = target.GetComponent<AudioControllerMono>();
+        audioController.PlayAudioClip(transitionClip2);
+
+        rectTransform.anchoredPosition = inPos;
+        rectTransform.DOAnchorPos(outPos, SlideDuration).OnComplete(() => 
+        {
+            OnAnimComplete();
+        });
     }
 
     public override void OnSceneLoaded()

@@ -34,6 +34,8 @@ public class DataManager : MonoBehaviour
     {
         Debug.Log(Application.persistentDataPath);
         LoadData();
+
+        SoundManager.Instance.PlayMusic();
       //  MainMenu.Instance.DisplayCompletionBar(unlockedLevels);
     }
 
@@ -88,6 +90,10 @@ public class DataManager : MonoBehaviour
         if(!worldData.levelsList.Exists(l => l.LevelName == levelName))
         {
             worldData.levelsList.Add(new SaveData.Level(levelName, diamondsCollected, isCompleted : true, isUnlocked : true));
+        }
+        else
+        {
+            worldData.levelsList.Find(l => l.LevelName == levelName).completed = true;
         }
             
 

@@ -13,53 +13,39 @@ MonoBehaviour:
   m_Name: World_Caves
   m_EditorClassIdentifier: 
   levels:
-  - scene: {fileID: 102900000, guid: f085440ad5f4e7c43b752ed0b3f62832, type: 3}
-    sceneAddress:
+  - sceneAddress:
       m_AssetGUID: f085440ad5f4e7c43b752ed0b3f62832
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     levelType: 0
-  - scene: {fileID: 102900000, guid: 5b3d32efd58708c4085e1f5b8cca250d, type: 3}
-    sceneAddress:
+  - sceneAddress:
       m_AssetGUID: 5b3d32efd58708c4085e1f5b8cca250d
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     levelType: 0
-  - scene: {fileID: 102900000, guid: a41cd9a87a39ecf418f87120dcd6015d, type: 3}
-    sceneAddress:
+  - sceneAddress:
       m_AssetGUID: a41cd9a87a39ecf418f87120dcd6015d
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     levelType: 1
-  - scene: {fileID: 102900000, guid: 8b5a5804865194443b1432e40b9655d1, type: 3}
-    sceneAddress:
+  - sceneAddress:
       m_AssetGUID: 8b5a5804865194443b1432e40b9655d1
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     levelType: 0
-  - scene: {fileID: 102900000, guid: 5082a1b289d3fc04ab4922467fd3f583, type: 3}
-    sceneAddress:
+  - sceneAddress:
       m_AssetGUID: ec1cf98fb04edfa42813896cea460a2b
       m_SubObjectName: 
+      m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     levelType: 0
-  - scene: {fileID: 102900000, guid: d16549121dcdc944cae3fec105027da8, type: 3}
-    sceneAddress:
-      m_AssetGUID: d16549121dcdc944cae3fec105027da8
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
-    levelType: 2
-  - scene: {fileID: 102900000, guid: b31bd1bcc93fba54c8ed9fd63f054109, type: 3}
-    sceneAddress:
-      m_AssetGUID: b31bd1bcc93fba54c8ed9fd63f054109
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
-    levelType: 1
   worldType: 1

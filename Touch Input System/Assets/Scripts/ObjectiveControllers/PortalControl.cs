@@ -41,8 +41,8 @@ public class PortalControl : MonoBehaviour
         _portalOpen.SetActive(false);
 
         MenuManager.Instance.OpenMenu(LoseScreen.Instance);
+        MyGameManager.Instance.LevelLost();
 
-        MyGameManager.gameState = MyGameManager.GameState.GameEnded;
     }
 
 }

@@ -26,6 +26,9 @@ public class WorldSO : ScriptableObject
     [Serializable]
     public class LevelClass
     {
+        [NonSerialized]
+        public string sceneName;
+
         [Header("SCENE FILE")]
         public  AssetReference sceneAddress;
 
@@ -37,4 +40,34 @@ public class WorldSO : ScriptableObject
     public List<LevelClass> levels;
 
     public WorldType worldType;
+
+    public void InitializeLevelNames()
+    {
+        foreach (var level in levels)
+        {
+#if UNITY_EDITOR
+            if (level.sceneAddress.editorAsset != null)
+            {
+                level.sceneName = level.sceneAddress.editorAsset.name;
+            }
+#else
+        // Use address (this only works if address == scene name)
+        level.sceneName = level.sceneAddress.RuntimeKey.ToString();
+#endif
+        }
+    }
+
+    public AssetReference GetSceneByName(string name)
+    {
+        foreach (var level in levels)
+        {
+            if (level.sceneName.Equals(name, StringComparison.OrdinalIgnoreCase))
+            {
+                return level.sceneAddress;
+            }
+        }
+
+        Debug.LogError($"Couldn't find level with name: {name}");
+        return null;
+    }
 }

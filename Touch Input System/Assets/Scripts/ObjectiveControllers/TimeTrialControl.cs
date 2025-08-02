@@ -16,21 +16,38 @@ public class TimeTrialControl : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        SceneTransitionManager.Instance.OnSceneTransitionAnimComplete.AddListener(InitLevel);
+    }
+
+    private void OnDisable()
+    {
+        SceneTransitionManager.Instance.OnSceneTransitionAnimComplete.RemoveListener(InitLevel);
+    }
+
+    private void InitLevel()
+    {
+
         _timeOut = false;
         _currentTime = _defaultTime;
 
         ObjectiveEventHandler.OnTimerObjectiveCompleteEventCaller();
 
+        startAnim.StartAnim(() =>
+        {
+
+            GameMenu.Instance.InitObjectiveUI(this);
+            MyGameManager.Instance.StateChanged(MyGameManager.GameState.GameNotStarted);
 
 
-        startAnim.StartAnim(() => GameMenu.Instance.InitObjectiveUI(this), () => MyGameManager.gameState = MyGameManager.GameState.GameRunning);
+
+        }, () => MyGameManager.Instance.StateChanged(MyGameManager.GameState.GameRunning));
     }
 
     private void LateUpdate()
     {
-        if (!_timeOut && MyGameManager.gameState == MyGameManager.GameState.GameRunning)
+        if (!_timeOut && MyGameManager.Instance.gameState == MyGameManager.GameState.GameRunning)
         {
             TimeTrialCountDown();
         }

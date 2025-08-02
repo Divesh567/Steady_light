@@ -23,11 +23,6 @@ namespace Menus.Animations
             if (transitionType == TransitionType.Open)
             {
                 MenuManager.Instance.OpenMenu(menu);
-                menu.canvas.sortingOrder = 20;
-            }
-            else
-            {
-                menu.canvas.sortingOrder = 0;
             }
         }
 

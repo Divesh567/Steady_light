@@ -19,10 +19,4 @@ public class IconPreview : MonoBehaviour
             icon.GetComponent<Image>().sprite = icons[i];
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

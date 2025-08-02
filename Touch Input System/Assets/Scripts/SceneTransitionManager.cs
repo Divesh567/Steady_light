@@ -1,15 +1,12 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
-using System;
-using UnityEngine.SceneManagement;
-using static UnityEngine.Rendering.DebugUI;
 using UnityEngine.Events;
 
 public class SceneTransitionManager : MonoBehaviour
 {
-    public UnityEvent  OnSceneTransitionStarted;
+    public UnityEvent<UnityAction>  OnSceneTransitionStarted;
     public UnityEvent OnSceneTransitionCompleted;
+    public UnityEvent OnSceneTransitionAnimComplete;
 
     public static SceneTransitionManager Instance { get; private set; }
 
@@ -36,12 +33,20 @@ public class SceneTransitionManager : MonoBehaviour
     {
         OnSceneTransitionStarted.AddListener(OnSceneLoadStarted);
         OnSceneTransitionCompleted.AddListener(OnSceneLoaded);
+        OnSceneTransitionAnimComplete.AddListener(OnTransitionCompleted);
+    }
+
+    private void OnTransitionCompleted()
+    {
+        if (panel != null)
+            Destroy(panel.gameObject);
     }
 
     private void OnDisable()
     {
         OnSceneTransitionStarted.RemoveListener(OnSceneLoadStarted);
         OnSceneTransitionCompleted.RemoveListener(OnSceneLoaded);
+        OnSceneTransitionAnimComplete.RemoveListener(OnTransitionCompleted);
     }
 
 
@@ -67,12 +72,12 @@ public class SceneTransitionManager : MonoBehaviour
         sceneTransitions[transitionIndex].OnSceneLoaded();
     }
 
-    private void OnSceneLoadStarted()
+    private void OnSceneLoadStarted(UnityAction unityAction)
     {
         PickRandomAnimation();
 
         panel = Instantiate(sceneTransitions[transitionIndex].trasnitionObject, this.transform);
-        sceneTransitions[transitionIndex].PlayAnimationPart1(panel);
+        sceneTransitions[transitionIndex].PlayAnimationPart1(panel, unityAction);
         transitionStarted = true;
 
     }

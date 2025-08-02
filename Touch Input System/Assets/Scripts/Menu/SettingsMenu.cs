@@ -26,6 +26,7 @@ public class SettingsMenu : Menu<SettingsMenu>
 
     public override void MenuClose()
     {
+        base.MenuClose();
         MainPanel.gameObject.SetActive(false);
 
         MainMenu.Instance.graphicRaycaster.enabled = true;
@@ -33,6 +34,7 @@ public class SettingsMenu : Menu<SettingsMenu>
 
     public override void MenuOpen()
     {
+        base.MenuOpen();
         MainPanel.gameObject.SetActive(true);
     }
 

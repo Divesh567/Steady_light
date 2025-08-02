@@ -55,6 +55,8 @@ public abstract class Menu : MonoBehaviour
     }
     public virtual void MenuOpen()
     {
+        graphicRaycaster.enabled = true;
+        MenuManager.Instance.SetSortingOrder(this);
     }
 
     public virtual void OnMainMenuButtonPressed()
@@ -69,17 +71,5 @@ public abstract class Menu : MonoBehaviour
             LevelLoader.Instance.LoadMainMenu();
         }
 
-    }
-
-    public virtual IEnumerator PauseGame()
-    {
-        yield return new WaitForSeconds(0.25f);
-        Time.timeScale = 0f;
-    }
-
-    public virtual IEnumerator ResumeGame()
-    {
-        yield return new WaitForSeconds(0f);
-        Time.timeScale = 1f;
     }
 }

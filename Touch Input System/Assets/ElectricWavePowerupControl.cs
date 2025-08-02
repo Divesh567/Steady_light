@@ -9,16 +9,6 @@ public class ElectricWavePowerupControl : MonoBehaviour
     private GameObject _powerup;
     private ButtonVisualFeedBack _bvf;
 
-    private void Start()
-    {
-        
-    }
-
-    public void OnPowerUpButtonPressed()
-    {
-       
-    }
-
     IEnumerator PowerUp()
     {
        yield return null;

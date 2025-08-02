@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEditor;
+using System;
 
 public class MenuManager : MonoBehaviour
 {
@@ -57,6 +58,12 @@ public class MenuManager : MonoBehaviour
                 CloseMenu(_runTimeMenus[i]);
             }
         }
+    }
+
+    public void SetSortingOrder(Menu menu)
+    {
+        _runTimeMenus.ForEach(x => x.canvas.sortingOrder = 0);
+        menu.canvas.sortingOrder = 20;
     }
 
     public Menu currentMenu;

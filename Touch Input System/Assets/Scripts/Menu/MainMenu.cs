@@ -29,6 +29,8 @@ public class MainMenu : Menu<MainMenu>
     private MenuTransitionSet _creditsTransitionSet;
     [SerializeField]
     private MenuTransitionSet _shopMenuTransitionSet;
+    [SerializeField]
+    private MenuTransitionSet _loadingScreenTransitionSet;
 
     public override void Start()
     {
@@ -36,6 +38,7 @@ public class MainMenu : Menu<MainMenu>
         _settingsTransitionSet.InitTranistion(this, SettingsMenu.Instance);
         _creditsTransitionSet.InitTranistion(this, CreditMenu.Instance);
         _shopMenuTransitionSet.InitTranistion(this, UpgradeMenu.Instance);
+        _loadingScreenTransitionSet.InitTranistion(this, LoadingScreen.Instance);
 
 
         playButton.button.onClick.AddListener(() => OnPlayPressed());
@@ -44,14 +47,16 @@ public class MainMenu : Menu<MainMenu>
         creditsButton.button.onClick.AddListener(() => OnCreditsButtonPressed()); // Add UISfx pn button Pressed
         shopButton.button.onClick.AddListener(() => OnShopButtonPressed()); // Add UISfx pn button Pressed
 
-        SoundManager.Instance.PlayMusic();
+        //SoundManager.Instance.PlayMusic();
+
+        Debug.Log(Application.persistentDataPath);
     }
     private void OnPlayPressed()
     {
         TutorialSwitch.TurorialOn = true;
         MenuManager._settingsMenuSwitch = false; //Code Smell
 
-        _levelSelectionTransitionSet.PlayTransition();
+        _loadingScreenTransitionSet.PlayTransition();
     }
 
     public void OnSettingsPressed()
@@ -70,15 +75,15 @@ public class MainMenu : Menu<MainMenu>
 
     public override void MenuOpen()
     {
+        base.MenuOpen();
         Debug.Log("Open MainMenu");
-        StartCoroutine(ResumeGame()); // Code smell
         MainPanel.gameObject.SetActive(true);
 //        DisplayCompletionBar(DataManager.Instance.unlockedLevels);
     }
 
     public override void MenuClose()
     {
-        StartCoroutine(ResumeGame());
+        base.MenuClose();
         MainPanel.gameObject.SetActive(false);
     }
 

@@ -19,7 +19,7 @@ public class LevelLoader : MonoBehaviour
 
     public LevelHolder levelHolder;
 
-    private AssetReference currentLevelAssetRef;
+    public AssetReference currentLevelAssetRef;
 
     private void Awake()
     {
@@ -37,6 +37,7 @@ public class LevelLoader : MonoBehaviour
     private void Start()
     {
         SceneManager.LoadScene(1);
+        levelHolder.worldSO.ForEach(x => x.InitializeLevelNames());
     }
 
     public void LoadNextLevel()
@@ -66,6 +67,8 @@ public class LevelLoader : MonoBehaviour
     {
 
         currentLevelAssetRef = levelName;
+
+
         RuntimeGameData.levelSelected = levelName;
         RuntimeGameData.levelType = levelHolder.FindLevelType(levelName);
 
@@ -97,7 +100,6 @@ public class LevelLoader : MonoBehaviour
 
         DataManager.Instance.SaveUnlockedLevel(RuntimeGameData.levelSelectedName, new List<int>());
 
-
         SceneTransitionManager.Instance.OnSceneTransitionCompleted.Invoke();
 
     }
@@ -124,6 +126,7 @@ public class LevelLoader : MonoBehaviour
 
     public void ReloadLevel()
     {
+       
         UnloadLevel();
 
         if (MenuManager.Instance != null && GameMenu.Instance != null)
@@ -136,6 +139,11 @@ public class LevelLoader : MonoBehaviour
 
     }
 
+    public string GetCurrentSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
+
     public void LoadTestScene()
     {
         SceneManager.LoadScene("TestScene");
@@ -143,7 +151,7 @@ public class LevelLoader : MonoBehaviour
         MenuManager.Instance.CloseMenu(MainMenu.Instance);
         MenuManager.Instance.OpenMenu(GameMenu.Instance);
 
-        MyGameManager.gameState = MyGameManager.GameState.GameRunning;
+        MyGameManager.Instance.StateChanged(MyGameManager.GameState.GameRunning);
 
     }
 
@@ -157,11 +165,9 @@ public class LevelLoader : MonoBehaviour
         {
             List<WorldSO.LevelClass> allLevels = new List<WorldSO.LevelClass>();
 
-
             worldSO.ForEach(x =>
             {
                 allLevels.AddRange(x.levels);
-
             });
 
             int currentIndex = allLevels.FindIndex(x => x.sceneAddress == currentLevel);
@@ -189,6 +195,42 @@ public class LevelLoader : MonoBehaviour
             else
             return allLevels[currentIndex -1].sceneAddress;
         }
+
+        public AssetReference FindCurrentLevel(List<SaveData.WorldData> data)
+        {
+            // Count total completed levels
+            int totalCompletedLevels = 0;
+
+            foreach (var worldData in data)
+            {
+                foreach (var level in worldData.levelsList)
+                {
+                    if (level.completed)
+                        totalCompletedLevels++;
+                    else
+                        break;
+                }
+            }
+
+            // Go through all worlds and subtract levels until we find the current one
+            foreach (var world in worldSO)
+            {
+                if (totalCompletedLevels < world.levels.Count)
+                {
+                    // Found the current world
+                    return world.levels[totalCompletedLevels].sceneAddress;
+                }
+                else
+                {
+                    // Skip completed world
+                    totalCompletedLevels -= world.levels.Count;
+                }
+            }
+
+            Debug.LogError("No current level found. All levels completed?");
+            return null;
+        }
+
 
         public WorldSO.LevelType FindLevelType(AssetReference currentLevel)
         {

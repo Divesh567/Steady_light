@@ -15,6 +15,6 @@ public class CustomButton : MonoBehaviour
 
     public virtual void Start()
     {
-        button.onClick.AddListener(() => audioController.PlayAudio(audioSource, audioClip));
+        button.onClick.AddListener(() => audioController.PlayAudio(audioSource, audioController.clip));
     }
 }

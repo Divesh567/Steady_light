@@ -2,13 +2,11 @@ using System;
 using UnityEngine;
 using Unity;
 using System.Collections.Generic;
+using System.Linq;
 
 [Serializable]
 public class SaveData 
 {
-
-    
-
     public int _lifes = 0;
     public float _time = 0;
     public int _powerUp = 0;
@@ -78,4 +76,7 @@ public class SaveData
     {
         public int totalDiamondsCollected;
     }
+
+
+   
 }

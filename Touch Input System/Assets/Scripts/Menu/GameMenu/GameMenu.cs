@@ -15,11 +15,13 @@ public class GameMenu : Menu<GameMenu>
 
     public override void MenuOpen()
     {
+        base.MenuOpen();
         MainPanel.gameObject.SetActive(true);
     }
 
     public override void MenuClose()
     {
+        base.MenuClose();
         MainPanel.gameObject.SetActive(false);
         objectiveUIs.ForEach(x => x.ResetUI());
     }

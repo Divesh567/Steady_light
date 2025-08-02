@@ -82,7 +82,7 @@ public class LevelSelectorMenu : Menu<LevelSelectorMenu>
         TutorialSwitch.TurorialOn = true;
         if (MenuManager.Instance != null && GameMenu.Instance != null)
         {
-            
+            base.MenuClose();
             MenuClose();
             MenuManager.Instance.CloseMenu(MainMenu.Instance);
         }
@@ -92,7 +92,7 @@ public class LevelSelectorMenu : Menu<LevelSelectorMenu>
     public override void MenuOpen()
     {
         _currentWorldSelected = 1;
-        StartCoroutine(ResumeGame());
+        base.MenuOpen();
         transform.GetChild(_currentWorldSelected).gameObject.SetActive(true);
         _backButton.gameObject.SetActive(true);
         _mainPanel.SetActive(true);
@@ -101,7 +101,7 @@ public class LevelSelectorMenu : Menu<LevelSelectorMenu>
     public override void MenuClose()
     {
 
-        StartCoroutine(ResumeGame());
+   
         _backButton.gameObject.SetActive(false);
         _mainPanel.SetActive(false);
         _worldList[_currentWorldSelected].SetActive(false);

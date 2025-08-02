@@ -14,5 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trasnitionObject: {fileID: 1643340133256135530, guid: 427f6dc5f40178d4eae0527f2c14e76f,
     type: 3}
+  transitionClip1: {fileID: 8300000, guid: 72127805eb2bc4e7fbf2e02eca266cfa, type: 3}
+  transitionClip2: {fileID: 8300000, guid: 72127805eb2bc4e7fbf2e02eca266cfa, type: 3}
   rectTransform: {fileID: 0}
   SlideDuration: 1
+  startPos: {x: 1920, y: 0}
+  inPos: {x: 0, y: 0}
+  outPos: {x: -2000, y: 0}

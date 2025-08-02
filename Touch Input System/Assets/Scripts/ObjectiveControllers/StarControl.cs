@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,31 +16,32 @@ public class StarControl : MonoBehaviour
     {
         ObjectiveEventHandler.OnStarInitEvent += AddStars;
         ObjectiveEventHandler.OnStarCollectedEvent += OnStarCollected;
+        SceneTransitionManager.Instance.OnSceneTransitionAnimComplete.AddListener(InitLevel);
     }
 
     private void OnDisable()
     {
         ObjectiveEventHandler.OnStarInitEvent -= AddStars;
         ObjectiveEventHandler.OnStarCollectedEvent -= OnStarCollected;
+        SceneTransitionManager.Instance.OnSceneTransitionAnimComplete.RemoveListener(InitLevel);
     }
-    private void Start()
+
+    private void InitLevel()
     {
         stars.Clear();
 
-        startAnim.StartAnim(() => 
+        startAnim.StartAnim(() =>
         {
 
             GameMenu.Instance.InitObjectiveUI(this);
-            MyGameManager.gameState = MyGameManager.GameState.GameNotStarted;
+            MyGameManager.Instance.StateChanged(MyGameManager.GameState.GameNotStarted);
 
 
-        }, () => MyGameManager.gameState = MyGameManager.GameState.GameRunning);
+        }, () => MyGameManager.Instance.StateChanged(MyGameManager.GameState.GameRunning));
     }
-
 
     private void AddStars(Star star)
     {
-        Debug.Log("TRIGGERED ADDED");
         stars.Add(star);
     }
 
