@@ -18,7 +18,7 @@ public class SpikeTrigger : MonoBehaviour
     }
     void SetSpikeInitalPos()
     {
-        spikeTransform.transform.localPosition = spikeOriginalPos - spikeInitalOffset;
+        spikeTransform.transform.localPosition = spikeInitalOffset;
     }
 
 

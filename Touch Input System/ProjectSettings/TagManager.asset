@@ -56,6 +56,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 1698160259
+    locked: 0
   - name: Level Fills
     uniqueID: 3703763187
     locked: 0
@@ -65,8 +68,14 @@ TagManager:
   - name: Floor
     uniqueID: 2591677887
     locked: 0
+  - name: DeadZone
+    uniqueID: 1800241987
+    locked: 0
   - name: Walls
     uniqueID: 692533495
+    locked: 0
+  - name: Obstacles
+    uniqueID: 4004025111
     locked: 0
   - name: Player
     uniqueID: 2105209897

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LivesUI : ObjectiveUI
 {
@@ -11,8 +12,13 @@ public class LivesUI : ObjectiveUI
     private CanvasGroup canvasGroup;
     [SerializeField]
     private Transform spirteParent;
+
+
     [SerializeField]
-    private GameObject lifeSprite;
+    private Sprite lifeSprite;
+    [SerializeField]
+    private Sprite deathSprite;
+
 
     [SerializeField]
     private AnimateUI animateUI;
@@ -36,6 +42,7 @@ public class LivesUI : ObjectiveUI
         for(int i = 0; i < spirteParent.childCount; i++)
         {
             spirteParent.GetChild(i).gameObject.SetActive(true);
+            spirteParent.GetChild(i).gameObject.GetComponent<Image>().sprite = lifeSprite;
         }
 
         currentLifes = 3;
@@ -50,7 +57,8 @@ public class LivesUI : ObjectiveUI
         Debug.Log("Life Lost");
         currentLifes--;
         if (currentLifes < 0) return;
-        spirteParent.GetChild(currentLifes).gameObject.SetActive(false);
+
+        spirteParent.GetChild(currentLifes).gameObject.GetComponent<Image>().sprite = deathSprite;
     }
 
 

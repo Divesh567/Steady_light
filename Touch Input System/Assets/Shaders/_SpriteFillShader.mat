@@ -42,9 +42,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FillAmount: 0.42857143
+    - _FillAmount: 0.85714287
     m_Colors:
-    - _Color: {r: 0.7696689, g: 2.2669716, b: 3.471698, a: 1}
+    - _Color: {r: 0.7413694, g: 2.1729462, b: 3.3247414, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &334514185598151354

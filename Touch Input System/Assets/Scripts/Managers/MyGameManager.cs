@@ -1,10 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.Linq;
-using System;
 using UnityEngine.Events;
 
 public class MyGameManager : MonoBehaviour // Should be a static class
@@ -28,6 +23,9 @@ public class MyGameManager : MonoBehaviour // Should be a static class
     public static MyGameManager Instance { get { return _instance; } }
 
     public GameState gameState;
+
+
+    public DeathEvent DeathEvent;
 
     private void Awake()
     {
@@ -75,7 +73,8 @@ public class MyGameManager : MonoBehaviour // Should be a static class
         StateChanged(GameState.GameEnded);
         hasWon = true;
 
-        SequencePlayer.Instance.PlaySequenceAsync();
+        FindAnyObjectByType<WinSequencePlayer>().PlayWinSequence();
+       // SequencePlayer.Instance.PlaySequenceAsync();
     }
 
     public void LevelLost()
@@ -94,7 +93,18 @@ public class MyGameManager : MonoBehaviour // Should be a static class
         }
     }
 
-    
+
 
 
 }
+
+[System.Serializable]
+public class DeathEvent : UnityEvent<Transform>
+{
+    public new void Invoke(Transform target)
+    {
+        Debug.Log($"[DeathEvent] Invoked for: {target?.name}");
+        base.Invoke(target); // still call the original UnityEvent logic
+    }
+}
+

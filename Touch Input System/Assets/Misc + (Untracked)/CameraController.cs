@@ -25,4 +25,8 @@ public class CameraController : MonoBehaviour
         Vector2 _playerDir = (-_player.transform.up) * _offset;
         _vCamCameraOffset.m_Offset = Vector3.Lerp(new Vector3(_vCamCameraOffset.m_Offset.x, _vCamCameraOffset.m_Offset.y, -10f), new Vector3(-_playerDir.x, -_playerDir.y, -10f), (_offsetLerp * Time.deltaTime));
     }
+    private void ShakeCam()
+    {
+        
+    }
 }

@@ -28,11 +28,13 @@ public class UpgradeMenu : Menu<UpgradeMenu>
 
     public override void MenuOpen()
     {
+        base.MenuOpen();
         MainPanel.gameObject.SetActive(true);
     }
 
     public override void MenuClose()
     {
+        base.MenuClose();
         MainPanel.gameObject.SetActive(false);
     }
 

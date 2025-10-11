@@ -35,6 +35,8 @@ public class BallCollisions : MonoBehaviour
 
     public Cinemachine.CinemachineImpulseSource impulseSource;
 
+    private FaceGenerator faceGenerator;
+
     private void Start()
     {
         _startPos = transform.position;
@@ -44,6 +46,7 @@ public class BallCollisions : MonoBehaviour
         _trailRenderer = GetComponent<TrailRenderer>();
         _light2D = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
         impulseSource = GetComponent<Cinemachine.CinemachineImpulseSource>();
+        faceGenerator = GetComponentInChildren<FaceGenerator>();
         _lastCheckPoint = null;
     }
 
@@ -68,6 +71,8 @@ public class BallCollisions : MonoBehaviour
                         impulseSource.GenerateImpulse();
 
                     }
+                    faceGenerator.DisableFace();
+                    MyGameManager.Instance.DeathEvent.Invoke(this.transform);
                     StartCoroutine(Respawn());
 
                     ObjectiveEventHandler.OnLifeLostEventCaller();
@@ -82,22 +87,6 @@ public class BallCollisions : MonoBehaviour
                 if (MyGameManager.Instance != null)
                 {
                     MyGameManager.Instance.LevelWon(); // Put in portal
-                }
-            }
-            else if (collision.CompareTag("Spike"))
-            {
-                if (!_invulnerable)
-                {
-                    if (MyGameManager.Instance != null)
-                    {
-                        Instantiate(_deathVfx, transform.position, transform.rotation);
-                        if (SoundManager.Instance != null)
-                        {
-                            SoundManager.Instance.PlayBallDeath(_ballDeathSfx, _ballDeathSfxVolume);
-                        }
-                        StartCoroutine(Respawn());
-                    }
-                    
                 }
             }
             else if (collision.CompareTag("Star"))
@@ -134,20 +123,23 @@ public class BallCollisions : MonoBehaviour
     }
     IEnumerator Respawn()
     {
-        transform.DetachChildren();
+        // transform.DetachChildren();
+
+       
         _collider.enabled = false;
         _spriteRenderer.enabled = false;
-        _light2D.enabled = false;
+
         _trailRenderer.enabled = false;
         _ballRigidbody.linearVelocity = new Vector2(0, 0);
 
         yield return new WaitForSeconds(1.5f);
 
+        faceGenerator.GenerateNewFace();
+        faceGenerator.EnableFace();
         GoToLastPosition();
-        _player.GetComponent<TouchController>().Reset();
+        _player.Reset();
         _collider.enabled = true;
         _spriteRenderer.enabled = true;
-        _light2D.enabled = true;
         _trailRenderer.enabled = true;
         _ballRigidbody.linearVelocity = new Vector2(0, 0);
     }
@@ -157,12 +149,12 @@ public class BallCollisions : MonoBehaviour
         if (_lastCheckPoint == null)
         {
             transform.position = _startPos;
-            _player.GetComponent<TouchController>().Reset();
+            _player.Reset();
         }
         else
         {
             transform.position = _lastCheckPoint.position; 
-            _player.GetComponent<TouchController>().Reset();
+            _player.Reset();
         }
     }
         

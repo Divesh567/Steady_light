@@ -1,4 +1,3 @@
-using UnityEditor.Timeline;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 public abstract class SequenceStepBase : MonoBehaviour

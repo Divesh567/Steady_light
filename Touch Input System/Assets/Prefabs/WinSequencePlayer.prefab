@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2048349547681974915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4467601531992376608}
+  - component: {fileID: 4423997633175128533}
+  m_Layer: 0
+  m_Name: WinSequencePlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4467601531992376608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048349547681974915}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4423997633175128533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048349547681974915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40deefa56873e0439ce7019928f38b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 0}
+  fragmentPrefab: {fileID: 1588957247938023864, guid: e0ff46a5450e3904d8940476dcb365ed,
+    type: 3}
+  progressTarget: {fileID: 0}
+  dissolveMaterial: {fileID: 2100000, guid: 1d5cb16de05de894491bd9e7b0c89778, type: 2}
+  vCam: {fileID: 0}
+  globalVolume: {fileID: 0}
+  progressController: {fileID: 0}
+  dissolveDuration: 0.75
+  dissolveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0076523
+      inSlope: -0.91458976
+      outSlope: -0.91458976
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.17677954
+    - serializedVersion: 3
+      time: 1
+      value: 0.002357483
+      inSlope: -1.0078206
+      outSlope: -1.0078206
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.40551353
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fragmentCount: 10
+  fragmentScatterRadius: 1.5
+  fragmentFlyDuration: 1
+  cameraMoveDuration: 2
+  slowTimeScale: 0.5
+  slowDuration: 0.25
+  volumeTransitionDuration: 1

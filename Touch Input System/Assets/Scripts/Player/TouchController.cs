@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.InputSystem.InputAction;
 
 public class TouchController : MonoBehaviour
 {
-    public GameObject _gameBall;
+    [Inject] [SerializeField] public BallCollisions _gameBall;
     private Vector2 _startTouchPos;
     private Touch _touch;
     private float _playerLerp = 15f;
@@ -26,7 +25,12 @@ public class TouchController : MonoBehaviour
     private void Awake()
     {
         _forceFieldController = transform.GetChild(0).GetComponent<ForceFieldController>();
-        _gameBall.GetComponent<BallCollisions>().GetPlayerObject(gameObject.GetComponent<TouchController>());
+        
+    }
+
+    private void Start()
+    {
+        _gameBall.GetPlayerObject(this);
     }
 
     private void LateUpdate()

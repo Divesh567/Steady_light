@@ -17,24 +17,24 @@ MonoBehaviour:
     _time: 0
     _powerUp: 0
     _Diamonds: 5
-    hashValue: 4c90f3f4138d5311ed23f98617c102474b9a5a9eb8841eda36397da839fdc513
+    hashValue: d60e7fb066c2ef804a5fd575e3559729d316957493afa3bd62375bd6a44589e4
     worldDatas:
     - worldType: 0
       levelsList:
       - LevelName: Level_Basic_1
         totalDiamondsCollected: 0
         unlocked: 1
-        completed: 0
+        completed: 1
         diamondCollectedIndex: 
       - LevelName: Level_Basic_2
         totalDiamondsCollected: 0
         unlocked: 1
-        completed: 0
+        completed: 1
         diamondCollectedIndex: 
       - LevelName: Level_Basic_3
         totalDiamondsCollected: 0
         unlocked: 1
-        completed: 0
+        completed: 1
         diamondCollectedIndex: 
       - LevelName: Level_Basic_4
         totalDiamondsCollected: 0
@@ -44,22 +44,7 @@ MonoBehaviour:
       - LevelName: Level_Basic_5
         totalDiamondsCollected: 0
         unlocked: 1
-        completed: 0
-        diamondCollectedIndex: 
-      - LevelName: Level_Basic_6
-        totalDiamondsCollected: 0
-        unlocked: 1
-        completed: 0
-        diamondCollectedIndex: 
-      - LevelName: Level_Basic_7
-        totalDiamondsCollected: 0
-        unlocked: 1
-        completed: 0
-        diamondCollectedIndex: 
-      - LevelName: Level_Basic_8
-        totalDiamondsCollected: 0
-        unlocked: 1
-        completed: 0
+        completed: 1
         diamondCollectedIndex: 
     resourcesData:
       totalDiamondsCollected: 0

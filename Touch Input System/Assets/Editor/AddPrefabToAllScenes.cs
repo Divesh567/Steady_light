@@ -7,7 +7,7 @@ public class AddPrefabToBuildScenes : EditorWindow
 {
     private GameObject prefabToAdd;
 
-    [MenuItem("Tools/Add Prefab To Build Scenes")]
+    [MenuItem("AutoDo/Add Prefab To Build Scenes")]
     public static void ShowWindow()
     {
         GetWindow<AddPrefabToBuildScenes>("Add Prefab To Build Scenes");

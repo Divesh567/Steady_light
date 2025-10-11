@@ -8,6 +8,8 @@ public class LivesControl : MonoBehaviour
     int totalLife = 3;
     int currentLife = 3;
 
+    public bool isTesting = false;
+
     private void OnEnable()
     {
         ObjectiveEventHandler.OnLifeLostEvent += OnLifeLost;
@@ -25,6 +27,8 @@ public class LivesControl : MonoBehaviour
 
     private void OnLifeLost()
     {
+        if (isTesting) return;
+
         currentLife--;
 
         if(currentLife == 0)

@@ -6,7 +6,7 @@ public class DestroyOnSpikeCollision : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Spike")
+        if (collision.CompareTag("Spike"))
         {
             if(transform.parent.GetComponent<BallAttachControl>() != null)
             {

@@ -61,6 +61,7 @@ MonoBehaviour:
     - c43b65433cd213f4ebde05c1f11f0bef
     - c4c7a2e0412568644886e3cdb1be77d2
     - 1bd1bb6a292406b49a23c4751f8f9125
+    - 62b5915e287e2614487240dd79579794
     values:
     - goDatas_byGlobalId:
         keys:
@@ -151,11 +152,17 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-46d55d43707293042ab2ab0c3f70e015-130172877-0
         - globalObjectIdString: GlobalObjectId_V1-2-46d55d43707293042ab2ab0c3f70e015-1128584420-0
         - globalObjectIdString: GlobalObjectId_V1-2-46d55d43707293042ab2ab0c3f70e015-3146311302301980154-6134147160632999497
+        - globalObjectIdString: GlobalObjectId_V1-2-46d55d43707293042ab2ab0c3f70e015-3146311302301980154-1686360684
+        - globalObjectIdString: GlobalObjectId_V1-2-46d55d43707293042ab2ab0c3f70e015-3146311302301980154-948002692
         values:
         - colorIndex: 3
           iconNameOrGuid: 
         - colorIndex: 0
           iconNameOrGuid: 971d8c3b27b21754d915bb68e489d7a5
+        - colorIndex: 0
+          iconNameOrGuid: MeshCollider Icon
+        - colorIndex: 0
+          iconNameOrGuid: MeshCollider Icon
         - colorIndex: 0
           iconNameOrGuid: MeshCollider Icon
     - goDatas_byGlobalId:
@@ -515,3 +522,9 @@ MonoBehaviour:
           iconNameOrGuid: Camera Icon
         - colorIndex: 0
           iconNameOrGuid: ParticleSystem Icon
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-1-62b5915e287e2614487240dd79579794-3146311302301980154-0
+        values:
+        - colorIndex: 0
+          iconNameOrGuid: MeshCollider Icon

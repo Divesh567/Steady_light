@@ -100,7 +100,7 @@ public class ProgressAnimationController : SequenceStepBase
 
         var tcs = new UniTaskCompletionSource();
 
-        DOTween.To(() => from, x => _progressMat.SetFloat("_FillAmount", x), to, duration)
+        DOTween.To(() => from, x => _progressMat.SetFloat("_Cutoff", x), to, duration)
             .SetEase(Ease.Linear)
             .OnComplete
             (
@@ -109,7 +109,7 @@ public class ProgressAnimationController : SequenceStepBase
 
         await tcs.Task;
 
-        _progressMat.SetFloat("_FillAmount", to);
+        _progressMat.SetFloat("_Cutoff", to);
         _progressMat.DOColor(endGlowIntensity, "_Color", duration);
 
         MenuManager.Instance.OpenMenu(WinScreen.Instance);

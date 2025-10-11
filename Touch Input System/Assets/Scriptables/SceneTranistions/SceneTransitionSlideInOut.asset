@@ -20,4 +20,4 @@ MonoBehaviour:
   SlideDuration: 1
   startPos: {x: 1920, y: 0}
   inPos: {x: 0, y: 0}
-  outPos: {x: -2000, y: 0}
+  outPos: {x: -2200, y: 0}

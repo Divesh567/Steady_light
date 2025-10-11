@@ -261,6 +261,28 @@ public class LevelLoader : MonoBehaviour
             Debug.LogError("World type not found for the specified level.");
             return WorldSO.WorldType.Basics; // Assuming Unknown is a valid default WorldType
         }
+
+        public AssetReference GetLevelByNumber(int number)
+        {
+            int currentCount = 0;
+
+            foreach (var world in worldSO)
+            {
+                foreach (var level in world.levels)
+                {
+                    if (currentCount == number)
+                    {
+                        return level.sceneAddress;
+                    }
+                    currentCount++;
+                }
+            }
+
+            Debug.LogError($"No level found for number {number}. Total levels: {currentCount}");
+            return null;
+
+
+        }
     }
 
   

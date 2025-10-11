@@ -57,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c8b5022490f654d45bce6057c6a6010b, type: 2}
+  - {fileID: 2100000, guid: 1d5cb16de05de894491bd9e7b0c89778, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,16 +78,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8461072119952228912, guid: ee52330893db56d4aa3c8af0846daed8,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee52330893db56d4aa3c8af0846daed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.4, y: 6.4}
+  m_Size: {x: 3.2, y: 3.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &8960195892628286913
@@ -104,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startWait: 0
   endWait: 0
-  sequenceIndex: 2
+  sequenceIndex: 3
   sequenceHolder: {fileID: 11400000, guid: 31c4b0a37152e95499f429a56e4b408c, type: 2}
   worldSprites:
   - sprite: {fileID: 21300000, guid: ee52330893db56d4aa3c8af0846daed8, type: 3}
@@ -123,7 +122,7 @@ MonoBehaviour:
     startGlowIntensity: {r: 0.582, g: 0.06744822, b: 0.045396008, a: 1}
     endGlowIntensity: {r: 1.4330522, g: 0.166077, b: 0.11177808, a: 1}
   progressionSprite: {fileID: 7575961517150158649}
-  _progressMat: {fileID: 2100000, guid: c8b5022490f654d45bce6057c6a6010b, type: 2}
+  _progressMat: {fileID: 2100000, guid: 1d5cb16de05de894491bd9e7b0c89778, type: 2}
   duration: 2
   startGlowIntensity: {r: 0.27189392, g: 0.6131063, b: 0.8867924, a: 1}
   endGlowIntensity: {r: 0.7696689, g: 2.2669716, b: 3.471698, a: 1}
@@ -195,5 +194,5 @@ MonoBehaviour:
   sequenceHolder: {fileID: 11400000, guid: 31c4b0a37152e95499f429a56e4b408c, type: 2}
   globalVolume: {fileID: 139291533283673356}
   transitionDuration: 1
-  slowTimeScale: 0.5
-  slowDuration: 2
+  slowTimeScale: 0.1
+  slowDuration: 0.5

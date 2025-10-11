@@ -47,9 +47,8 @@ public class LevelSelectionMenu : Menu<LevelSelectionMenu>
     }
     public override void MenuOpen()
     {
-        StartCoroutine(ResumeGame());
+        base.MenuOpen();
         MainPanel.gameObject.SetActive(true);
-
     }
 
 
@@ -59,8 +58,8 @@ public class LevelSelectionMenu : Menu<LevelSelectionMenu>
     } 
     public override void MenuClose()
     {
+        base.MenuClose();
         MainPanel.gameObject.SetActive(false);
-        StartCoroutine(ResumeGame());
     }
 
     private void OnLevelSelected()

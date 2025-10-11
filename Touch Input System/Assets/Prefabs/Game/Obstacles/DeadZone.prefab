@@ -57,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 520857c390a8a0746a4c6d7e7fa2b045, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,11 +75,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1703289409
-  m_SortingLayer: 1
+  m_SortingLayerID: 1800241987
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ced651994b40ec04e97ecdb9d5d7ee8d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 0.29803923}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -150,17 +150,17 @@ MonoBehaviour:
   m_ComponentVersion: 2
   m_LightType: 1
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.373
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.75
+  m_FalloffIntensity: 0.415
+  m_Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
+  m_Intensity: 0.93
   m_LightVolumeIntensity: 0
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: f5d8f560f3f0c2dc00000000bfdd799a9d749646cf01977c2f3e34f9776efafc51bd82bcf7384729bfc903e829f47a7db3eb783a
+  m_ApplyToSortingLayers: 83de3765f3f0c2dc00000000bfdd799a43834d6bf73847291793a8ee29f47a7db3eb783a
   m_LightCookieSprite: {fileID: 21300000, guid: 550ef6725581c4d448419d0c342f002c,
     type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 21300000, guid: 550ef6725581c4d448419d0c342f002c,
     type: 3}
-  m_LightOrder: 0
+  m_LightOrder: 34
   m_AlphaBlendOnOverlap: 1
   m_OverlapOperation: 1
   m_NormalMapDistance: 3
@@ -173,19 +173,19 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0
   m_LocalBounds:
-    m_Center: {x: 0, y: -0.0023500025, z: 0}
-    m_Extent: {x: 0.2968, y: 0.29815, z: 0}
+    m_Center: {x: 0.00055003166, y: 0.026650071, z: 0}
+    m_Extent: {x: 3.56105, y: 3.5334501, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
+  m_PointLightInnerRadius: 5.25
+  m_PointLightOuterRadius: 32.64
   m_ShapeLightParametricSides: 4
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 0.01
-  m_ShapeLightFalloffSize: 0.29
+  m_ShapeLightFalloffSize: 0.32
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
-  - {x: -0.0070710676, y: 0.0070710676, z: 0}
-  - {x: -0.007071066, y: -0.0070710685, z: 0}
-  - {x: 0.008999952, y: -0.01219034, z: 0}
-  - {x: 0.0070710676, y: 0.0070710676, z: 0}
+  - {x: -3.240764, y: 3.182503, z: 0}
+  - {x: -3.197648, y: -3.1538951, z: 0}
+  - {x: 3.2426932, y: -3.1876218, z: 0}
+  - {x: 3.2192063, y: 3.239718, z: 0}

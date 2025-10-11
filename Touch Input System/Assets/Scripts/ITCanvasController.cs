@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using Testing;
+using TMPro;
+using UnityEngine.AddressableAssets;
 
 public class ITCanvasController : MonoBehaviour
 {
@@ -36,8 +38,16 @@ public class ITCanvasController : MonoBehaviour
 
 
     public Button canvasSwitchButton;
+
+    public Button levelStartButton;
+
+    public TMP_InputField levelNumberInputField;
+
     public GameObject canvas;
 
+
+    public Button infiniteButton;
+    public Button spikesButton;
 
     private MoveToNextCheckPoint NextCheckPoint = new MoveToNextCheckPoint();
 
@@ -98,7 +108,47 @@ public class ITCanvasController : MonoBehaviour
             LevelLoader.Instance.LoadTestScene();
         });
 
+        levelStartButton.onClick.AddListener(() =>
+        {
 
+            MenuManager.Instance.CloseMenu(MainMenu.Instance);
+            MenuManager.Instance.CloseMenu(GameMenu.Instance);
+
+
+            if (string.IsNullOrEmpty(levelNumberInputField.text)) return;
+
+            int.TryParse(levelNumberInputField.text, out int levelNumber);
+            AssetReference level = LevelLoader.Instance.levelHolder.GetLevelByNumber(levelNumber);
+
+            if (level == null) return;
+
+            SceneTransitionManager.Instance.OnSceneTransitionStarted.Invoke(() => LevelLoader.Instance.LoadLevel(level));
+
+          
+
+
+        });
+
+        infiniteButton.onClick.AddListener(() =>
+        {
+            var lives = FindAnyObjectByType<LivesControl>();
+            var time = FindAnyObjectByType<TimeTrialControl>();
+
+            if (lives != null)
+                lives.isTesting = !lives.isTesting;
+
+            if (time != null)
+                time.isTesting = !time.isTesting;
+        });
+
+
+        spikesButton.onClick.AddListener(() =>
+        {
+            var obstacleManger = FindAnyObjectByType<ObstacleManager>();
+
+            if (obstacleManger != null)
+                obstacleManger.gameObject.SetActive(!obstacleManger.gameObject.activeInHierarchy);
+        });
     }
 
 

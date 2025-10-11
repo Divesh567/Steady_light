@@ -7,6 +7,8 @@ public class TimeTrialControl : MonoBehaviour
     private bool _timeOut = false;
 
     public GameStartAnim startAnim;
+
+    public bool isTesting = false;
     
     private void Awake()
     {
@@ -55,6 +57,7 @@ public class TimeTrialControl : MonoBehaviour
 
     private void TimeTrialCountDown()
     {
+
         _currentTime -= Time.deltaTime;
         if (_currentTime <= 0f)
         {

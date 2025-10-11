@@ -16,6 +16,7 @@ public static class RuntimeSceneInitializer
 
     private static void OnPlayModeStateChanged(PlayModeStateChange state)
     {
+        return;
 
         if (state == PlayModeStateChange.ExitingEditMode)
         {

@@ -1,11 +1,11 @@
-using UnityEngine;
-using Cysharp.Threading.Tasks;
 using System.Linq;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 public class SequencePlayer : MonoBehaviour
 {
     public SequenceHolder sequenceHolder;
-
     public static SequencePlayer Instance;
 
     public void Awake()
@@ -15,14 +15,22 @@ public class SequencePlayer : MonoBehaviour
 
     public async UniTask PlaySequenceAsync()
     {
-        var orderedSteps = sequenceHolder.sequenceSteps
-        .Where(step => step != null)
-        .OrderBy(step => step.sequenceIndex)
-        .ToList();
+        // group steps by index
+        var groupedSteps = sequenceHolder.sequenceSteps
+            .Where(step => step != null)
+            .GroupBy(step => step.sequenceIndex)
+            .OrderBy(group => group.Key);
 
-        foreach (var step in orderedSteps)
+        foreach (var group in groupedSteps)
         {
-            await step.Execute();
+            // run all steps in this group in parallel
+            List<UniTask> tasks = new List<UniTask>();
+            foreach (var step in group)
+            {
+                tasks.Add(step.Execute());
+            }
+
+            await UniTask.WhenAll(tasks);
         }
     }
 }

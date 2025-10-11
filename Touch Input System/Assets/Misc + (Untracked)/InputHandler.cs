@@ -57,7 +57,7 @@ public class InputHandler : MonoBehaviour
 
     private void Update()
     {
-        if (MyGameManager.gameState != MyGameManager.GameState.GameRunning) return;
+        if (MyGameManager.Instance.gameState != MyGameManager.GameState.GameRunning) return;
 
 
         if (isClicking)

@@ -10,7 +10,6 @@ public class ObjectiveEventHandler : MonoBehaviour
 
     public static void OnStarInitEventCaller(Star star)
     {
-        Debug.Log("THIS IS CALLED");
         OnStarInitEvent?.Invoke(star);
     }
 

@@ -25,7 +25,7 @@ public class CameraMover : SequenceStepBase
     public override void Start()
     {
         base.Start();
-        targetPos = FindObjectOfType<ProgressAnimationController>().transform; // To be refactored
+        targetPos = FindAnyObjectByType<ProgressAnimationController>().transform; // To be refactored
        
     }
 

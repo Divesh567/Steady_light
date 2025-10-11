@@ -18,7 +18,7 @@ public class PlayWallCollideAudio : MonoBehaviour
             _audioSource.Play();
             if (transform.childCount > 0)
             {
-                Instantiate(_bouceVfx, transform.GetChild(0).transform.position, _bouceVfx.transform.rotation);
+                _bouceVfx.gameObject.SetActive(true);
             }
             else
             {

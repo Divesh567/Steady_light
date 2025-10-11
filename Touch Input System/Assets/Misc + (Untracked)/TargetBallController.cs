@@ -20,7 +20,7 @@ public class TargetBallController : MonoBehaviour
     }
     public void OnSwitchTargetBallPressed()
     {
-        if (_selectedGameball == _ball1)
+/*        if (_selectedGameball == _ball1)
         {
             _selectedGameball = _ball2;
             _playerObject.GetComponent<TouchController>()._gameBall = _selectedGameball;
@@ -31,6 +31,6 @@ public class TargetBallController : MonoBehaviour
             _selectedGameball = _ball1;
             _playerObject.GetComponent<TouchController>()._gameBall = _selectedGameball;
             _cvCam.GetComponent<CinemachineVirtualCamera>().Follow = _selectedGameball.transform;
-        }
+        }*/
     }
 }

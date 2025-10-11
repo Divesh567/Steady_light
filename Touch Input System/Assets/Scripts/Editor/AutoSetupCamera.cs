@@ -10,7 +10,7 @@ public class AutoSetupCamera : EditorWindow
     private static readonly string mainCameraPrefabPath = "Assets/Prefabs/Camera/Main Camera.prefab";
     private static readonly string cameraRigPrefabPath = "Assets/Prefabs/Camera/GameCVCAM.prefab"; // VCam + TargetGroup
 
-   // [MenuItem("Tools/Setup Camera & Assign Target Group")]
+    [MenuItem("AutoDo/Setup Camera & Assign Target Group")]
     public static void SetupCameraAndAssignTargetGroup()
     {
         // -------------------------
