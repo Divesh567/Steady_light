@@ -15,7 +15,9 @@ public class SharkSpike : MonoBehaviour
         _localScale = transform.localScale;
     }
     private void Update()
-    {
+    { 
+        if(MyGameManager.Instance.gameState != MyGameManager.GameState.GameRunning) return;
+        
         if (!_stop)
         {
             _movePos = Mathf.Lerp(transform.position.x, _ballPos.position.x, _speed * Time.deltaTime);

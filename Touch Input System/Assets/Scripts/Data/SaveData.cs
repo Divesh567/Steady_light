@@ -3,22 +3,16 @@ using UnityEngine;
 using Unity;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class SaveData 
 {
-    public int _lifes = 0;
-    public float _time = 0;
-    public int _powerUp = 0;
 
-
-    public int _Diamonds = 5;
+    
+    public bool isFirstTextAnimShown = false;
     public string hashValue = String.Empty;
-
-
     public List<WorldData> worldDatas;
-    public ResourcesData resourcesData;
-    public UpgradeData upgradeData;
     public SoundSettings soundSettings;
 
 
@@ -40,27 +34,17 @@ public class SaveData
     public class Level
     {
         public string LevelName;
-        public int totalDiamondsCollected;
         public bool unlocked;
         public bool completed;
 
-        public List<int> diamondCollectedIndex;
+
 
         public Level(string name,List<int> diamondsCollected, bool  isUnlocked = false, bool isCompleted = false)
         {
             LevelName = name;
-            diamondCollectedIndex = diamondsCollected;
             completed = isCompleted;
             unlocked = isUnlocked;
         }
-    }
-
-    [Serializable]
-    public class UpgradeData
-    {
-        public int lifeUpgrade;
-        public int timerUpgrade;
-        public int powerUpgrade;
     }
 
     [Serializable]
@@ -69,14 +53,4 @@ public class SaveData
         public bool isSfxMuted = false;
         public bool isMusicMuted = false;
     }
-
-
-    [Serializable]
-    public class ResourcesData
-    {
-        public int totalDiamondsCollected;
-    }
-
-
-   
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Immersiveorama.EditorTools.Immersiveorama.Notes.Runtime
 {
@@ -12,15 +13,19 @@ namespace Immersiveorama.EditorTools.Immersiveorama.Notes.Runtime
         [Header("Basic Info")]
         public string title;
         [TextArea(3, 8)] public string description;
+        public Sprite previewImage;
 
         [Header("Classification")]
         public List<string> tags = new List<string>();
         public NoteCategory category = NoteCategory.General;
         public NotePriority priority = NotePriority.Medium;
 
-        [Header("References")]
-        public UnityEngine.Object linkedAsset;            // Prefabs, scripts, materials etc.
-        // public List<SceneObjectReference> linkedSceneObjects = new List<SceneObjectReference>();
+        // NotesSO (editor/runtime asset)
+        [Header("Attachment Info (Editor Only)")]
+        public string attachedScenePath;    // full scene path: "Assets/Scenes/Level1.unity"
+        public string attachedHierarchyPath; // "Root/Enemies/Boss"
+        public string attachedAssetPath;     // for project assets (prefabs), optional
+
 
 
         [Header("Metadata (Read-Only)")]
@@ -33,6 +38,8 @@ namespace Immersiveorama.EditorTools.Immersiveorama.Notes.Runtime
         [Header("State")]
         public bool isPinned = false;
         public bool isClosed = false;
+        
+        
 
         private void OnEnable()
         {

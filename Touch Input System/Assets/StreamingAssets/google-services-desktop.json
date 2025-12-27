@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "738362941935",
     "project_id": "steady-light",
-    "storage_bucket": "steady-light.appspot.com"
+    "storage_bucket": "steady-light.firebasestorage.app"
   },
   "client": [
     {
@@ -12,12 +12,7 @@
           "package_name": "com.Immersiveorama.LightForce"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "738362941935-k5up56ona76dnigih764keoukv3veo39.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
           "current_key": "AIzaSyAlWBji7kSx7qEL9xYSuACHD6da8lAPqBw"
@@ -25,12 +20,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "738362941935-k5up56ona76dnigih764keoukv3veo39.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

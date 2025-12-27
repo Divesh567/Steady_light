@@ -32,10 +32,13 @@ public class BallCollisions : MonoBehaviour
     private AudioClip _ballBounceSfx;
     [SerializeField]
     private float _ballBounceSfxVolume;
+    
+    [SerializeField]
+    private AudioControllerMono audioControllerMono;
 
     public Cinemachine.CinemachineImpulseSource impulseSource;
 
-    private FaceGenerator faceGenerator;
+    private FaceRenderer _faceRenderer;
 
     private void Start()
     {
@@ -46,7 +49,7 @@ public class BallCollisions : MonoBehaviour
         _trailRenderer = GetComponent<TrailRenderer>();
         _light2D = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
         impulseSource = GetComponent<Cinemachine.CinemachineImpulseSource>();
-        faceGenerator = GetComponentInChildren<FaceGenerator>();
+        _faceRenderer = GetComponentInChildren<FaceRenderer>();
         _lastCheckPoint = null;
     }
 
@@ -71,7 +74,7 @@ public class BallCollisions : MonoBehaviour
                         impulseSource.GenerateImpulse();
 
                     }
-                    faceGenerator.DisableFace();
+                    _faceRenderer.DisableFace();
                     MyGameManager.Instance.DeathEvent.Invoke(this.transform);
                     StartCoroutine(Respawn());
 
@@ -109,11 +112,9 @@ public class BallCollisions : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            if (SoundManager.Instance != null)
-            {
-                SoundManager.Instance.PlayBallBounce(_ballBounceSfx, _ballBounceSfxVolume);
-            }
-            Instantiate(_bounceVfx, transform.position, transform.rotation);
+            audioControllerMono.PlayAudioClip(_ballBounceSfx);
+            _bounceVfx.gameObject.SetActive(true);
+           
         }
     }
 
@@ -134,8 +135,8 @@ public class BallCollisions : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
-        faceGenerator.GenerateNewFace();
-        faceGenerator.EnableFace();
+        _faceRenderer.GenerateFace();
+        _faceRenderer.EnableFace();
         GoToLastPosition();
         _player.Reset();
         _collider.enabled = true;

@@ -16,11 +16,14 @@ MonoBehaviour:
   description: '
 
 '
+  previewImage: {fileID: 0}
   tags: []
   category: 0
   priority: 1
-  linkedAsset: {fileID: 0}
+  attachedScenePath: 
+  attachedHierarchyPath: 
+  attachedAssetPath: 
   dateCreated: 2025-10-11 20:47
-  dateModified: 2025-10-11 20:49
+  dateModified: 2025-11-22 13:10
   isPinned: 0
-  isClosed: 0
+  isClosed: 1

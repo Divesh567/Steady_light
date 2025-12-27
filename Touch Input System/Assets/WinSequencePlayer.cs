@@ -13,6 +13,7 @@ public class WinSequencePlayer : MonoBehaviour
     [Inject] [SerializeField] private CinemachineVirtualCamera vCam;
     [Inject] [SerializeField] private Volume globalVolume;
     [Inject] [SerializeField] private ProgressAnimationController progressController;
+    [Inject] [SerializeField] private DrawLine drawLine;
 
     [SerializeField] private GameObject fragmentPrefab;
     [SerializeField] private Material dissolveMaterial;
@@ -21,7 +22,7 @@ public class WinSequencePlayer : MonoBehaviour
     [SerializeField] private AnimationCurve dissolveCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
     [Header("Fragments")]
-    [SerializeField] private int fragmentCount = 10;
+    [SerializeField] private int fragmentCount = 6;
     [SerializeField] private float fragmentScatterRadius = 1.5f;
     [SerializeField] private float fragmentFlyDuration = 1f;
 
@@ -34,6 +35,9 @@ public class WinSequencePlayer : MonoBehaviour
     [SerializeField] private float volumeTransitionDuration = 1f;
 
     private Transform originalFollow, originalLookAt;
+
+    [SerializeField]
+    private AudioControllerMono fragmentAudio;
 
 #if UNITY_EDITOR
     [ContextMenu("Inject Dependencies")]
@@ -52,13 +56,28 @@ public class WinSequencePlayer : MonoBehaviour
         }
     }
 
+  
     public async UniTask PlayWinSequence()
     {
         // Step 1. Slow time + PP effect + start dissolve
         await SlowTimeAndVolume();
+      
         List<GameObject> fragments = await DissolveBallAndBurstFragments();
+        vCam.Follow = null;
+        vCam.LookAt = null;
+        
+        foreach (var frag in fragments)
+        {
+              
+            // Start flying this fragment
+            MoveFragment(frag, progressController.gameObject.transform.position).Forget();
 
-        // Step 2 & 3. Move fragments one by one, trigger camera + progress
+            UniTask.Delay(100);
+
+
+        }
+        
+        /*// Step 2 & 3. Move fragments one by one, trigger camera + progress
         bool cameraMoved = false;
         bool progressStarted = false;
 
@@ -81,7 +100,7 @@ public class WinSequencePlayer : MonoBehaviour
 
             // small stagger so they move one after another
             await UniTask.Delay(150);
-        }
+        }*/
     }
 
     private async UniTask SlowTimeAndVolume()
@@ -156,11 +175,12 @@ public class WinSequencePlayer : MonoBehaviour
         }
 
         matInstance.SetFloat("_Cutoff", 1f);
-        ball.gameObject.SetActive(false);
+        rend.enabled = false;
 
         return fragments;
     }
 
+    bool progressStarted = false;
     private async UniTask MoveFragment(GameObject frag, Vector3 target)
     {
         Vector3 start = frag.transform.position;
@@ -171,12 +191,22 @@ public class WinSequencePlayer : MonoBehaviour
             frag.transform.position = Vector3.Lerp(start, target, t);
             await UniTask.Yield();
         }
+        
+        if (!progressStarted)
+        {
+            progressStarted = true;
+               
+            progressController.Execute().Forget();
+        }
 
+        fragmentAudio.PlayAudioClip();
         Destroy(frag);
     }
 
     private async UniTask MoveCameraTo(Vector3 targetPosition)
     {
+        return;
+        
         if (vCam == null) return;
 
         vCam.Follow = null;

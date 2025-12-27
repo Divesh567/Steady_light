@@ -235,8 +235,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultTimer: 2
   crushDistance: 12
-  crushSpeed: 30
-  resetSpeed: 4
+  crushSpeed: 6
+  resetSpeed: 2
 --- !u!50 &2638917605480537143
 Rigidbody2D:
   serializedVersion: 5

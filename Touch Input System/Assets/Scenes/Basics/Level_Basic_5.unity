@@ -3418,22 +3418,22 @@ PrefabInstance:
     - target: {fileID: 8259550204305597173, guid: 1bd1bb6a292406b49a23c4751f8f9125,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 890.4601
+      value: 5342.7607
       objectReference: {fileID: 0}
     - target: {fileID: 8259550204305597173, guid: 1bd1bb6a292406b49a23c4751f8f9125,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -240.84
+      value: -1445.04
       objectReference: {fileID: 0}
     - target: {fileID: 9167834918376504614, guid: 1bd1bb6a292406b49a23c4751f8f9125,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 890.4601
+      value: 5342.7607
       objectReference: {fileID: 0}
     - target: {fileID: 9167834918376504614, guid: 1bd1bb6a292406b49a23c4751f8f9125,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -240.84
+      value: -1445.04
       objectReference: {fileID: 0}
     - target: {fileID: 9167834918376504614, guid: 1bd1bb6a292406b49a23c4751f8f9125,
         type: 3}
@@ -3772,11 +3772,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DeadZone (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8748049728837359832, guid: 11590fa743ecd8f4f827438ec042520d,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4190,11 +4185,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeadZone (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 8748049728837359832, guid: 11590fa743ecd8f4f827438ec042520d,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4575,12 +4565,12 @@ PrefabInstance:
     - target: {fileID: 6435313479772084722, guid: c4c7a2e0412568644886e3cdb1be77d2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 890.4601
+      value: 5342.7607
       objectReference: {fileID: 0}
     - target: {fileID: 6435313479772084722, guid: c4c7a2e0412568644886e3cdb1be77d2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -240.84
+      value: -1445.04
       objectReference: {fileID: 0}
     - target: {fileID: 6435313479772084722, guid: c4c7a2e0412568644886e3cdb1be77d2,
         type: 3}
@@ -5906,11 +5896,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DeadZone
-      objectReference: {fileID: 0}
-    - target: {fileID: 8748049728837359832, guid: 11590fa743ecd8f4f827438ec042520d,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -18,11 +18,14 @@ MonoBehaviour:
     Remote Config
 
 '
+  previewImage: {fileID: 0}
   tags: []
   category: 4
   priority: 1
-  linkedAsset: {fileID: 0}
+  attachedScenePath: 
+  attachedHierarchyPath: 
+  attachedAssetPath: 
   dateCreated: 2025-10-11 20:46
-  dateModified: 2025-10-11 20:46
+  dateModified: 2025-11-02 22:08
   isPinned: 0
   isClosed: 0

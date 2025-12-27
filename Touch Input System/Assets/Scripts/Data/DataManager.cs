@@ -44,22 +44,15 @@ public class DataManager : MonoBehaviour
         get { return _saveData.soundSettings.isSfxMuted; }
         set { _saveData.soundSettings.isSfxMuted = value; }
     }
-    public SaveData.ResourcesData resourcesData
-    {
-        get { return _saveData.resourcesData; }
-        set { _saveData.resourcesData = value; }
-    }
-
-    public SaveData.UpgradeData upgradeData
-    {
-        get { return _saveData.upgradeData; }
-        set { _saveData.upgradeData= value; }
-    }
 
     public List<SaveData.WorldData> worldDatas
     {
         get { return _saveData.worldDatas; }
-        set { _saveData.worldDatas = value; }
+        set
+        {
+            _saveData.worldDatas = value; 
+            
+        }
     }
 
     public bool isMuiscMuted
@@ -96,7 +89,7 @@ public class DataManager : MonoBehaviour
             worldData.levelsList.Find(l => l.LevelName == levelName).completed = true;
         }
             
-
+       
         worldDatas = data;
         SaveData();
     }
@@ -118,8 +111,10 @@ public class DataManager : MonoBehaviour
             worldData.levelsList.Add(new SaveData.Level(levelName, diamondsCollected, isUnlocked: true, isCompleted: false));
         }
 
-
+        
+        
         worldDatas = data;
+        
         SaveData();
     }
 
@@ -152,4 +147,15 @@ public class DataManager : MonoBehaviour
         _jsonSaver.Delete();
     }
 
+    public bool IsFirstTextAnimShown()
+    {
+        if(_saveData == null)
+            return false;
+        return _saveData.isFirstTextAnimShown;
+    }
+    
+    public void SetFirstAnimShown()
+    {
+        _saveData.isFirstTextAnimShown = true;
+    }
 }

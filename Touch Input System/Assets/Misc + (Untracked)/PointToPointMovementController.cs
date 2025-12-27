@@ -22,6 +22,8 @@ public class PointToPointMovementController : MonoBehaviour
 
     private void Update()
     {
+        if(MyGameManager.Instance.gameState != MyGameManager.GameState.GameRunning) return;
+        
         if(_follow == true)
         {
             transform.position = Vector2.MoveTowards(transform.position, _currentPoint.position, _speed * Time.deltaTime);

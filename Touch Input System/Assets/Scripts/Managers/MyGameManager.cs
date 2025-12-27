@@ -20,11 +20,25 @@ public class MyGameManager : MonoBehaviour // Should be a static class
    
 
     private static MyGameManager _instance;
-    public static MyGameManager Instance { get { return _instance; } }
+    public static MyGameManager Instance 
+    { 
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<MyGameManager>();
+                if (_instance == null)
+                {
+                    Debug.LogError("MyGameManager not found! It must exist in Bootstrap scene.");
+                }
+            }
+            return _instance;
+        }
+    
+    }
 
     public GameState gameState;
-
-
+    
     public DeathEvent DeathEvent;
 
     private void Awake()
@@ -42,6 +56,12 @@ public class MyGameManager : MonoBehaviour // Should be a static class
 
         Debug.Log("ApplicationPersistentDataPath = " + Application.persistentDataPath);
     }
+    
+    public void Start()
+    {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+    }
 
     private LevelTimer levelTimer;
     private bool hasWon; // Should only be used in this class
@@ -50,14 +70,27 @@ public class MyGameManager : MonoBehaviour // Should be a static class
        gameState = newState;
        GameStateChanged?.Invoke(gameState);
 
+       Debug.Log("Changing game state");
+       
         if(gameState == GameState.GameRunning)
         {
+            Debug.Log("Changing game state 0");
             levelTimer = new LevelTimer();
             levelTimer.StartTimer();
+
+            Debug.Log("Changing game state 1");
+            
+            if (!DataManager.Instance.IsFirstTextAnimShown())
+            {
+                Debug.Log("Changing game state 2");
+                DataManager.Instance.SetFirstAnimShown();
+                Debug.Log("Changing game state 3");
+            }
         }
 
         if(gameState == GameState.GameEnded)
         {
+            
             if (levelTimer == null) { Debug.LogError("Game Ended but level Timer was not initailzed"); return; }
 
             levelTimer.StopTimer(hasWon);
@@ -68,8 +101,7 @@ public class MyGameManager : MonoBehaviour // Should be a static class
     {
       
         DataManager.Instance.SaveCompletedLevel(RuntimeGameData.levelSelectedName, new List<int>());
-
-
+        
         StateChanged(GameState.GameEnded);
         hasWon = true;
 

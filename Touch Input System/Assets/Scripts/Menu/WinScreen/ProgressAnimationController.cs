@@ -8,6 +8,7 @@ public class ProgressAnimationController : SequenceStepBase
 {
     public List<ProgressAnimationModel> worldSprites;
     public SpriteRenderer progressionSprite;
+    public SpriteRenderer bgSprite;
 
     public UnityAction startAction = null;
     public UnityAction endAction = null;
@@ -21,44 +22,42 @@ public class ProgressAnimationController : SequenceStepBase
     [ColorUsage(true, true)]
     public Color endGlowIntensity;
 
+    public DrawLine lineDraw;
+
 
     public override void Start()
     {
         base.Start();
-       
-    }
-    public float GetWorldProgress()
-    {
-        var world = LevelLoader.Instance.levelHolder.worldSO.Find(x => x.worldType == RuntimeGameData.worldType);
-        int total = world.levels.Count;
-        int currentIndex = world.levels.FindIndex(x => x.sceneName == RuntimeGameData.levelSelectedName) + 1;
-        return (float)currentIndex / total;
+        bgSprite.gameObject.SetActive(false);
+        progressionSprite.gameObject.SetActive(false);
     }
 
-    public float GetPreviousProgress()
-    {
-        var world = LevelLoader.Instance.levelHolder.worldSO.Find(x => x.worldType == RuntimeGameData.worldType);
-        int total = world.levels.Count;
-        int currentIndex = world.levels.FindIndex(x => x.sceneName == RuntimeGameData.levelSelectedName);
-        return (float)currentIndex / total;
-    }
 
+
+    
+    private void EnableBG()
+    {
+        bgSprite.gameObject.SetActive(true);
+    }
     public void SetProgressSprite()
     {
 
-        float previousProgress = GetPreviousProgress();
+        float previousProgress = 0;
 
-        int worldIndex = LevelLoader.Instance.levelHolder.worldSO.FindIndex(x => x.worldType == RuntimeGameData.worldType);
+        int worldIndex = LevelLoader.Instance.levelHolder.currentWorldSO.FindIndex(x => x.worldType == RuntimeGameData.worldType);
         var spriteData = worldSprites[worldIndex];
 
         progressionSprite.sprite = spriteData.sprite;
-
+        progressionSprite.gameObject.SetActive(true);
+        
         startGlowIntensity = spriteData.startGlowIntensity;
         endGlowIntensity = spriteData.endGlowIntensity;
 
         _progressMat.SetFloat("_FillAmount", previousProgress);
         _progressMat.SetColor("_Color", startGlowIntensity);
         _progressMat.SetTexture("_MainTex", spriteData.sprite.texture);
+        
+        
 
     }
 
@@ -67,10 +66,10 @@ public class ProgressAnimationController : SequenceStepBase
         this.startAction = startAction;
         this.endAction = endAction;
 
-        float previousProgress = GetPreviousProgress();
-        float currentProgress = GetWorldProgress();
+        float previousProgress = 0;
+        float currentProgress = 1;
 
-        int worldIndex = LevelLoader.Instance.levelHolder.worldSO.FindIndex(x => x.worldType == RuntimeGameData.worldType);
+        int worldIndex = LevelLoader.Instance.levelHolder.currentWorldSO.FindIndex(x => x.worldType == RuntimeGameData.worldType);
         var spriteData = worldSprites[worldIndex];
 
         progressionSprite.sprite = spriteData.sprite;
@@ -91,10 +90,12 @@ public class ProgressAnimationController : SequenceStepBase
 
     public async UniTask Animate()
     {
+        CameraUtilities.SetTransfromPosition(transform);
+        EnableBG();
         SetProgressSprite();
 
-        float from = GetPreviousProgress();
-        float to = GetWorldProgress();
+        float from = 0;
+        float to = 1;
 
         Debug.Log($"Previous progress was {from}, Current progress is {to}");
 
@@ -118,7 +119,8 @@ public class ProgressAnimationController : SequenceStepBase
 
     public async override UniTask Execute()
     {
-        await Animate();
+        bgSprite.gameObject.SetActive(true);
+        await lineDraw.Execute();
     }
 }
 

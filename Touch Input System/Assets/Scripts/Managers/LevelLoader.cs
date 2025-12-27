@@ -7,6 +7,8 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 using System;
 using System.IO;
 using System.Linq;
+using FirebaseUtilities;
+using Scriptables.Worlds;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -37,7 +39,10 @@ public class LevelLoader : MonoBehaviour
     private void Start()
     {
         SceneManager.LoadScene(1);
-        levelHolder.worldSO.ForEach(x => x.InitializeLevelNames());
+
+        levelHolder.InitializeProgression();
+
+
     }
 
     public void LoadNextLevel()
@@ -68,10 +73,7 @@ public class LevelLoader : MonoBehaviour
 
         currentLevelAssetRef = levelName;
 
-
-        RuntimeGameData.levelSelected = levelName;
-        RuntimeGameData.levelType = levelHolder.FindLevelType(levelName);
-
+        
         // Start loading the scene asynchronously
         handle = levelName.LoadSceneAsync();
 
@@ -160,12 +162,65 @@ public class LevelLoader : MonoBehaviour
     public class LevelHolder
     {
         public List<WorldSO>  worldSO;
+        public List<WorldSO>  remoteWorldSO;
+        public LevelCatalogSO LevelCatalog;
+        public List<WorldSO> currentWorldSO;
+        FirebaseRemoteConfigController remoteConfigController = new FirebaseRemoteConfigController();
+        public void InitializeProgression()
+        {
+            remoteConfigController.FetchAndApply(SetupRemoteWorldSo);
+        }
 
+        void SetupRemoteWorldSo()
+        {
+            RemoteProgressionConfig config = remoteConfigController.Config;
+            
+            if (config == null || config.worlds == null || config.worlds.Count == 0)
+            {
+                Debug.LogWarning("[Progression] Remote config empty, using local worlds");
+                currentWorldSO = worldSO;
+                return;
+            }
+
+            foreach (RemoteProgressionData worldData in config.worlds)
+            {
+                WorldSO world = ScriptableObject.CreateInstance<WorldSO>();
+
+                world.levels = new List<WorldSO.LevelClass>();
+
+                try
+                {
+                    world.worldType = (WorldSO.WorldType)worldData.worldIndex;
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Cannot parse config world type, using local world data");
+                    currentWorldSO = worldSO;
+                    return;
+                }
+
+                List<AssetReference> levels = new List<AssetReference>();
+
+                foreach (int levelIndice in worldData.levelIndices)
+                {
+                    
+                    WorldSO.LevelClass level = new WorldSO.LevelClass();
+                    level.sceneAddress = LevelCatalog.levels[levelIndice].scene;
+                    
+                    world.levels.Add(level);
+                }
+                
+                remoteWorldSO.Add(world);
+            }
+            
+            currentWorldSO = remoteWorldSO;
+        }
+        
         public AssetReference FindNextLevel(AssetReference currentLevel)
         {
             List<WorldSO.LevelClass> allLevels = new List<WorldSO.LevelClass>();
 
-            worldSO.ForEach(x =>
+            currentWorldSO.ForEach(x =>
             {
                 allLevels.AddRange(x.levels);
             });
@@ -181,7 +236,7 @@ public class LevelLoader : MonoBehaviour
             List<WorldSO.LevelClass> allLevels = new List<WorldSO.LevelClass>();
 
 
-            worldSO.ForEach(x =>
+            currentWorldSO.ForEach(x =>
             {
                 allLevels.AddRange(x.levels);
 
@@ -193,7 +248,7 @@ public class LevelLoader : MonoBehaviour
             if(currentIndex - 1 < 0) 
                 return  allLevels[0].sceneAddress;
             else
-            return allLevels[currentIndex -1].sceneAddress;
+            return allLevels[currentIndex - 1].sceneAddress;
         }
 
         public AssetReference FindCurrentLevel(List<SaveData.WorldData> data)
@@ -213,7 +268,7 @@ public class LevelLoader : MonoBehaviour
             }
 
             // Go through all worlds and subtract levels until we find the current one
-            foreach (var world in worldSO)
+            foreach (var world in currentWorldSO)
             {
                 if (totalCompletedLevels < world.levels.Count)
                 {
@@ -230,27 +285,11 @@ public class LevelLoader : MonoBehaviour
             Debug.LogError("No current level found. All levels completed?");
             return null;
         }
-
-
-        public WorldSO.LevelType FindLevelType(AssetReference currentLevel)
-        {
-            List<WorldSO.LevelClass> allLevels = new List<WorldSO.LevelClass>();
-
-
-            worldSO.ForEach(x =>
-            {
-                allLevels.AddRange(x.levels);
-            });
-
-            var currentIndex = allLevels.Find(x => x.sceneAddress == currentLevel);
-
-            return currentIndex.levelType;
-        }
-
+        
         public WorldSO.WorldType FindWorldType(AssetReference currentLevel)
         {
             // Find the world that contains the level with the given scene address
-            var world = worldSO.Find(x => x.levels.Any(l => l.sceneAddress == currentLevel));
+            var world = currentWorldSO.Find(x => x.levels.Any(l => l.sceneAddress == currentLevel));
 
             if (world != null)
             {
@@ -266,7 +305,7 @@ public class LevelLoader : MonoBehaviour
         {
             int currentCount = 0;
 
-            foreach (var world in worldSO)
+            foreach (var world in currentWorldSO)
             {
                 foreach (var level in world.levels)
                 {

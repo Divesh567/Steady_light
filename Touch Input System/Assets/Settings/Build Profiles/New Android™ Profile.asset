@@ -247,7 +247,7 @@ MonoBehaviour:
     - line: '|   loadStoreDebugModeEnabled: 0'
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
-    - line: '|   bundleVersion: 4.3'
+    - line: '|   bundleVersion: 4.4'
     - line: '|   preloadedAssets:'
     - line: '|   - {fileID: -944628639613478452, guid: 46dacabd60cb8f04db12cbb645b295fc,
         type: 3}'
@@ -1081,9 +1081,9 @@ MonoBehaviour:
     - rid: 8320492219650277398
       type: {class: AndroidPlatformBuildSettings, ns: UnityEditor.Android, asm: UnityEditor.Android.Extensions}
       data:
-        m_Development: 0
-        m_ConnectProfiler: 0
-        m_BuildWithDeepProfilingSupport: 0
+        m_Development: 1
+        m_ConnectProfiler: 1
+        m_BuildWithDeepProfilingSupport: 1
         m_AllowDebugging: 0
         m_WaitForManagedDebugger: 0
         m_ManagedDebuggerFixedPort: 0
@@ -1098,7 +1098,7 @@ MonoBehaviour:
         m_DebugSymbolLevel: 1
         m_DebugSymbolFormat: 5
         m_CurrentDeploymentTargetId: __builtin__target_all
-        m_BuildType: 2
+        m_BuildType: 1
         m_BuildAppBundle: 0
         m_IPAddressToConnect: 
         m_SymlinkSources: 0

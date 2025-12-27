@@ -62,6 +62,7 @@ MonoBehaviour:
     - c4c7a2e0412568644886e3cdb1be77d2
     - 1bd1bb6a292406b49a23c4751f8f9125
     - 62b5915e287e2614487240dd79579794
+    - 91b3ab6663b74064ea65a627ab9bd759
     values:
     - goDatas_byGlobalId:
         keys:
@@ -367,11 +368,14 @@ MonoBehaviour:
         keys:
         - globalObjectIdString: GlobalObjectId_V1-2-becd9e637d4fb2f48b906f517383babf-654680064-0
         - globalObjectIdString: GlobalObjectId_V1-2-becd9e637d4fb2f48b906f517383babf-331427901-0
+        - globalObjectIdString: GlobalObjectId_V1-2-becd9e637d4fb2f48b906f517383babf-8501816514822668748-606523209
         values:
         - colorIndex: 3
           iconNameOrGuid: 
         - colorIndex: 0
           iconNameOrGuid: 971d8c3b27b21754d915bb68e489d7a5
+        - colorIndex: 6
+          iconNameOrGuid: 
     - goDatas_byGlobalId:
         keys:
         - globalObjectIdString: GlobalObjectId_V1-2-7ced147e8bb236e4199ff8caf36d653b-1298509388-0
@@ -466,7 +470,7 @@ MonoBehaviour:
         keys:
         - globalObjectIdString: GlobalObjectId_V1-1-7b307ea13aff77042a8b02c9103a3951-8501816514822668748-0
         values:
-        - colorIndex: 0
+        - colorIndex: 6
           iconNameOrGuid: 5c5b7ead15e2040d88a94f883b2f2633
     - goDatas_byGlobalId:
         keys:
@@ -528,3 +532,15 @@ MonoBehaviour:
         values:
         - colorIndex: 0
           iconNameOrGuid: MeshCollider Icon
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-91b3ab6663b74064ea65a627ab9bd759-1468797090-0
+        - globalObjectIdString: GlobalObjectId_V1-2-91b3ab6663b74064ea65a627ab9bd759-8501816514822668748-1003545699
+        - globalObjectIdString: GlobalObjectId_V1-2-91b3ab6663b74064ea65a627ab9bd759-1815724991-0
+        values:
+        - colorIndex: 3
+          iconNameOrGuid: 
+        - colorIndex: 0
+          iconNameOrGuid: 5c5b7ead15e2040d88a94f883b2f2633
+        - colorIndex: 0
+          iconNameOrGuid: 833db1b4a8a49ba4eb412b15e31210bc

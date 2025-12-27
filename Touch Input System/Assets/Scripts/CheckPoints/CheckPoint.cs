@@ -26,7 +26,7 @@ public class CheckPoint : MonoBehaviour
     public void CheckpointAnimationTrigger()
     {
 
-        ckAnimation.AnimateCheckPoint();
+       // ckAnimation.AnimateCheckPoint();
         _light2D.enabled = true;
         _active = true;
        

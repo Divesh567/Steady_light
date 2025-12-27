@@ -37,7 +37,6 @@ public class MainMenu : Menu<MainMenu>
         _levelSelectionTransitionSet.InitTranistion(this, LevelSelectionMenu.Instance);
         _settingsTransitionSet.InitTranistion(this, SettingsMenu.Instance);
         _creditsTransitionSet.InitTranistion(this, CreditMenu.Instance);
-        _shopMenuTransitionSet.InitTranistion(this, UpgradeMenu.Instance);
         _loadingScreenTransitionSet.InitTranistion(this, LoadingScreen.Instance);
 
 

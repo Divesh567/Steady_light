@@ -15,6 +15,7 @@ public class TapToStartAnim : GameStartAnim
 
     public float valueStartScaleMultiplier;
     public float valueEndScaleMultiplier;
+    
 
 
     public override void StartAnim(UnityAction startAction, UnityAction endAction)

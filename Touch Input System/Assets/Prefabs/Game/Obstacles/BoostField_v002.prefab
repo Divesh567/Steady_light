@@ -28,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3694108065914220552}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3694108065914220551
 SpriteRenderer:
@@ -53,6 +53,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -96,11 +99,32 @@ PolygonCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3694108065914220552}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 1
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,6 +144,7 @@ PolygonCollider2D:
       - {x: 2.6699998, y: -0.01}
       - {x: 2.6699998, y: 0.01}
       - {x: -0.47098404, y: 3.1614983}
+  m_UseDelaunayMesh: 0
 --- !u!249 &3694108065914220549
 AreaEffector2D:
   serializedVersion: 2
@@ -135,7 +160,7 @@ AreaEffector2D:
     m_Bits: 128
   m_UseGlobalAngle: 0
   m_ForceAngle: 0
-  m_ForceMagnitude: 25
+  m_ForceMagnitude: 35
   m_ForceVariation: 0
   m_ForceTarget: 0
   m_Drag: 0
@@ -166,14 +191,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ComponentVersion: 1
+  m_ComponentVersion: 2
   m_LightType: 1
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 1
   m_Color: {r: 0.5058824, g: 0.72156864, b: 0.8980392, a: 1}
   m_Intensity: 0
   m_LightVolumeIntensity: 0
-  m_LightVolumeIntensityEnabled: 0
+  m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: f3f0c2dc00000000bfdd799a9d749646cf01977c2f3e34f9776efafcbfc903e829f47a7d
   m_LightCookieSprite: {fileID: 21300000, guid: 833db1b4a8a49ba4eb412b15e31210bc,
     type: 3}
@@ -185,18 +210,15 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 0
+  m_ShadowsEnabled: 0
   m_ShadowIntensity: 0
+  m_ShadowSoftness: 0
+  m_ShadowSoftnessFalloffIntensity: 0.5
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0
-  m_Vertices:
-  - position: {x: 0, y: 0, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 0}
-    uv: {x: 0, y: 0}
-  m_Triangles: 0000
   m_LocalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+    m_Center: {x: -0.3206997, y: -0.016050339, z: 0}
+    m_Extent: {x: 16.1875, y: 16.56015, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

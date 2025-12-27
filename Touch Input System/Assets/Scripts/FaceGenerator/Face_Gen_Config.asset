@@ -22,41 +22,56 @@ MonoBehaviour:
     - {fileID: 1892568518595763743, guid: 3df6d9fe3f5f4ab45a3ebdbc25e80970, type: 3}
     eyes:
     - open: {fileID: 21300000, guid: ab8dcd926c2737a479cf2496a2494f49, type: 3}
-      blink: {fileID: 0}
+      blink: {fileID: 21300000, guid: 6991498ad57bb5846a49036b64de2c41, type: 3}
     - open: {fileID: 21300000, guid: fd8ad9ae23d5c884da16e2772b29927d, type: 3}
-      blink: {fileID: 0}
+      blink: {fileID: 21300000, guid: ad9646518d55ecd43b69ff712b0b4713, type: 3}
     - open: {fileID: 21300000, guid: cc8ef4357279a2749b5dcb926195b22f, type: 3}
-      blink: {fileID: 0}
+      blink: {fileID: 21300000, guid: 081b30cc1fe45f241bdf9f0e6845d6c4, type: 3}
     - open: {fileID: 21300000, guid: 4548c6aafbc4bc54daf7dace397078f4, type: 3}
-      blink: {fileID: 0}
+      blink: {fileID: 21300000, guid: cf92b154389659d4281b1452b955d917, type: 3}
     - open: {fileID: 21300000, guid: f4e260466995a744cb64350bf63b5089, type: 3}
-      blink: {fileID: 0}
+      blink: {fileID: 21300000, guid: f4e260466995a744cb64350bf63b5089, type: 3}
+    - open: {fileID: 21300000, guid: cd119d699c16f3047ba8dd53b5b2a8fd, type: 3}
+      blink: {fileID: 21300000, guid: 189e8523898bc224289526edfc059784, type: 3}
+    - open: {fileID: 21300000, guid: b49a63ea4db65c846b30d0753df515c2, type: 3}
+      blink: {fileID: 21300000, guid: 0219d2475f0faaf4ebb73bb7ad8caec7, type: 3}
     mouths:
-    - normal: {fileID: -5026471611469256794, guid: f4059ad9caae48741aff734ed831b657,
-        type: 3}
-      smile: {fileID: 0}
-      angry: {fileID: 0}
     - normal: {fileID: 422890300412301445, guid: fae77a93a3f89cc49b1b35f82d3dc110,
         type: 3}
-      smile: {fileID: 0}
-      angry: {fileID: 0}
-    - normal: {fileID: 2095082162188187141, guid: f73b4ae414167204ab39a89399479c9b,
+      smile: {fileID: -5026471611469256794, guid: f4059ad9caae48741aff734ed831b657,
         type: 3}
-      smile: {fileID: 0}
-      angry: {fileID: 0}
-    - normal: {fileID: 6867046535480044752, guid: 8de76507a84216447839142c9f2c4986,
+      angry: {fileID: 6867046535480044752, guid: 8de76507a84216447839142c9f2c4986,
         type: 3}
-      smile: {fileID: 0}
-      angry: {fileID: 0}
+    - normal: {fileID: -1983274145001815666, guid: 5503927404c77b047bec8cd942b2e383,
+        type: 3}
+      smile: {fileID: -5364881497030786879, guid: 69b2708150aa5a5428dceb5490b33063,
+        type: 3}
+      angry: {fileID: -8783302090702854962, guid: 4f6dccd73e6d89646b2b7cf3e9bf9c6e,
+        type: 3}
     - normal: {fileID: -5364881497030786879, guid: 69b2708150aa5a5428dceb5490b33063,
         type: 3}
-      smile: {fileID: 0}
-      angry: {fileID: 0}
+      smile: {fileID: 2095082162188187141, guid: f73b4ae414167204ab39a89399479c9b,
+        type: 3}
+      angry: {fileID: -7569428755224868025, guid: fae77a93a3f89cc49b1b35f82d3dc110,
+        type: 3}
+    - normal: {fileID: 6867046535480044752, guid: 8de76507a84216447839142c9f2c4986,
+        type: 3}
+      smile: {fileID: 6867046535480044752, guid: 8de76507a84216447839142c9f2c4986,
+        type: 3}
+      angry: {fileID: -8337759990920294888, guid: 2789d55798115cb4e830d230c8aba715,
+        type: 3}
+    - normal: {fileID: -5364881497030786879, guid: 69b2708150aa5a5428dceb5490b33063,
+        type: 3}
+      smile: {fileID: -5026471611469256794, guid: f4059ad9caae48741aff734ed831b657,
+        type: 3}
+      angry: {fileID: 6867046535480044752, guid: 8de76507a84216447839142c9f2c4986,
+        type: 3}
     - normal: {fileID: 4895116388844290065, guid: 4f6dccd73e6d89646b2b7cf3e9bf9c6e,
         type: 3}
-      smile: {fileID: 0}
-      angry: {fileID: 0}
-    - normal: {fileID: -8337759990920294888, guid: 2789d55798115cb4e830d230c8aba715,
+      smile: {fileID: 4895116388844290065, guid: 4f6dccd73e6d89646b2b7cf3e9bf9c6e,
         type: 3}
-      smile: {fileID: 0}
-      angry: {fileID: 0}
+      angry: {fileID: -8783302090702854962, guid: 4f6dccd73e6d89646b2b7cf3e9bf9c6e,
+        type: 3}
+    - normal: {fileID: 21300000, guid: f06889a8c7d28c94bbeb9d6db4160330, type: 3}
+      smile: {fileID: 21300000, guid: b93cfa57e6d39a04c99774aabcc826de, type: 3}
+      angry: {fileID: 21300000, guid: 95991005b0986154fa3179a6aa97c280, type: 3}

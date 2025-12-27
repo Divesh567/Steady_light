@@ -19,4 +19,18 @@ public static class CameraUtilities
         return WorldObject_ScreenPosition;
 
      }
+     
+     public static  void SetTransfromPosition(Transform transform)
+     {
+         if (Camera.main != null)
+         {
+             Vector3 centerPos = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0);
+             transform.position =  centerPos;
+         }
+         else
+         {
+             Debug.LogError("Camera main object not found");
+         }
+        
+     }
 }

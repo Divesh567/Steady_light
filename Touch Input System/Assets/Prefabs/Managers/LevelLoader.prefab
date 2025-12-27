@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4608943841641382151}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4608943841641382150
 MonoBehaviour:
@@ -52,3 +52,12 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b4e85b32000e1594e904cc28e66bb3bc, type: 2}
     - {fileID: 11400000, guid: 63a7daf15cfac644d8b2b29e04f09d29, type: 2}
     - {fileID: 11400000, guid: 69bf2f3536dfccf4f9287b0b46effa1c, type: 2}
+    remoteWorldSO: []
+    LevelCatalog: {fileID: 11400000, guid: 9caa77c877943764b9abbf3cc1094194, type: 2}
+    currentWorldSO: []
+  currentLevelAssetRef:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1

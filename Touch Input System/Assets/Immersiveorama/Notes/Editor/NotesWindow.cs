@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Immersiveorama.EditorTools.Immersiveorama.Notes.Runtime;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 namespace Immersiveorama.EditorTools.Immersiveorama.Notes.Editor
@@ -35,7 +37,7 @@ namespace Immersiveorama.EditorTools.Immersiveorama.Notes.Editor
 
         private void LoadDatabase()
         {
-            database = AssetDatabase.LoadAssetAtPath<NotesDatabase>("Assets/Notes/NoteDatabase.asset");
+            database = AssetDatabase.LoadAssetAtPath<NotesDatabase>("Assets/Notes/NotesDatabase.asset");
 
             if (database == null)
             {
@@ -43,7 +45,7 @@ namespace Immersiveorama.EditorTools.Immersiveorama.Notes.Editor
                     AssetDatabase.CreateFolder("Assets", "Notes");
 
                 database = ScriptableObject.CreateInstance<NotesDatabase>();
-                AssetDatabase.CreateAsset(database, "Assets/Notes/NoteDatabase.asset");
+                AssetDatabase.CreateAsset(database, "Assets/Notes/NotesDatabase.asset");
                 AssetDatabase.SaveAssets();
             }
         }
@@ -104,7 +106,7 @@ namespace Immersiveorama.EditorTools.Immersiveorama.Notes.Editor
         private void DrawFooter()
         {
 
-            GUILayout.Label("Shortcuts:  Crtl + N - New Note | Del - Delete |  Shift + P - Pin | Shift + H - Hide | Arrows - Navigate", EditorStyles.miniLabel);
+            GUILayout.Label("Shortcuts:  Crtl + N - New Note | Del - Delete |  Shift + P - Pin | Shift + H - Close | Arrows - Navigate", EditorStyles.miniLabel);
             EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
         
             EditorGUILayout.EndHorizontal();
@@ -113,6 +115,7 @@ namespace Immersiveorama.EditorTools.Immersiveorama.Notes.Editor
         // === FILTER UI ===
         private bool showOnlyPinned = false;
         private bool showClosedNotes = false;
+        private bool focusTitleFieldNextFrame;
 
         private void DrawFilters()
         {
@@ -152,113 +155,231 @@ namespace Immersiveorama.EditorTools.Immersiveorama.Notes.Editor
         }
 
         // === LEFT PANEL (List of Notes) ===
-        private void DrawNotesList()
-        {
-            EditorGUILayout.BeginVertical(GUILayout.Width(200));
-            GUILayout.Label("All Notes", EditorStyles.boldLabel);
+       private void DrawNotesList()
+       {
+           EditorGUILayout.BeginVertical(GUILayout.Width(200));
+           GUILayout.Label("All Notes", EditorStyles.boldLabel);
 
-            scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
+           scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 
-            var filteredNotes = GetFilteredNotes();
+           var filteredNotes = GetFilteredNotes();
 
-            if (filteredNotes.Count() == 0)
-            {
-                GUILayout.Space(10);
-                EditorGUILayout.HelpBox("No notes yet — click 'Create Note' to get started!", MessageType.Info);
-            }
-        
-            foreach (var note in filteredNotes)
-            {
-                if (note == null) continue;
+           if (filteredNotes.Count() == 0)
+           {
+               GUILayout.Space(10);
+               EditorGUILayout.HelpBox("No notes yet — click 'Create Note' to get started!", MessageType.Info);
+           }
 
-                string displayTitle = note.title;
-                if (note.isPinned) displayTitle = "📌 " + displayTitle;
-                if (note.isClosed) displayTitle = "❌ " + displayTitle;
+           GUIStyle buttonStyle = new GUIStyle(GUI.skin.button)
+           {
+               alignment = TextAnchor.MiddleLeft, padding = new RectOffset(10, 10, 4, 4)
+           };
 
-                if (GUILayout.Button(displayTitle, (_selectedNote == note) ? EditorStyles.toolbarButton : EditorStyles.miniButton))
-                {
-                    _selectedNote = note;
-                    GUI.FocusControl(null);
-                }
-            }
+           foreach (var note in filteredNotes)
+           {
+               if (note == null) continue;
 
-            EditorGUILayout.EndScrollView();
+               string displayTitle = note.title;
+               if (note.isPinned) displayTitle = "📌 " + displayTitle;
+               if (note.isClosed) displayTitle = "❌ " + displayTitle;
 
-            if (GUILayout.Button("+ Create Note"))
-            {
-                CreateNote();
-            }
+               // ✂️ Limit title length to 15 characters max
+               const int maxLength = 15;
+               if (displayTitle.Length > maxLength)
+                   displayTitle = displayTitle.Substring(0, maxLength - 3) + "...";
 
-            if (_selectedNote != null && GUILayout.Button("Delete Selected"))
-            {
-                DeleteNote(_selectedNote);
-            }
+               // Choose style for selected note
+               GUIStyle activeStyle = (_selectedNote == note)
+                   ? new GUIStyle(EditorStyles.toolbarButton) { alignment = TextAnchor.MiddleLeft }
+                   : buttonStyle;
 
-            EditorGUILayout.EndVertical();
-        }
+               // Reserve rect for button
+               Rect rect = GUILayoutUtility.GetRect(new GUIContent(displayTitle), activeStyle, GUILayout.Height(25));
+
+               // Draw button and handle click
+               if (GUI.Button(rect, displayTitle, activeStyle))
+               {
+                   _selectedNote = note;
+                   GUI.FocusControl(null);
+               }
+
+               // Draw category color box (right aligned)
+               Color categoryColor = GetCategoryColor(note.category);
+               float boxSize = 10f;
+               Rect colorRect = new Rect(rect.xMax - boxSize - 6, rect.y + (rect.height - boxSize) / 2f, boxSize, boxSize);
+               EditorGUI.DrawRect(colorRect, categoryColor);
+
+               // Outline the color box
+               EditorGUI.DrawRect(new Rect(colorRect.x - 1, colorRect.y - 1, colorRect.width + 2, 1), Color.black); // top
+               EditorGUI.DrawRect(new Rect(colorRect.x - 1, colorRect.yMax, colorRect.width + 2, 1), Color.black); // bottom
+               EditorGUI.DrawRect(new Rect(colorRect.x - 1, colorRect.y - 1, 1, colorRect.height + 2), Color.black); // left
+               EditorGUI.DrawRect(new Rect(colorRect.xMax, colorRect.y - 1, 1, colorRect.height + 2), Color.black); // right
+
+               // Highlight selected note
+               if (_selectedNote == note)
+                   EditorGUI.DrawRect(rect, new Color(0.3f, 0.6f, 1f, 0.1f));
+           }
+
+
+           EditorGUILayout.EndScrollView();
+
+           if (GUILayout.Button("+ Create Note"))
+           {
+               CreateNote();
+           }
+
+           if (_selectedNote != null && GUILayout.Button("Delete Selected"))
+           {
+               DeleteNote(_selectedNote);
+           }
+
+           EditorGUILayout.EndVertical();
+       }
+
 
         // === RIGHT PANEL (Note Details) ===
-        private void DrawNoteDetails()
+        private Vector2 detailScroll;
+
+private void DrawNoteDetails()
+{
+    if (_selectedNote == null)
+    {
+        GUILayout.Label("Select a note to view/edit", EditorStyles.helpBox);
+        return;
+    }
+
+    detailScroll = EditorGUILayout.BeginScrollView(detailScroll);
+    EditorGUILayout.BeginVertical("box");
+    GUILayout.Space(4);
+
+    EditorGUI.BeginChangeCheck();
+
+    // --- Title ---
+    GUILayout.Label("Title", EditorStyles.boldLabel);
+    _selectedNote.title = EditorGUILayout.TextField(_selectedNote.title);
+
+    // --- Description ---
+    GUILayout.Space(4);
+    GUILayout.Label("Description", EditorStyles.boldLabel);
+    _selectedNote.description = EditorGUILayout.TextArea(_selectedNote.description, GUILayout.MinHeight(60));
+
+    // --- Category & Priority ---
+    GUILayout.Space(4);
+    _selectedNote.category = (NoteCategory)EditorGUILayout.EnumPopup("Category", _selectedNote.category);
+    _selectedNote.priority = (NotePriority)EditorGUILayout.EnumPopup("Priority", _selectedNote.priority);
+
+    /*
+    // --- Tags ---
+    GUILayout.Space(4);
+    GUILayout.Label("Tags (comma separated)", EditorStyles.boldLabel);
+    string tags = string.Join(", ", _selectedNote.tags);
+    string newTags = EditorGUILayout.TextField(tags);
+    if (newTags != tags)
+        _selectedNote.tags = new List<string>(newTags.Split(','));
+        */
+
+    // --- Dates ---
+    EditorGUILayout.Space();
+    using (new EditorGUILayout.HorizontalScope())
+    {
+        EditorGUILayout.LabelField("Created", _selectedNote.DateCreated, EditorStyles.miniLabel);
+        EditorGUILayout.LabelField("Modified", _selectedNote.DateModified, EditorStyles.miniLabel);
+    }
+
+    // --- Preview Image (small & right-aligned) ---
+    GUILayout.Space(6);
+
+    using (new EditorGUILayout.HorizontalScope())
+    {
+        GUILayout.Label("Preview Image", EditorStyles.boldLabel);
+
+        GUILayout.FlexibleSpace(); // push preview to the right
+
+        if (_selectedNote.previewImage != null)
         {
-            EditorGUILayout.BeginVertical();
-
-            if (_selectedNote == null)
+            Texture2D tex = _selectedNote.previewImage.texture;
+            if (tex != null)
             {
-                GUILayout.Label("Select a note to view/edit", EditorStyles.helpBox);
-                EditorGUILayout.EndVertical();
-                return; // ✅ stop drawing early if nothing is selected
+                float previewSize = 80f; // smaller thumbnail
+                float aspect = (float)tex.width / tex.height;
+                float width = previewSize;
+                float height = previewSize / aspect;
+
+                Rect rect = GUILayoutUtility.GetRect(width, height, GUILayout.Width(width), GUILayout.Height(height));
+                EditorGUI.DrawPreviewTexture(rect, tex, null, ScaleMode.ScaleToFit);
+
+                // Optional: click to ping/select image in project
+                if (Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition))
+                {
+                    EditorGUIUtility.PingObject(_selectedNote.previewImage);
+                    Selection.activeObject = _selectedNote.previewImage;
+                    Event.current.Use();
+                }
             }
-
-            // --- Note editing UI ---
-            EditorGUI.BeginChangeCheck();
-
-            _selectedNote.title = EditorGUILayout.TextField("Title", _selectedNote.title);
-
-            GUILayout.Label("Description");
-            _selectedNote.description = EditorGUILayout.TextArea(_selectedNote.description, GUILayout.Height(60));
-
-            _selectedNote.category = (NoteCategory)EditorGUILayout.EnumPopup("Category", _selectedNote.category);
-            _selectedNote.priority = (NotePriority)EditorGUILayout.EnumPopup("Priority", _selectedNote.priority);
-
-            GUILayout.Label("Tags (comma separated)");
-            string tags = string.Join(", ", _selectedNote.tags);
-            string newTags = EditorGUILayout.TextField(tags);
-            if (newTags != tags)
-                _selectedNote.tags = new List<string>(newTags.Split(','));
-
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Created", _selectedNote.DateCreated);
-            EditorGUILayout.LabelField("Modified", _selectedNote.DateModified);
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                _selectedNote.MarkModified();
-                EditorUtility.SetDirty(_selectedNote);
-                AssetDatabase.SaveAssets();
-            }
-
-            // --- Actions (Pin / Close) ---
-            EditorGUILayout.BeginHorizontal();
-
-            if (GUILayout.Button(_selectedNote.isPinned ? "📌 Unpin" : "📍 Pin", GUILayout.Width(70)))
-            {
-                _selectedNote.isPinned = !_selectedNote.isPinned;
-                EditorUtility.SetDirty(_selectedNote);
-            }
-
-            if (GUILayout.Button(_selectedNote.isClosed ? "Reopen" : "Close", GUILayout.Width(70)))
-            {
-                _selectedNote.isClosed = !_selectedNote.isClosed;
-                EditorUtility.SetDirty(_selectedNote);
-            }
-
-            var rect = GUILayoutUtility.GetRect(new GUIContent(titleContent), EditorStyles.miniButton);
-            EditorGUI.DrawRect(new Rect(rect.x + 2, rect.y + 2, 8, rect.height - 4), GetTagColor(_selectedNote.category));
-
-            
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.EndVertical();
         }
+    }
+
+    _selectedNote.previewImage = (Sprite)EditorGUILayout.ObjectField(_selectedNote.previewImage, typeof(Sprite), false);
+
+
+    // --- Attached Object Section ---
+    GUILayout.Space(6);
+    if (!string.IsNullOrEmpty(_selectedNote.attachedScenePath) || !string.IsNullOrEmpty(_selectedNote.attachedAssetPath))
+    {
+        using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
+        {
+            GUILayout.Label("Attachment", EditorStyles.boldLabel);
+
+            EditorGUILayout.LabelField(
+                "Path:",
+                !string.IsNullOrEmpty(_selectedNote.attachedAssetPath)
+                    ? _selectedNote.attachedAssetPath
+                    : _selectedNote.attachedHierarchyPath,
+                EditorStyles.wordWrappedMiniLabel
+            );
+
+            if (GUILayout.Button("Go To Attached Object", GUILayout.Height(24)))
+            {
+                bool ok = TrySelectObjectFromAttachment(
+                    _selectedNote.attachedScenePath,
+                    _selectedNote.attachedHierarchyPath,
+                    _selectedNote.attachedAssetPath
+                );
+                if (!ok)
+                    EditorUtility.DisplayDialog("Note", "Target object not found. It may have been renamed or moved.", "OK");
+            }
+        }
+    }
+
+    // --- Actions (Pin / Close) ---
+    GUILayout.Space(8);
+    using (new EditorGUILayout.HorizontalScope())
+    {
+        if (GUILayout.Button(_selectedNote.isPinned ? "📌 Unpin" : "📍 Pin", GUILayout.Width(80)))
+        {
+            _selectedNote.isPinned = !_selectedNote.isPinned;
+            EditorUtility.SetDirty(_selectedNote);
+        }
+
+        if (GUILayout.Button(_selectedNote.isClosed ? "Reopen" : "Close", GUILayout.Width(80)))
+        {
+            _selectedNote.isClosed = !_selectedNote.isClosed;
+            EditorUtility.SetDirty(_selectedNote);
+        }
+    }
+
+    // --- Save modified ---
+    if (EditorGUI.EndChangeCheck())
+    {
+        _selectedNote.MarkModified();
+        EditorUtility.SetDirty(_selectedNote);
+        AssetDatabase.SaveAssets();
+    }
+
+    EditorGUILayout.EndVertical();
+    EditorGUILayout.EndScrollView();
+}
+
 
 
         // === Hotkeys (work only inside this window) ===
@@ -288,8 +409,7 @@ namespace Immersiveorama.EditorTools.Immersiveorama.Notes.Editor
                 case KeyCode.UpArrow:
                     if (notes.Count > 0 && currentIndex > 0)
                     {
-                        _selectedNote = notes[currentIndex - 1];
-                        Repaint();
+                        SelectNote(notes[currentIndex - 1]);
                         e.Use();
                     }
                     break;
@@ -297,8 +417,7 @@ namespace Immersiveorama.EditorTools.Immersiveorama.Notes.Editor
                 case KeyCode.DownArrow:
                     if (notes.Count > 0 && currentIndex < notes.Count - 1)
                     {
-                        _selectedNote = notes[currentIndex + 1];
-                        Repaint();
+                        SelectNote(notes[currentIndex + 1]);
                         e.Use();
                     }
                     break;
@@ -355,41 +474,158 @@ namespace Immersiveorama.EditorTools.Immersiveorama.Notes.Editor
 
         private void CreateNote()
         {
-            NotesSO newNote = ScriptableObject.CreateInstance<NotesSO>();
-            string path = AssetDatabase.GenerateUniqueAssetPath("Assets/Notes/Note.asset");
-            AssetDatabase.CreateAsset(newNote, path);
-            AssetDatabase.SaveAssets();
+            var newNote = ScriptableObject.CreateInstance<NotesSO>();
+            newNote.title = "New Note";
+            newNote.description = "";
 
+            // Ensure note is treated as part of the database and hidden from hierarchy
+            newNote.hideFlags = HideFlags.HideInHierarchy | HideFlags.HideInInspector | HideFlags.NotEditable;
+
+            // Add to database
             database.notes.Add(newNote);
+            AssetDatabase.AddObjectToAsset(newNote, database); // makes NotesDatabase the root container
             EditorUtility.SetDirty(database);
             AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
 
+            // Select new note
             _selectedNote = newNote;
+            focusTitleFieldNextFrame = true; // trigger focusing
         }
+
 
         private void DeleteNote(NotesSO note)
         {
+            if (note == null)
+                return;
+            
             if (EditorUtility.DisplayDialog("Delete Note", "Are you sure you want to delete this note?", "Yes", "No"))
             {
+                // Remove from database list
                 database.notes.Remove(note);
-                AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(note));
+
+                // Temporarily clear hideFlags so Unity allows deletion
+                note.hideFlags = HideFlags.None;
+
+                // Remove from database asset
+                AssetDatabase.RemoveObjectFromAsset(note);
+
+                // Destroy the ScriptableObject
+                Object.DestroyImmediate(note, true);
+
                 EditorUtility.SetDirty(database);
                 AssetDatabase.SaveAssets();
-                _selectedNote = null; // ✅ avoids null reference after deletion
+                AssetDatabase.Refresh();
+
+                _selectedNote = null;
             }
         }
+
+
         
-        private Color GetTagColor(NoteCategory tag)
+        private Color GetCategoryColor(NoteCategory tag)
         {
             return tag switch
             {
                 NoteCategory.Bug => new Color(0.9f, 0.3f, 0.3f),
-                NoteCategory.ToDo => new Color(0.3f, 0.7f, 0.9f),
+                NoteCategory.ToDo => new Color(0.3f, 0.2f, 0.7f),
                 NoteCategory.Design => new Color(0.8f, 0.8f, 0.3f),
+                NoteCategory.Code => new Color(0.3f, 0.7f, 0.9f),
+
                 _ => Color.gray
             };
         }
-    
-    
+        
+        public bool TrySelectObjectFromAttachment(string scenePath, string hierarchyPath, string assetPath)
+        {
+            // If it's an asset (prefab), just ping/select the asset
+            if (!string.IsNullOrEmpty(assetPath))
+            {
+                var asset = AssetDatabase.LoadAssetAtPath<Object>(assetPath);
+                if (asset != null)
+                {
+                    EditorGUIUtility.PingObject(asset);
+                    Selection.activeObject = asset;
+                    return true;
+                }
+                return false;
+            }
+
+            // Scene object path flow
+            if (string.IsNullOrEmpty(scenePath) || string.IsNullOrEmpty(hierarchyPath))
+                return false;
+
+            // Ask user to save modified scenes first
+            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                return false;
+
+            // Open scene (single mode)
+            var scene = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
+            if (!scene.IsValid())
+            {
+                Debug.LogWarning($"Unable to open scene: {scenePath}");
+                return false;
+            }
+
+            // find the object by hierarchy path
+            GameObject found = FindGameObjectInSceneByHierarchyPath(scene, hierarchyPath);
+            if (found != null)
+            {
+                Selection.activeGameObject = found;          // select
+                EditorGUIUtility.PingObject(found);          // ping
+                return true;
+            }
+            else
+            {
+                Debug.LogWarning($"Attached object not found in scene. Path: {hierarchyPath}");
+                return false;
+            }
+        }
+
+        private GameObject FindGameObjectInSceneByHierarchyPath(Scene scene, string hierarchyPath)
+        {
+            if (!scene.isLoaded) return null;
+            string[] parts = hierarchyPath.Split('/');
+            foreach (var root in scene.GetRootGameObjects())
+            {
+                if (root.name != parts[0]) continue;
+                Transform t = root.transform;
+                bool fail = false;
+                for (int i = 1; i < parts.Length; ++i)
+                {
+                    t = t.Find(parts[i]);
+                    if (t == null) { fail = true; break; }
+                }
+                if (!fail) return t.gameObject;
+            }
+            return null;
+        }
+
+        private SerializedObject serializedNote;
+        private void SelectNote(NotesSO note)
+        {
+            if (note == _selectedNote) return;
+
+            _selectedNote = note;
+
+            // Force-refresh SerializedObject for the details panel
+            if (_selectedNote != null)
+            { 
+                serializedNote = new SerializedObject(_selectedNote);
+                var titleProp = serializedNote.FindProperty("title");
+                var categoryProp = serializedNote.FindProperty("category");
+                var descriptionProp = serializedNote.FindProperty("description");
+                // Add other properties if your NotesSO has more
+            }
+            else
+            {
+                serializedNote = null;
+            }
+
+            GUI.FocusControl(null);
+            Repaint();
+        }
+
+
     }
 }

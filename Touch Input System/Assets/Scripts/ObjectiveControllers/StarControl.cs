@@ -37,7 +37,18 @@ public class StarControl : MonoBehaviour
             MyGameManager.Instance.StateChanged(MyGameManager.GameState.GameNotStarted);
 
 
-        }, () => MyGameManager.Instance.StateChanged(MyGameManager.GameState.GameRunning));
+        }, () =>
+        {
+            if (MyGameManager.Instance != null)
+            {
+                MyGameManager.Instance.StateChanged(MyGameManager.GameState.GameRunning);
+            }
+            else
+            {
+                Debug.LogError("MyGameManager has not been initialized");
+                throw new Exception("MyGameManager has not been initialized");
+            }
+        } );
     }
 
     private void AddStars(Star star)

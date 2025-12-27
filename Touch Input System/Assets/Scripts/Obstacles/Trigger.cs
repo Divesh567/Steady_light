@@ -1,10 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] _traps;
+    public List<Trap> _traps = new List<Trap>();
     private AudioSource _audioSource;
     private Collider2D _collider2D;
 
@@ -26,9 +27,9 @@ public class Trigger : MonoBehaviour
     {
         StartCoroutine(TriggeredVisualFeedback());
         _audioSource.Play();
-        foreach (GameObject trap in _traps)
+        foreach (Trap trap in _traps)
         {
-            trap.GetComponent<Trap>().Triggered();
+            trap.Triggered();
         }
         _collider2D.enabled = false;
     }

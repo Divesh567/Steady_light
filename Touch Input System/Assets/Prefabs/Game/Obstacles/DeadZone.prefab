@@ -41,7 +41,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5182032917554472715}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -75,11 +75,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1800241987
-  m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingLayerID: -591204109
+  m_SortingLayer: -1
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: ced651994b40ec04e97ecdb9d5d7ee8d, type: 3}
-  m_Color: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 0.29803923}
+  m_Color: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 0.28235295}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -151,8 +151,8 @@ MonoBehaviour:
   m_LightType: 1
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.415
-  m_Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
-  m_Intensity: 0.93
+  m_Color: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
+  m_Intensity: 1.1
   m_LightVolumeIntensity: 0
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 83de3765f3f0c2dc00000000bfdd799a43834d6bf73847291793a8ee29f47a7db3eb783a

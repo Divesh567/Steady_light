@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: New Checkpoint Anim
   description: 
+  previewImage: {fileID: 0}
   tags: []
   category: 1
   priority: 1
-  linkedAsset: {fileID: 0}
+  attachedScenePath: 
+  attachedHierarchyPath: 
+  attachedAssetPath: 
   dateCreated: 2025-10-11 20:45
-  dateModified: 2025-10-11 20:45
+  dateModified: 2025-10-26 21:34
   isPinned: 0
-  isClosed: 0
+  isClosed: 1
