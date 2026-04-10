@@ -206,6 +206,16 @@ public class SoundManager : MonoBehaviour
 
     }
 
+    public void SetMusicPitch(float musicPitch)
+    {
+        _musicSource.pitch = musicPitch;
+    }
+
+    public float GetMusicPitch()
+    {
+        return _musicSource.pitch;
+    }
+
     public void PlayDiamondCollected()
     {
         _audioSource.PlayOneShot(_diamondCollected, _diamondVolume);

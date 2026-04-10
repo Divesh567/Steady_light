@@ -1,4 +1,6 @@
+using FirebaseUtilities;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimeTrialControl : MonoBehaviour
 {
@@ -32,7 +34,30 @@ public class TimeTrialControl : MonoBehaviour
     {
 
         _timeOut = false;
-        _currentTime = _defaultTime;
+        
+        string currentScene = SceneManager.GetActiveScene().name;
+        
+        if (FirebaseRemoteConfigController.Instance.GameBalance.RemoteLevelTimers.
+            Exists(x =>
+                x.levelName == currentScene))
+        {
+            float time =
+                (FirebaseRemoteConfigController.Instance.GameBalance.RemoteLevelTimers.
+                    Find(x =>
+                    x.levelName == currentScene)).time;
+            _currentTime = time;
+
+        }
+        else
+        {
+            _currentTime = _defaultTime;
+        }
+            
+        // get current scene name 
+        // check if exists in remote
+        // if yes use that else use _defaultTime
+        
+       
 
         ObjectiveEventHandler.OnTimerObjectiveCompleteEventCaller();
 

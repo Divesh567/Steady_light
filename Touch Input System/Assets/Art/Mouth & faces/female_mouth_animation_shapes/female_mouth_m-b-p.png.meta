@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      female_mouth_m-b-p_0: -7356661516728647319
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

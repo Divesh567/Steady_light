@@ -1,4 +1,5 @@
 using System.Collections;
+using FirebaseUtilities;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -40,6 +41,7 @@ public class BallCollisions : MonoBehaviour
 
     private FaceRenderer _faceRenderer;
 
+    public IntEventChannel OnStateChangeEventTrigger;
     private void Start()
     {
         _startPos = transform.position;
@@ -51,6 +53,9 @@ public class BallCollisions : MonoBehaviour
         impulseSource = GetComponent<Cinemachine.CinemachineImpulseSource>();
         _faceRenderer = GetComponentInChildren<FaceRenderer>();
         _lastCheckPoint = null;
+
+        if (FirebaseRemoteConfigController.Instance.GameBalance.ballGravity != 0)
+            _ballRigidbody.gravityScale = FirebaseRemoteConfigController.Instance.GameBalance.ballGravity;
     }
 
     public void GetPlayerObject(TouchController _playerobject)
@@ -143,6 +148,10 @@ public class BallCollisions : MonoBehaviour
         _spriteRenderer.enabled = true;
         _trailRenderer.enabled = true;
         _ballRigidbody.linearVelocity = new Vector2(0, 0);
+        
+        OnStateChangeEventTrigger.RaiseEvent(0);
+        
+        
     }
 
     public void GoToLastPosition()

@@ -1,2 +1,18 @@
 fileFormatVersion: 2
 guid: d6818dc50a487c243acb34ae1cb2cafb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - faceAnimation: {instanceID: 0}
+  - config: {instanceID: 0}
+  - baseRenderer: {instanceID: 0}
+  - eyesRenderer: {instanceID: 0}
+  - mouthRenderer: {instanceID: 0}
+  - OnStateChangeEventTrigger: {fileID: 11400000, guid: e4dba96d96940b448beecac3486e9608,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

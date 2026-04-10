@@ -36,20 +36,11 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        SceneManager.LoadScene(1);
-
-        levelHolder.InitializeProgression();
-
-
-    }
-
     public void LoadNextLevel()
     {
         AssetReference nextLevelRef =  levelHolder.FindNextLevel(currentLevelAssetRef);
 
-        UnloadLevel();
+      //  UnloadLevel();
 
         // Debug.Log($"LOADING NEXT LEVEL{Path.GetFileName(nextLevelRef.editorAsset.name)}");
 
@@ -121,8 +112,8 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        UnloadLevel();
-
+       // UnloadLevel();
+       levelHolder.InitializeProgression();
         SceneManager.LoadSceneAsync(1);
     }
 
@@ -166,14 +157,15 @@ public class LevelLoader : MonoBehaviour
         public LevelCatalogSO LevelCatalog;
         public List<WorldSO> currentWorldSO;
         FirebaseRemoteConfigController remoteConfigController = new FirebaseRemoteConfigController();
+
+       
         public void InitializeProgression()
         {
-            remoteConfigController.FetchAndApply(SetupRemoteWorldSo);
+            SetupRemoteWorldSo(remoteConfigController.Progression);
         }
 
-        void SetupRemoteWorldSo()
+        void SetupRemoteWorldSo(RemoteProgressionConfig config)
         {
-            RemoteProgressionConfig config = remoteConfigController.Config;
             
             if (config == null || config.worlds == null || config.worlds.Count == 0)
             {

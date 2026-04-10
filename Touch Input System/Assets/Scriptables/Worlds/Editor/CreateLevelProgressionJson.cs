@@ -6,6 +6,7 @@ using System.Text;
 [CustomEditor(typeof(LevelLoader))] // 👈 replace with your MonoBehaviour / SO
 public class CreateLevelProgressionJson : Editor
 {
+    
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();

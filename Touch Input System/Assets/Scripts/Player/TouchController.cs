@@ -15,7 +15,6 @@ public class TouchController : MonoBehaviour
     private float resetSpeed = 2f;
     private Vector2 _touchPos;
     private ForceFieldController _forceFieldController;
-    private float _racastSize = 7.5f;
 
 
     public bool _force = false;
@@ -25,7 +24,6 @@ public class TouchController : MonoBehaviour
     private void Awake()
     {
         _forceFieldController = transform.GetChild(0).GetComponent<ForceFieldController>();
-        
     }
 
     private void Start()

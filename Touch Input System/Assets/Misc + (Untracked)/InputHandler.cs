@@ -58,8 +58,7 @@ public class InputHandler : MonoBehaviour
     private void Update()
     {
         if (MyGameManager.Instance.gameState != MyGameManager.GameState.GameRunning) return;
-
-
+        
         if (isClicking)
         {
             Vector2 worldPosition = mainCamera.ScreenToWorldPoint(mousePosition);

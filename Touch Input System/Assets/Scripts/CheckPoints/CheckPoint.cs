@@ -25,10 +25,10 @@ public class CheckPoint : MonoBehaviour
 
     public void CheckpointAnimationTrigger()
     {
-
+        _active = true;
+        return;
        // ckAnimation.AnimateCheckPoint();
         _light2D.enabled = true;
-        _active = true;
        
         if (SoundManager.Instance != null)
         {

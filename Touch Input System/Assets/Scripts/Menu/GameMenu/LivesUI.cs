@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FirebaseUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,9 @@ public class LivesUI : ObjectiveUI
 
     public override void InitUI()
     {
+        if(FirebaseRemoteConfigController.Instance.GameBalance.lives == -1)
+            return;
+        
         animateUI.AnimateOut();
         animateUI.AnimateIn();
     }

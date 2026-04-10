@@ -185,7 +185,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      expresionless_blink_0: 1892568518595763743
+      expresionless_blink_1: -6444973927374163531
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

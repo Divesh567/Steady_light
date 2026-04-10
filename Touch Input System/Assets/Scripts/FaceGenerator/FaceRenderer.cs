@@ -16,6 +16,8 @@ public class FaceRenderer : MonoBehaviour
     private FaceSet faceSet;
     private CancellationTokenSource blinkCTS;
 
+
+
     private void Awake()
     {
         faceAnimation.OnStateChange += UpdateMouthSprite;
@@ -47,6 +49,8 @@ public class FaceRenderer : MonoBehaviour
             BallState.Angry => faceSet.mouth.angry,
             _ => faceSet.mouth.normal
         };
+
+      
     }
 
     private async UniTaskVoid StartBlinkLoop()
