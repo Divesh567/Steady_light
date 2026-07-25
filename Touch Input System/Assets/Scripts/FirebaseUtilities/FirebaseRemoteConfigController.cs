@@ -30,19 +30,33 @@ namespace FirebaseUtilities
 
         public async Task FetchAllAsync()
         {
-            await FirebaseRemoteConfig.DefaultInstance.FetchAsync(TimeSpan.Zero);
-            await FirebaseRemoteConfig.DefaultInstance.ActivateAsync();
+            try
+            {
+                await FirebaseRemoteConfig.DefaultInstance.FetchAsync(TimeSpan.Zero);
+                await FirebaseRemoteConfig.DefaultInstance.ActivateAsync();
 
-            IsFetched = true;
+                IsFetched = true;
 
-            Progression = Parse<RemoteProgressionConfig>(PROGRESSION_KEY) 
-                          ?? DefaultConfigs.Progression;
+                Progression = Parse<RemoteProgressionConfig>(PROGRESSION_KEY)
+                              ?? DefaultConfigs.Progression;
 
-            ObstacleOverride = Parse<ObstacleOverrideConfig>(OBSTACLE_KEY) 
-                               ?? DefaultConfigs.ObstacleOverride;
+                ObstacleOverride = Parse<ObstacleOverrideConfig>(OBSTACLE_KEY)
+                                   ?? DefaultConfigs.ObstacleOverride;
 
-            GameBalance = Parse<GameBalanceConfig>(BALANCE_KEY) 
-                          ?? DefaultConfigs.GameBalance;
+                GameBalance = Parse<GameBalanceConfig>(BALANCE_KEY)
+                              ?? DefaultConfigs.GameBalance;
+            }
+            catch (Exception e)
+            {
+                IsFetched = true;
+
+                Progression = DefaultConfigs.Progression;
+
+                ObstacleOverride = DefaultConfigs.ObstacleOverride;
+
+                GameBalance = DefaultConfigs.GameBalance;
+            }
+           
 
             Debug.Log("[RC] All configs fetched and defaulted safely");
         }
