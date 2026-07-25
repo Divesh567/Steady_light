@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 
 public class ProgressAnimationController : SequenceStepBase
@@ -120,7 +121,10 @@ public class ProgressAnimationController : SequenceStepBase
     public async override UniTask Execute()
     {
         bgSprite.gameObject.SetActive(true);
-        await lineDraw.Execute();
+       // await lineDraw.Execute();
+       await Task.Delay(1);
+       MenuManager.Instance.OpenMenu(WinScreen.Instance);
+       MenuManager.Instance.CloseMenu(GameMenu.Instance);
     }
 }
 

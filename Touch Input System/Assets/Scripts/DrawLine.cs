@@ -54,7 +54,6 @@ public class DrawLine : MonoBehaviour
 
         DrawSignature(points).Forget();
 
-        MenuManager.Instance.OpenMenu(WinScreen.Instance);
-        MenuManager.Instance.CloseMenu(GameMenu.Instance);
+       
     }
 }

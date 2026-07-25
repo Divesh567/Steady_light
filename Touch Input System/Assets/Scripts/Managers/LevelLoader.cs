@@ -314,6 +314,38 @@ public class LevelLoader : MonoBehaviour
 
 
         }
+
+        public int GetAllActiveLevelCount()
+        {
+            int levelCount = 0;
+            foreach (var worldData in currentWorldSO)
+            {
+                foreach (var level in worldData.levels)
+                {
+                    levelCount++;
+                }
+            }
+
+            return levelCount;
+        }
+
+        public int GetAllCompletedLevelCount()
+        {
+            var saveData = DataManager.Instance.saveDataSO.saveData.worldDatas;
+            int completedLevels = 0;
+            foreach (var worldData in saveData)
+            {
+                foreach (var level in worldData.levelsList)
+                {
+                    if (level.completed)
+                        completedLevels++;
+                    else
+                        break;
+                }
+            }
+
+            return completedLevels;
+        }
     }
 
   

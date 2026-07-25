@@ -13,6 +13,10 @@ public class WinScreen : Menu<WinScreen>
     [SerializeField]
     private DOTweenAnimation startAnimation;
 
+    [SerializeField] private Animator animator;
+    
+ 
+
     public override void Start()
     {
         base.Start();
@@ -25,7 +29,8 @@ public class WinScreen : Menu<WinScreen>
         MainPanel.gameObject.SetActive(true);
         nextLevelButton.button.interactable = true;
 
-
+        UpdateProgressPercentage();
+        animator.SetTrigger("CenterTrigger");
         startAnimation.DOPlayAllById("WinAnim");
     }
 
@@ -50,10 +55,25 @@ public class WinScreen : Menu<WinScreen>
         SceneTransitionManager.Instance.OnSceneTransitionStarted.Invoke( LevelLoader.Instance.LoadNextLevel );
         
     }
-    private void OnUpgradeButton()
+
+    public GameObject circleParent;
+    public TextMeshProUGUI percentageText;
+    private void UpdateProgressPercentage()
     {
+        int totalLevels  = LevelLoader.Instance.levelHolder.GetAllActiveLevelCount();
+        int completedLevels = LevelLoader.Instance.levelHolder.GetAllCompletedLevelCount();
+        
+        LogCore.Log(LogCat.Default, $"Completed {completedLevels} /{totalLevels} levels");
+        
+        float completedPercentage = completedLevels / (float)totalLevels * 100;
+        
+        circleParent.gameObject.SetActive(true);
+        percentageText.text = $"{completedPercentage}%";
+        
+        
 
     }
+
 
 
 
